@@ -2,9 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Modal from '../components/Modal';
-import { useContext } from 'react';
-import { ModalContext } from './Modal';
 
 const navItems = [
   { title: 'Home', to: '/' },
@@ -14,25 +11,22 @@ const navItems = [
 
 export default function PageLayout({ children }) {
   return (
-    <Modal>
-      <div className="min-h-screen bg-white">
-        <Head>
-          <title>[COVID-19] Self-reporting</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Nav items={navItems} />
-        <main>
-          <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div className="px-4 py-8 sm:px-0">{children}</div>
-          </div>
-        </main>
-      </div>
-    </Modal>
+    <div className="min-h-screen bg-white">
+      <Head>
+        <title>[COVID-19] Self-reporting</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Nav items={navItems} />
+      <main>
+        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+          <div className="px-4 py-8 sm:px-0">{children}</div>
+        </div>
+      </main>
+    </div>
   );
 }
 
 const Nav = ({ items }) => {
-  const showModal = useContext(ModalContext);
   return (
     <nav className="bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,11 +38,6 @@ const Nav = ({ items }) => {
               ))}
             </div>
           </div>
-          <button
-            onClick={() => showModal()}
-            className="inline-flex items-center my-3 cursor-pointer py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-            Register Now
-          </button>
         </div>
       </div>
     </nav>

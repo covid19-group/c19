@@ -1,48 +1,37 @@
 import PageLayout from '../components/PageLayout';
+import RegistrationForm from '../components/RegistrationForm';
 import { InputWithDropDown } from '../components/Form';
 import Link from 'next/link';
 import contentMain from '../content';
 import { useContext } from 'react';
-import { ModalContext } from '../components/Modal';
 
 export default function Landing() {
   return (
     <PageLayout>
       <Hero />
-      <Explanation />
     </PageLayout>
   );
 }
 
 const Hero = ({ language = 'en-US' }) => {
   const content = contentMain[language].hero;
-  const showModal = useContext(ModalContext);
   return (
     <div className="relative bg-white overflow-hidden">
-      <div className="relative py-4 sm:py-8 md:py-16 lg:py-24">
-        <div className="mx-auto max-w-xl lg:max-w-screen-xl">
-          <div className="sm:text-center md:mx-auto lg:text-left">
-            <h2 className="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
+      <div class="mt-8 mx-auto max-w-screen-xl sm:mt-12 md:mt-16 xl:mt-20">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+            <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
               {content.titleBlack}
               <br />
-              <span className="text-indigo-600">{content.titleBlue}</span>
+              <span class="text-indigo-600">{content.titleBlue}</span>
             </h2>
-            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
-            <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-              <p className="text-base font-medium text-gray-900">{content.action}</p>
-              <button
-                onClick={e => showModal()}
-                className="mt-1 sm:mt-4 w-full px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-800 shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline active:bg-gray-900 transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
-                {content.button}
-              </button>
-              <p className="mt-3 text-sm leading-5 text-gray-500">
-                {content.privacy.value}
-                <Link href={content.privacy.link.href}>
-                  <a className="font-medium text-gray-900 underline">{content.privacy.link.label}</a>
-                </Link>
-                .
-              </p>
+            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
+            <div class="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+              <p class="text-base font-medium text-gray-900">{content.action}</p>
             </div>
+          </div>
+          <div class="relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+            <RegistrationForm />
           </div>
         </div>
       </div>

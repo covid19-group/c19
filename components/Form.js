@@ -1,5 +1,5 @@
 export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder, type = 'text', ...props }) => (
-  <div className="mt-1 sm:mt-4 sm:col-span-2">
+  <div className="mt-1 sm:col-span-2">
     <div className="relative max-w-lg flex rounded-md shadow-sm">
       <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
         {prefix}

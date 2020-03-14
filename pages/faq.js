@@ -22,7 +22,7 @@ export default function Faq({ language = 'en-US' }) {
                     <p className="text-base leading-6 text-gray-500">
                       {answer}
                       {link && (
-                        <a href={link} className="block text-blue-500">
+                        <a href={link} className="block text-blue-500 truncate">
                           {link}
                         </a>
                       )}
