@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import PageLayout from '../components/PageLayout';
 import contentFaq from '../content/faq';
+import { LanguageContext } from '../components/LanguageSelector';
 
-export default function Faq({ language = 'en-US' }) {
+export default function Faq() {
+  const { language } = useContext(LanguageContext);
   const content = contentFaq[language];
   return (
     <PageLayout>
@@ -22,7 +25,7 @@ export default function Faq({ language = 'en-US' }) {
                     <p className="text-base leading-6 text-gray-500">
                       {answer}
                       {link && (
-                        <a href={link} className="block text-blue-500 truncate">
+                        <a href={link} className="block text-indigo-500 truncate">
                           {link}
                         </a>
                       )}

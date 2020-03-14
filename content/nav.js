@@ -2,7 +2,7 @@ export default {
   'da-DK': {
     data: 'Data',
     faq: 'FAQ',
-    root: 'Registrering',
+    root: 'Tilmelding',
   },
   'en-UK': {
     data: 'Data',

@@ -2,25 +2,23 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useState, useEffect, useContext } from 'react';
-import LanguageSelector, { LanguageProvider, LanguageContext } from './LanguageSelector';
+import LanguageSelector, { LanguageContext } from './LanguageSelector';
 import content from '../content/nav';
 
 export default function PageLayout({ children }) {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-white">
-        <Head>
-          <title>[COVID-19] Self-reporting</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Nav />
-        <main>
-          <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div className="px-4 py-8 sm:px-0">{children}</div>
-          </div>
-        </main>
-      </div>
-    </LanguageProvider>
+    <div className="min-h-screen bg-white">
+      <Head>
+        <title>[COVID-19] Self-reporting</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Nav />
+      <main>
+        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+          <div className="px-4 py-8 sm:px-0">{children}</div>
+        </div>
+      </main>
+    </div>
   );
 }
 

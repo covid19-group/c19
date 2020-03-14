@@ -1,9 +1,10 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { InputWithFix } from './Form';
 import { AsYouType, parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import flag from 'country-code-emoji';
 import Link from 'next/link';
 import { LanguageContext } from './LanguageSelector';
+import LoadingSpinner from './LoadingSpinner';
 import authContent from '../content/authForm';
 
 export default function AuthForm({ children }) {
@@ -14,6 +15,29 @@ export default function AuthForm({ children }) {
 
   const [phoneError, setPhoneError] = useState(false);
   const [authError, setAuthError] = useState(false);
+
+  const [authorized, setAuthorized] = useState(false);
+  const [authorizing, setAuthorizing] = useState(false);
+  const [renewing, setRenewing] = useState(0);
+
+  useEffect(() => {
+    if (authorized) {
+      setRenewing(5);
+      setTimeout(() => {
+        setAuthorized(false);
+      }, 5000);
+    }
+  }, [authorized]);
+
+  useEffect(() => {
+    if (renewing) {
+      setTimeout(() => {
+        setRenewing(renewing - 1);
+      }, 1000);
+    } else {
+      setPhoneError(false);
+    }
+  }, [renewing]);
 
   const [countryCode, setCountryCode] = useState('');
   const [code, setCode] = useState('');
@@ -34,7 +58,7 @@ export default function AuthForm({ children }) {
         <label className="block text-sm font-medium leading-5 text-gray-700">
           {content.phone.label}
           <span className="block text-gray-500 font-normal text-xs">{content.phone.description}</span>
-          <div className="-mt-px flex">
+          <div className="-mt-px w-full flex">
             <InputWithFix
               suffix={
                 phoneIsValid && (
@@ -61,24 +85,70 @@ export default function AuthForm({ children }) {
               onChange={({ value }) => {
                 phoneError && setPhoneError(false);
                 setPhone(value);
-                if (isValidNumber(value)) {
-                  codeInputRef.current[0].focus();
-                }
               }}
               placeholder="+45 60 55 07 09"
             />
             <span className="inline-flex rounded-md shadow-sm">
               <button
-                onClick={e => {
+                onClick={async e => {
+                  setAuthorizing(true);
                   e.preventDefault();
-                  if (!phone || !isValidNumber(phone)) {
+                  if (authorizing || authorized) {
+                    setPhoneError(content.phone.error.wait);
+                  } else if (!phone || !isValidNumber(phone)) {
                     setPhoneError(content.phone.error.incomplete);
+                  } else {
+                    const response = await fetch('/api/authorize', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        phone: parsePhoneNumberFromString(phone).number,
+                      }),
+                    });
+                    if (response.ok) {
+                      setPhoneError(false);
+                      setAuthorized(true);
+                    } else {
+                      setPhoneError(content.phone.error.unknown);
+                    }
                   }
+                  setAuthorizing(false);
                 }}
                 className={
-                  'w-full inline-flex justify-center py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out'
+                  'relative py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-indigo-300 focus:shadow-outline-blue transition duration-150 ease-in-out'
                 }>
-                {content.phone.btn.send} <span className="hidden sm:inline-block ml-1">{content.phone.btn.code}</span>
+                <LoadingSpinner
+                  size={16}
+                  className={authorizing ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
+                />
+                <span className={'flex flex-1 flex-no-wrap' + (authorizing ? ' invisible' : '')}>
+                  {authorized ? (
+                    <>
+                      <span className="hidden sm:inline-block mr-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                      {content.phone.btn.sent}{' '}
+                    </>
+                  ) : (
+                    <>
+                      {content.phone.btn.send}{' '}
+                      <span className="hidden sm:inline-block ml-1">{content.phone.btn.code}</span>
+                    </>
+                  )}
+                </span>
               </button>
             </span>
           </div>
@@ -88,6 +158,7 @@ export default function AuthForm({ children }) {
                 (!parsedPhone || !parsedPhone.country
                   ? content.phone.error.missingCountryCode
                   : content.phone.error.invalid)}
+              {!!renewing && renewing + ' ' + content.phone.error.secs}
             </p>
           )}
         </label>
@@ -131,7 +202,7 @@ export default function AuthForm({ children }) {
                 setCode('');
                 codeInputRef.current[0].focus();
               }}
-              className={'text-sm ' + !!code.length ? 'text-blue-500' : 'text-gray-500'}>
+              className={'text-sm ' + !!code.length ? 'text-indigo-500' : 'text-gray-500'}>
               {content.code.reset}
             </button>
           </div>

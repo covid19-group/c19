@@ -7,10 +7,14 @@ export default {
         incomplete: 'Venligst indtast et gyldigt telefonnummer først',
         missingCountryCode: 'Venligst inkluder din landekode (f.eks. +45)',
         invalid: 'Det ser ikke rigtigt ud. Prøv venligst igen.',
+        unknown: 'Der skete en fejl. Prøv igen senere.',
+        wait: 'Du kan sende en ny kode om: ',
+        secs: 'Sekunder',
       },
       btn: {
         send: 'Send',
         code: 'Kode',
+        sent: 'Sendt',
       },
     },
     code: {
@@ -35,10 +39,14 @@ export default {
         incomplete: 'Please enter a valid phone number first',
         missingCountryCode: 'Please specify your country code (e.g. +44)',
         invalid: "This doesn't look right. Try again.",
+        unknown: 'An error occured. Please try again later.',
+        wait: 'You can request another code in: ',
+        secs: 'Seconds',
       },
       btn: {
         send: 'Send',
         code: 'Code',
+        sent: 'Sent',
       },
     },
     code: {

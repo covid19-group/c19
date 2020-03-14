@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
+import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
 import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
 
-export default function Registration({ phone = '+45 60 55 07 09', code, authorization, language = 'en-US' }) {
+export default function Registration({ phone = '+45 60 55 07 09', code, authorization }) {
   /* authorization */
   /* TODO: Move to seperate component */
   // const [phone, setPhone] = useState('');
@@ -25,6 +26,7 @@ export default function Registration({ phone = '+45 60 55 07 09', code, authoriz
   const [tested, setTested] = useState(false);
   const [state, setState] = useState([]);
 
+  const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
   return (
     <PageLayout>
@@ -44,7 +46,7 @@ export default function Registration({ phone = '+45 60 55 07 09', code, authoriz
           description = description && (
             <>
               {description.value}
-              <a href={description.link.href} target={description.link.href} className="text-blue-500">
+              <a href={description.link.href} target={description.link.href} className="text-indigo-500">
                 {description.link.label}
               </a>
             </>

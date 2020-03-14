@@ -14,11 +14,13 @@
     "crypto": "^1.0.1",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
+    "framer-motion": "^1.9.1",
     "libphonenumber-js": "^1.7.46",
     "next": "9.3.0",
     "pg-promise": "^10.4.4",
     "react": "16.13.0",
     "react-dom": "16.13.0",
+    "rollbar": "^2.15.0",
     "tailwindcss": "^1.2.0"
   },
   "devDependencies": {
