@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
 import registrationContent from '../content/registration';
+import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
 
 export default function Registration({ phone = '+45 60 55 07 09', code, authorization, language = 'en-US' }) {
   /* authorization */
@@ -130,8 +131,4 @@ export default function Registration({ phone = '+45 60 55 07 09', code, authoriz
       </div>
     </PageLayout>
   );
-}
-
-function fahrenheitToCelcius(fahrenheit) {
-  return ((fahrenheit - 32) * 5) / 9;
 }

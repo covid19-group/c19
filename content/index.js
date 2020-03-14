@@ -10,7 +10,7 @@ export default {
       privacy: {
         value: 'We care about the protection of your data. Read our ',
         link: {
-          href: 'https://um.dk/',
+          href: '#',
           label: 'Privacy Policy',
         },
       },

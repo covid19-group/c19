@@ -2,6 +2,8 @@ import PageLayout from '../components/PageLayout';
 import { InputWithDropDown } from '../components/Form';
 import Link from 'next/link';
 import contentMain from '../content';
+import { useContext } from 'react';
+import { ModalContext } from '../components/Modal';
 
 export default function Landing() {
   return (
@@ -14,6 +16,7 @@ export default function Landing() {
 
 const Hero = ({ language = 'en-US' }) => {
   const content = contentMain[language].hero;
+  const showModal = useContext(ModalContext);
   return (
     <div className="relative bg-white overflow-hidden">
       <div className="relative py-4 sm:py-8 md:py-16 lg:py-24">
@@ -27,29 +30,15 @@ const Hero = ({ language = 'en-US' }) => {
             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
             <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-gray-900">{content.action}</p>
-              <form action="#" method="POST" className=" sm:flex">
-                <div className="mt-2 sm:mt-4 relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center">
-                    <select className="form-select focus:outline-none h-full py-0 pl-3 pr-8 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5">
-                      <option>+45</option>
-                    </select>
-                  </div>
-                  <input
-                    aria-label="Email"
-                    className="appearance-none block w-full pl-20 px-3 py-3 border border-gray-300 text-base leading-6 rounded-md placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 transition duration-150 ease-in-out sm:flex-1"
-                    placeholder={content.placeholder}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="mt-1 sm:mt-4 w-full px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-800 shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline active:bg-gray-900 transition duration-150 ease-in-out sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
-                  {content.button}
-                </button>
-              </form>
+              <button
+                onClick={e => showModal()}
+                className="mt-1 sm:mt-4 w-full px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-800 shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline active:bg-gray-900 transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
+                {content.button}
+              </button>
               <p className="mt-3 text-sm leading-5 text-gray-500">
                 {content.privacy.value}
                 <Link href={content.privacy.link.href}>
-                  <a class="font-medium text-gray-900 underline">{content.privacy.link.label}</a>
+                  <a className="font-medium text-gray-900 underline">{content.privacy.link.label}</a>
                 </Link>
                 .
               </p>
@@ -83,7 +72,7 @@ const Explanation = ({ language = 'en-US' }) => {
             };
             const Icon = props => <svg {...props}> {icons[key]}</svg>;
             return (
-              <div className="mt-10 lg:mt-0">
+              <div key={key} className="mt-10 lg:mt-0">
                 <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                   <Icon
                     width="24"

@@ -1,6 +1,6 @@
-export const InputWithPrefix = ({ id, prefix, value, onChange, placeholder, type = 'text' }) => (
+export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder, type = 'text', ...props }) => (
   <div className="mt-1 sm:mt-4 sm:col-span-2">
-    <div className="max-w-lg flex rounded-md shadow-sm">
+    <div className="relative max-w-lg flex rounded-md shadow-sm">
       <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
         {prefix}
       </span>
@@ -11,7 +11,9 @@ export const InputWithPrefix = ({ id, prefix, value, onChange, placeholder, type
         placeholder={placeholder}
         onChange={e => onChange({ id, value: e.target.value })}
         className="flex-1 form-input block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+        {...props}
       />
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{suffix}</div>
     </div>
   </div>
 );
@@ -55,7 +57,10 @@ export const Input = ({ id, value, onChange, placeholder, type = 'text' }) => (
         value={value}
         type={type}
         placeholder={placeholder}
-        onChange={e => onChange({ id, value: e.target.value })}
+        onChange={e => {
+          console.log(e.target.value);
+          onChange({ id, value: e.target.value });
+        }}
         className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
       />
     </div>
