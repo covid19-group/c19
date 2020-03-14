@@ -3,12 +3,15 @@ import { InputWithFix } from './Form';
 import { AsYouType, parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import flag from 'country-code-emoji';
 import Link from 'next/link';
+import authContent from '../content/authForm';
 
 export default function RegistrationForm({ children, language = 'en-US' }) {
   const codeInputRef = useRef({});
   const submitBtnRef = useRef(null);
 
-  const [error, setError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [authError, setAuthError] = useState(false);
+
   const [countryCode, setCountryCode] = useState('');
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
@@ -18,14 +21,16 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
   const codeIsComplete = code.length === 6;
   const phoneIsValid = phone && isValidNumber(phone);
   const parsedPhone = parsePhoneNumberFromString(phone);
-  const err = error || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
+  const error = phoneError || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
+
+  const content = authContent[language];
 
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:shadow-lg sm:border sm:border-gray-100 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-4">
       <div className="w-full">
         <label className="block text-sm font-medium leading-5 text-gray-700">
-          Phone Number
-          <span className="block text-gray-500 font-normal text-xs">Please include country code</span>
+          {content.phone.label}
+          <span className="block text-gray-500 font-normal text-xs">{content.phone.description}</span>
           <div className="-mt-px flex">
             <InputWithFix
               suffix={
@@ -51,7 +56,7 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
               type="phone"
               value={asYouTypeParser.input(phone)}
               onChange={({ value }) => {
-                error && setError(false);
+                phoneError && setPhoneError(false);
                 setPhone(value);
                 if (isValidNumber(value)) {
                   codeInputRef.current[0].focus();
@@ -64,22 +69,22 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
                 onClick={e => {
                   e.preventDefault();
                   if (!phone || !isValidNumber(phone)) {
-                    setError('Please enter a valid phone number first');
+                    setPhoneError(content.phone.error.incomplete);
                   }
                 }}
                 className={
                   'w-full inline-flex justify-center py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out'
                 }>
-                Send <span className="hidden sm:inline-block ml-1">Code</span>
+                {content.phone.btn.send} <span className="hidden sm:inline-block ml-1">{content.phone.btn.code}</span>
               </button>
             </span>
           </div>
-          {!!err && (
+          {!!error && (
             <p class="mt-2 text-xs font-normal text-red-600">
-              {error ||
+              {phoneError ||
                 (!parsedPhone || !parsedPhone.country
-                  ? 'Please specify your country code (e.g. +44)'
-                  : "This doesn't look right. Try again.")}
+                  ? content.phone.error.missingCountryCode
+                  : content.phone.error.invalid)}
             </p>
           )}
         </label>
@@ -87,8 +92,8 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
 
       <div className="mt-6">
         <label className="block text-sm font-medium leading-5 text-gray-700 mb-1">
-          Verification Code
-          <span className="block text-gray-500 font-normal text-xs">Received by SMS</span>
+          {content.code.label}
+          <span className="block text-gray-500 font-normal text-xs">{content.code.description}</span>
         </label>
         <div className="-mt-px flex">
           {[0, 1, 2, 3, 4, 5].map(idx => (
@@ -115,8 +120,7 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
               />
             </div>
           ))}
-          <div className="relative flex items-center justify-center text-sm leading-5">
-            <span className="mx-2 bg-white text-gray-500">or</span>
+          <div className="relative flex items-center justify-center text-sm leading-5 ml-2">
             <button
               disabled={!code.length}
               onClick={e => {
@@ -125,7 +129,7 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
                 codeInputRef.current[0].focus();
               }}
               className={'text-sm ' + !!code.length ? 'text-blue-500' : 'text-gray-500'}>
-              Reset
+              {content.code.reset}
             </button>
           </div>
         </div>
@@ -136,20 +140,39 @@ export default function RegistrationForm({ children, language = 'en-US' }) {
           <button
             disabled={!(codeIsComplete && phoneIsValid)}
             ref={btn => (submitBtnRef.current = btn)}
+            onClick={async () => {
+              const response = await fetch('/api/verify', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: {
+                  phone,
+                  code,
+                },
+              });
+              if (response.ok) {
+                // authorization as a cookie?
+                // do something (save in localStorage and redirect)
+              } else {
+                setAuthError(content.btn.error);
+              }
+            }}
             className={
               'w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
               (phoneIsValid && codeIsComplete
                 ? 'bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
-                : 'bg-gray-500 focus:shadow-outline-gray ')
+                : 'bg-gray-500 focus:shadow-outline-gray cursor-default')
             }>
-            Continue to Registration
+            {content.btn.label}
           </button>
         </span>
+        {authError && <p class="mt-2 text-xs font-normal text-red-600">{authError}</p>}
       </div>
       <p className="mt-3 text-sm leading-5 text-gray-500">
-        We care about the protection of your data. Read our
+        {content.privacy.prefix}
         <Link href="#">
-          <a className="font-medium text-gray-900 underline ml-1">Privacy Policy</a>
+          <a className="font-medium text-gray-900 underline ml-1">{content.privacy.label}</a>
         </Link>
       </p>
     </form>

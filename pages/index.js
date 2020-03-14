@@ -1,5 +1,5 @@
 import PageLayout from '../components/PageLayout';
-import RegistrationForm from '../components/RegistrationForm';
+import AuthForm from '../components/AuthForm';
 import { InputWithDropDown } from '../components/Form';
 import Link from 'next/link';
 import contentMain from '../content';
@@ -31,7 +31,7 @@ const Hero = ({ language = 'en-US' }) => {
             </div>
           </div>
           <div class="relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-            <RegistrationForm />
+            <AuthForm />
           </div>
         </div>
       </div>
