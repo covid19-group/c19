@@ -1,5 +1,5 @@
 export default {
-  'en-US': {
+  'en-UK': {
     title: 'Frequently asked questions',
     questions: [
       {

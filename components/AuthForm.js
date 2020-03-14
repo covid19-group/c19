@@ -1,11 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { InputWithFix } from './Form';
 import { AsYouType, parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import flag from 'country-code-emoji';
 import Link from 'next/link';
+import { LanguageContext } from './LanguageSelector';
 import authContent from '../content/authForm';
 
-export default function RegistrationForm({ children, language = 'en-US' }) {
+export default function AuthForm({ children }) {
+  const { language } = useContext(LanguageContext);
+
   const codeInputRef = useRef({});
   const submitBtnRef = useRef(null);
 

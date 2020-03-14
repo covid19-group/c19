@@ -1,5 +1,33 @@
 export default {
-  'en-US': {
+  'da-DK': {
+    phone: {
+      label: 'Telefonnummer',
+      description: 'Venligst inkluder landekode',
+      error: {
+        incomplete: 'Venligst indtast et gyldigt telefonnummer først',
+        missingCountryCode: 'Venligst inkluder din landekode (f.eks. +45)',
+        invalid: 'Det ser ikke rigtigt ud. Prøv venligst igen.',
+      },
+      btn: {
+        send: 'Send',
+        code: 'Kode',
+      },
+    },
+    code: {
+      label: 'Bekræftelseskode',
+      description: 'Modtaget via SMS',
+      reset: 'Nulstil',
+    },
+    btn: {
+      label: 'Gå til tilmelding',
+      error: 'Denne kode er ikke længere gældende. Prøv igen.',
+    },
+    privacy: {
+      prefix: 'Vi går op i datasikkerhed. Læs vores privatlivspolitik',
+      label: 'Privatlivspolitik',
+    },
+  },
+  'en-UK': {
     phone: {
       label: 'Phone Number',
       description: 'Please include country code',

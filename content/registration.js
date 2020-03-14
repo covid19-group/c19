@@ -1,5 +1,5 @@
 export default {
-  'en-US': {
+  'en-UK': {
     title: 'Registration',
     submit: 'Submit Registration',
     phone: {

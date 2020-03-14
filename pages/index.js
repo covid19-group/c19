@@ -4,6 +4,7 @@ import { InputWithDropDown } from '../components/Form';
 import Link from 'next/link';
 import contentMain from '../content';
 import { useContext } from 'react';
+import { LanguageContext } from '../components/LanguageSelector';
 
 export default function Landing() {
   return (
@@ -13,7 +14,8 @@ export default function Landing() {
   );
 }
 
-const Hero = ({ language = 'en-US' }) => {
+const Hero = () => {
+  const { language } = useContext(LanguageContext);
   const content = contentMain[language].hero;
   return (
     <div className="relative bg-white overflow-hidden">

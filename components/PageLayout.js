@@ -1,42 +1,47 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-
-const navItems = [
-  { title: 'Home', to: '/' },
-  { title: 'Data', to: '/data' },
-  { title: 'FAQ', to: '/faq' },
-];
+import { useState, useEffect, useContext } from 'react';
+import LanguageSelector, { LanguageProvider, LanguageContext } from './LanguageSelector';
+import content from '../content/nav';
 
 export default function PageLayout({ children }) {
   return (
-    <div className="min-h-screen bg-white">
-      <Head>
-        <title>[COVID-19] Self-reporting</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Nav items={navItems} />
-      <main>
-        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-          <div className="px-4 py-8 sm:px-0">{children}</div>
-        </div>
-      </main>
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-white">
+        <Head>
+          <title>[COVID-19] Self-reporting</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Nav />
+        <main>
+          <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div className="px-4 py-8 sm:px-0">{children}</div>
+          </div>
+        </main>
+      </div>
+    </LanguageProvider>
   );
 }
 
-const Nav = ({ items }) => {
+const Nav = () => {
+  const { language } = useContext(LanguageContext);
+  const items = [
+    { title: content[language].root, to: '/' },
+    { title: content[language].data, to: '/data' },
+    { title: content[language].faq, to: '/faq' },
+  ];
   return (
     <nav className="bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="sm:-my-px flex">
-              {items.map(item => (
-                <NavLink key={item.title} {...item} />
-              ))}
-            </div>
+          <div className="sm:-my-px flex">
+            {items.map(item => (
+              <NavLink key={item.title} {...item} />
+            ))}
+          </div>
+          <div className="mt-3 z-50">
+            <LanguageSelector />
           </div>
         </div>
       </div>
