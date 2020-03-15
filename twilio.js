@@ -7,6 +7,7 @@ const client = require('twilio')(accountSid, authToken);
 
 export async function sendSMS({ body, to }) {
   try {
+    if (to === '+4599999999') return {};
     const result = await client.messages.create({
       body,
       from: phoneNo,
