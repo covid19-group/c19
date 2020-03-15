@@ -13,10 +13,12 @@ export default function CustomHead() {
       <link rel="shortcut icon" type="image/x-icon" href="https://c19.dk/favicon.ico" />
       <title>{title}</title>
       <meta name="description" content={subtitle} />
-      <meta name="og:title" content={title} />
-      <meta name="og:site_name" content="Pelion" />
-      <meta name="og:description" content={subtitle} />
-      <meta name="og:image" content="https://c19.dk/og.png" />
+      <meta property="og:title" content={title} />
+      <meta property="og:site_name" content={title} />
+      <meta property="og:description" content={subtitle} />
+      <meta property="og:image" content="https://c19.dk/og.png" />
+      <meta property="og:url" content="https://c19.dk/" />
+      <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={subtitle} />
