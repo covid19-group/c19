@@ -7,10 +7,10 @@ export default {
     close: 'Luk siden',
   },
   'en-UK': {
-    title: 'Din registrering gemt',
+    title: 'Registration Saved',
     description:
-      'Fik du tastet forkert? Du kan altid udfylde formularen igen og overskrive dagens tidligere registrering.',
-    back: 'Gå tilbage',
-    close: 'Luk siden',
+      'Did you make any mistakes? You can always fill out the form again and overwrite today\'s registration.',
+    back: 'Go back',
+    close: 'Close',
   },
 };
