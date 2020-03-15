@@ -4,7 +4,7 @@ export default {
       titleBlack: '[COVID-19]',
       titleBlue: 'Self-Reporting',
       subtitle:
-        'Selv-rapportering hjælper myndighederne med at danne overblik over coronakrisen. Vi sender dig dagligt en SMS , og spørger dig, hvordan du er påvirket.',
+        'Selv-rapportering hjælper myndighederne med at danne overblik over coronakrisen. Vi sender dig dagligt en SMS, og spørger dig, hvordan du er påvirket.',
       action: 'Sammen kan vi give myndighederne de bedste vilkår for at kontrollere krisen.',
       placeholder: 'Indtast telefonnummer',
       privacy: {
