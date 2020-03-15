@@ -1,9 +1,10 @@
 import fetch from 'node-fetch';
-import { useRouter } from 'next/router';
 
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
+import ConfirmationModal from '../components/ConfirmationModal';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
 import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
@@ -14,7 +15,7 @@ function Registration({ phone, survey }) {
   const [country, setCountry] = useState('');
   const [age, setAge] = useState('');
 
-  const router = useRouter();
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
@@ -33,6 +34,7 @@ function Registration({ phone, survey }) {
 
   return (
     <PageLayout>
+      {showConfirmation && <ConfirmationModal language={language} close={() => setShowConfirmation(false)} />}
       <Header
         title={
           <div className="flex flex-wrap">
@@ -152,19 +154,18 @@ function Registration({ phone, survey }) {
                     survey,
                   }),
                 });
-                if (response.ok) router.push('/complete');
-                else {
-                  setSaving(false);
-                  setError('An unexpected error occured. Please try again.');
-                }
+                if (response.ok) setShowConfirmation(true);
+                else setError('An unexpected error occured. Please try again.');
+                setSaving(false);
               }}
               type="submit"
               className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-              {saving ? (
-                <LoadingSpinner size={16} color="white" className="absolute inset-0 h-full flex items-center" />
-              ) : (
-                content.submit
-              )}
+              <LoadingSpinner
+                size={16}
+                color="white"
+                className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
+              />
+              <span className={saving ? 'invisible' : ''}>{content.submit}</span>
             </button>
           </span>
         </div>
