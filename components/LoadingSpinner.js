@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-export default ({ size, className }) => (
+export default ({ size, className, color }) => (
   <motion.svg
     className={className}
     height={size}
@@ -22,7 +22,7 @@ export default ({ size, className }) => (
       }}
       style={{ scaleX: '-1' }}
       fill="transparent"
-      stroke="#5850ec"
+      stroke={color === 'white' ? '#FFFFFF' : '#5850ec'}
       strokeWidth="3"
       strokeLinecap="round"
       strokeLinejoin="round"

@@ -1,3 +1,6 @@
+import fetch from 'node-fetch';
+import db from '../db';
+
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
@@ -5,7 +8,7 @@ import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
 import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
 
-export default function Registration({ phone = '+45 60 55 07 09', code, authorization }) {
+function Registration({ phone, survey }) {
   /* authorization */
   /* TODO: Move to seperate component */
   // const [phone, setPhone] = useState('');
@@ -134,3 +137,33 @@ export default function Registration({ phone = '+45 60 55 07 09', code, authoriz
     </PageLayout>
   );
 }
+
+export async function getServerSideProps(context) {
+  const secret = process.env.SECRET;
+  const { survey } = context.query;
+  const phone = await db.task(async t => {
+    const { person } = await t.one(
+      `SELECT *
+        FROM survey
+        WHERE id = $/id/`,
+      { id: survey }
+    );
+    const { phone } = await db.oneOrNone(
+      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone
+      FROM person
+      WHERE id = $/id/`,
+      { secret, id: person }
+    );
+    return phone;
+  });
+  if (phone) {
+    return {
+      props: {
+        phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
+        survey,
+      },
+    };
+  } else return {};
+}
+
+export default Registration;

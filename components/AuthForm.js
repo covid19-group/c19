@@ -1,4 +1,5 @@
 import { useState, useRef, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { InputWithFix } from './Form';
 import { AsYouType, parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import flag from 'country-code-emoji';
@@ -8,6 +9,7 @@ import LoadingSpinner from './LoadingSpinner';
 import authContent from '../content/authForm';
 
 export default function AuthForm({ children }) {
+  const router = useRouter();
   const { language } = useContext(LanguageContext);
 
   const codeInputRef = useRef({});
@@ -18,6 +20,7 @@ export default function AuthForm({ children }) {
 
   const [authorized, setAuthorized] = useState(false);
   const [authorizing, setAuthorizing] = useState(false);
+  const [verifying, setVerifying] = useState(false);
   const [renewing, setRenewing] = useState(0);
 
   useEffect(() => {
@@ -52,8 +55,40 @@ export default function AuthForm({ children }) {
 
   const content = authContent[language];
 
+  const verify = async (phone, code) => {
+    setVerifying(true);
+    const response = await fetch('/api/post/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        phone,
+        code,
+      }),
+    });
+    if (response.ok) {
+      const { id } = await response.json();
+      router.push('/' + id);
+    } else {
+      setAuthError(content.btn.error);
+    }
+  };
+
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:shadow-lg sm:border sm:border-gray-100 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-4">
+      <div className="w-full flex -mb-5">
+        <button
+          onClick={async e => {
+            e.preventDefault();
+            setPhone('+4599999999');
+            setCode('000000');
+            verify('+4599999999', '000000');
+          }}
+          className="ml-auto text-sm font-medium text-indigo-500 hover:text-indigo-600">
+          Use test number
+        </button>
+      </div>
       <div className="w-full">
         <label className="block text-sm font-medium leading-5 text-gray-700">
           {content.phone.label}
@@ -98,7 +133,7 @@ export default function AuthForm({ children }) {
                   } else if (!phone || !isValidNumber(phone)) {
                     setPhoneError(content.phone.error.incomplete);
                   } else {
-                    const response = await fetch('/api/authorize', {
+                    const response = await fetch('/api/post/authorize', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -120,6 +155,7 @@ export default function AuthForm({ children }) {
                   'relative py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-indigo-300 focus:shadow-outline-blue transition duration-150 ease-in-out'
                 }>
                 <LoadingSpinner
+                  color="blue"
                   size={16}
                   className={authorizing ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
                 />
@@ -214,31 +250,21 @@ export default function AuthForm({ children }) {
           <button
             disabled={!(codeIsComplete && phoneIsValid)}
             ref={btn => (submitBtnRef.current = btn)}
-            onClick={async () => {
-              const response = await fetch('/api/verify', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: {
-                  phone,
-                  code,
-                },
-              });
-              if (response.ok) {
-                // authorization as a cookie?
-                // do something (save in localStorage and redirect)
-              } else {
-                setAuthError(content.btn.error);
-              }
+            onClick={e => {
+              e.preventDefault();
+              verify(phone, code);
             }}
             className={
-              'w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
+              'relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
               (phoneIsValid && codeIsComplete
                 ? 'bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
                 : 'bg-gray-500 focus:shadow-outline-gray cursor-default')
             }>
-            {content.btn.label}
+            {verifying ? (
+              <LoadingSpinner size={16} color="white" className="absolute inset-0 h-full flex items-center" />
+            ) : (
+              content.btn.label
+            )}
           </button>
         </span>
         {authError && <p class="mt-2 text-xs font-normal text-red-600">{authError}</p>}
