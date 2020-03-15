@@ -5,11 +5,13 @@ import Link from 'next/link';
 import contentMain from '../content';
 import { useContext } from 'react';
 import { LanguageContext } from '../components/LanguageSelector';
+import Banner from '../components/Banner';
 
 export default function Landing() {
   return (
     <PageLayout>
       <Hero />
+      <Banner />
     </PageLayout>
   );
 }

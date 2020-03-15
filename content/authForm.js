@@ -1,5 +1,7 @@
 export default {
   'da-DK': {
+    testBtn: 'Brug test telefonnummer',
+    or: 'Eller',
     phone: {
       label: 'Telefonnummer',
       description: 'Venligst inkluder landekode',
@@ -36,6 +38,8 @@ export default {
     },
   },
   'en-UK': {
+    testBtn: 'Use Test Number',
+    or: 'Or',
     phone: {
       label: 'Phone Number',
       description: 'Please include country code',

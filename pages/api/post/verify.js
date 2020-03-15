@@ -9,9 +9,10 @@ export default async (req, res) => {
       const { phone, code, reminders } = req.body;
       const { id } = await db.task(async t => {
         const person = await t.oneOrNone(
-          `SELECT *,
-            PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone,
-            PGP_SYM_DECRYPT(code::bytea, $/secret/) as code
+          `SELECT
+            id,
+            reminders,
+            verified
           FROM person
           WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/
             AND PGP_SYM_DECRYPT(code::bytea, $/secret/) = $/code/`,
