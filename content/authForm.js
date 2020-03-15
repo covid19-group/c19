@@ -28,7 +28,7 @@ export default {
     },
     btn: {
       label: 'Gå til tilmelding',
-      error: 'Denne kode er ikke længere gældende. Prøv igen.',
+      error: 'Koden er ugyldig.',
     },
     privacy: {
       prefix: 'Vi går op i datasikkerhed. Læs vores privatlivspolitik',
@@ -64,7 +64,7 @@ export default {
     },
     btn: {
       label: 'Continue to Registration',
-      error: 'The code is no longer valid, please try again.',
+      error: 'The code is invalid.',
     },
     privacy: {
       prefix: 'We care about the protection of your data. Read our',
