@@ -19,20 +19,20 @@ const Hero = () => {
   const content = contentMain[language].hero;
   return (
     <div className="relative bg-white overflow-hidden">
-      <div class="mt-8 mx-auto max-w-screen-xl sm:mt-12 md:mt-16 xl:mt-20">
-        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-          <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-            <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
+      <div className="mt-8 mx-auto max-w-screen-xl sm:mt-12 md:mt-16 xl:mt-20">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+            <h2 className="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
               {content.titleBlack}
               <br />
-              <span class="text-indigo-600">{content.titleBlue}</span>
+              <span className="text-indigo-600">{content.titleBlue}</span>
             </h2>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
-            <div class="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-              <p class="text-base font-medium text-gray-900">{content.action}</p>
+            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
+            <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+              <p className="text-base font-medium text-gray-900">{content.action}</p>
             </div>
           </div>
-          <div class="relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+          <div className="relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
             <AuthForm />
           </div>
         </div>

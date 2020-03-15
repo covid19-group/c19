@@ -1,5 +1,6 @@
 export default {
   'da-DK': {
+    by: 'Registrering for tlf.',
     title: 'Registration',
     submit: 'Submit Registration',
     phone: {
@@ -78,6 +79,7 @@ export default {
     },
   },
   'en-UK': {
+    by: 'Registration by No. ',
     title: 'Registration',
     submit: 'Submit Registration',
     phone: {

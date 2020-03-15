@@ -1,5 +1,5 @@
 export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder, type = 'text', ...props }) => (
-  <div className="mt-1 sm:col-span-2">
+  <div className="mt-1 sm:col-span-2 w-full">
     <div className="relative max-w-lg flex rounded-md shadow-sm">
       <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
         {prefix}
@@ -13,7 +13,7 @@ export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder,
         className="flex-1 form-input block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         {...props}
       />
-      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{suffix}</div>
+      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{suffix}</div>
     </div>
   </div>
 );

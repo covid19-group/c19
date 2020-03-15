@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-    "DATABASE": "@corona-db",
-    "SECRET": "@corona-secret",
-    "ROLLBAR_ACCESS_TOKEN": "@corona-rollbar"
+    "DATABASE": "@db",
+    "SECRET": "@secret",
+    "ROLLBAR_ACCESS_TOKEN": "@rollbar"
   }
 }
