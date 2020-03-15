@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import db from '../db';
-
+import { useRouter } from 'next/router';
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
@@ -9,15 +9,14 @@ import registrationContent from '../content/registration';
 import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
 
 function Registration({ phone, survey }) {
-  /* authorization */
-  /* TODO: Move to seperate component */
-  // const [phone, setPhone] = useState('');
-  // const [code, setCode] = useState('');
-
   /* one time questions */
   /* TODO: Move so separate component */
   const [country, setCountry] = useState('');
   const [age, setAge] = useState('');
+
+  const router = useRouter();
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(false);
 
   /* each registration */
   const [exposure, setExposure] = useState([]);
@@ -31,6 +30,7 @@ function Registration({ phone, survey }) {
 
   const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
+
   return (
     <PageLayout>
       <Header
@@ -55,6 +55,7 @@ function Registration({ phone, survey }) {
             </>
           );
           const optionProps = {
+            key,
             label,
             description,
             onChange: () => {
@@ -124,12 +125,46 @@ function Registration({ phone, survey }) {
       </Label>
       <div className="pt-5">
         <div className="flex justify-end">
+          <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
-              onClick={() => e.preventDefault()}
+              onClick={async e => {
+                setSaving(true);
+                e.preventDefault();
+                const response = await fetch('/api/post/survey', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    value: {
+                      country,
+                      age,
+                      exposure,
+                      exposureDate,
+                      symptoms,
+                      scale,
+                      fever,
+                      feverValue,
+                      tested,
+                      state,
+                    },
+                    survey,
+                  }),
+                });
+                if (response.ok) router.push('/complete');
+                else {
+                  setSaving(false);
+                  setError('An unexpected error occured. Please try again.');
+                }
+              }}
               type="submit"
-              className="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-              {content.submit}
+              className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+              {saving ? (
+                <LoadingSpinner size={16} color="white" className="absolute inset-0 h-full flex items-center" />
+              ) : (
+                content.submit
+              )}
             </button>
           </span>
         </div>
@@ -141,29 +176,32 @@ function Registration({ phone, survey }) {
 export async function getServerSideProps(context) {
   const secret = process.env.SECRET;
   const { survey } = context.query;
-  const phone = await db.task(async t => {
-    const { person } = await t.one(
-      `SELECT *
+  const { phone, value } = await db.task(async t => {
+    const { person, value } =
+      (await t.oneOrNone(
+        `SELECT *
         FROM survey
         WHERE id = $/id/`,
-      { id: survey }
-    );
+        { id: survey }
+      )) || {};
+    if (!person) return {};
     const { phone } = await db.oneOrNone(
       `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone
       FROM person
       WHERE id = $/id/`,
       { secret, id: person }
     );
-    return phone;
+    return { phone, value };
   });
   if (phone) {
     return {
       props: {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
+        submitted: value !== null,
       },
     };
-  } else return {};
+  } else return { props: {} };
 }
 
 export default Registration;

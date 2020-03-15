@@ -13,7 +13,7 @@ export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder,
         className="flex-1 form-input block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         {...props}
       />
-      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{suffix}</div>
+      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{suffix}</div>
     </div>
   </div>
 );

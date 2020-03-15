@@ -106,7 +106,7 @@ export default function AuthForm({ children }) {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    class="text-green-500">
+                    className="text-green-500">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                     <polyline points="22 4 12 14.01 9 11.01" />
                   </svg>
@@ -189,7 +189,7 @@ export default function AuthForm({ children }) {
             </span>
           </div>
           {!!error && (
-            <p class="mt-2 text-xs font-normal text-red-600">
+            <p className="mt-2 text-xs font-normal text-red-600">
               {phoneError ||
                 (!parsedPhone || !parsedPhone.country
                   ? content.phone.error.missingCountryCode
@@ -267,7 +267,7 @@ export default function AuthForm({ children }) {
             )}
           </button>
         </span>
-        {authError && <p class="mt-2 text-xs font-normal text-red-600">{authError}</p>}
+        {authError && <p className="mt-2 text-xs font-normal text-red-600">{authError}</p>}
       </div>
       <p className="mt-3 text-sm leading-5 text-gray-500">
         {content.privacy.prefix}
