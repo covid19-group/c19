@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import db from '../db';
 
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
@@ -139,6 +138,8 @@ function Registration({ phone, survey }) {
 }
 
 export async function getServerSideProps(context) {
+  const db = require('../db');
+
   const secret = process.env.SECRET;
   const { survey } = context.query;
   const phone = await db.task(async t => {
