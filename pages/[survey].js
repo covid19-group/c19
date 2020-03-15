@@ -38,7 +38,9 @@ function Registration({ phone, survey }) {
       <Header
         title={
           <div className="flex flex-wrap">
-            <span className="flex-auto">Registration by {phone}</span>
+            <span className="flex-auto">
+              {content.by} {phone}
+            </span>
             <span className="text-gray-500">
               {new Date().toLocaleString(language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>

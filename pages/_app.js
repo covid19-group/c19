@@ -25,11 +25,11 @@ const CustomHead = () => {
       <meta name="og:title" content={title} />
       <meta name="og:site_name" content="Pelion" />
       <meta name="og:description" content={description} />
-      <meta name="og:image" content="https://c10.dk/og.png" />
+      <meta name="og:image" content="https://c19.dk/og.png" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content="https://c10.dk/og.png" />
+      <meta name="twitter:image" content="https://c19.dk/og.png" />
     </Head>
   );
 };
