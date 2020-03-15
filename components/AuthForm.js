@@ -140,6 +140,7 @@ export default function AuthForm({ children }) {
                       },
                       body: JSON.stringify({
                         phone: parsePhoneNumberFromString(phone).number,
+                        language,
                       }),
                     });
                     if (response.ok) {

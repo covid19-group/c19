@@ -21,7 +21,8 @@
     "react": "16.13.0",
     "react-dom": "16.13.0",
     "rollbar": "^2.15.0",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "twilio": "^3.40.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

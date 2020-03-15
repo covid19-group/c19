@@ -1,12 +1,13 @@
 import db from '../../../db';
 import rollbar from '../../../rollbar';
-
+import { sendSMS } from '../../../twilio';
+import smsContent from '../../../content/sms';
 const secret = process.env.SECRET;
 
 export default async (req, res) => {
   try {
     if (req.method === 'POST') {
-      const { phone } = req.body;
+      const { phone, language } = req.body;
       const code = await db.task(async t => {
         let person = await db.oneOrNone(
           `SELECT *,
@@ -32,7 +33,7 @@ export default async (req, res) => {
         return person.code;
       });
 
-      /* INSERT TWILIO SMS SEND */
+      await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone });
 
       res.status(200).end();
     } else res.status(502).end();
