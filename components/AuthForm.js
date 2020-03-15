@@ -1,6 +1,6 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { InputWithFix } from './Form';
+import { InputWithFix, Checkbox } from './Form';
 import { AsYouType, parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import flag from 'country-code-emoji';
 import Link from 'next/link';
@@ -42,9 +42,10 @@ export default function AuthForm({ children }) {
     }
   }, [renewing]);
 
-  const [countryCode, setCountryCode] = useState('');
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
+  const [reminders, setReminders] = useState(true);
+
   const [focused, setFocused] = useState(false);
 
   const asYouTypeParser = new AsYouType();
@@ -55,7 +56,7 @@ export default function AuthForm({ children }) {
 
   const content = authContent[language];
 
-  const verify = async (phone, code) => {
+  const verify = async (phone, code, reminders) => {
     setVerifying(true);
     const response = await fetch('/api/post/verify', {
       method: 'POST',
@@ -65,12 +66,14 @@ export default function AuthForm({ children }) {
       body: JSON.stringify({
         phone,
         code,
+        reminders,
       }),
     });
     if (response.ok) {
       const { id } = await response.json();
       router.push('/' + id);
     } else {
+      setVerifying(false);
       setAuthError(content.btn.error);
     }
   };
@@ -83,7 +86,7 @@ export default function AuthForm({ children }) {
             e.preventDefault();
             setPhone('+4599999999');
             setCode('000000');
-            verify('+4599999999', '000000');
+            verify('+4599999999', '000000', true);
           }}
           className="ml-auto text-sm font-medium text-indigo-500 hover:text-indigo-600">
           Use test number
@@ -246,13 +249,22 @@ export default function AuthForm({ children }) {
       </div>
 
       <div className="mt-6">
+        <Checkbox
+          label={content.reminders.label}
+          checked={reminders}
+          onChange={() => setReminders(!reminders)}
+          description={content.reminders.description}
+        />
+      </div>
+
+      <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
           <button
             disabled={!(codeIsComplete && phoneIsValid)}
             ref={btn => (submitBtnRef.current = btn)}
             onClick={e => {
               e.preventDefault();
-              verify(phone, code);
+              verify(phone, code, reminders);
             }}
             className={
               'relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
@@ -269,7 +281,7 @@ export default function AuthForm({ children }) {
         </span>
         {authError && <p className="mt-2 text-xs font-normal text-red-600">{authError}</p>}
       </div>
-      <p className="mt-3 text-sm leading-5 text-gray-500">
+      <p className="mt-3 text-xs leading-5 text-gray-500">
         {content.privacy.prefix}
         <Link href="#">
           <a className="font-medium text-gray-900 underline ml-1">{content.privacy.label}</a>

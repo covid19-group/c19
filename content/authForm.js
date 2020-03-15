@@ -22,6 +22,10 @@ export default {
       description: 'Modtaget via SMS',
       reset: 'Nulstil',
     },
+    reminders: {
+      label: 'Modtag påmindelser på SMS',
+      description: 'Du får et link til din daglige registrering',
+    },
     btn: {
       label: 'Gå til tilmelding',
       error: 'Denne kode er ikke længere gældende. Prøv igen.',
@@ -53,6 +57,10 @@ export default {
       label: 'Verification Code',
       description: 'Received by SMS',
       reset: 'Reset',
+    },
+    reminders: {
+      label: 'Receive SMS notifications',
+      description: "You'll get a link to your daily register",
     },
     btn: {
       label: 'Continue to Registration',
