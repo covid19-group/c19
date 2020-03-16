@@ -29,13 +29,13 @@ export default function Data() {
 }
 
 const Banner = ({ text }) => (
-  <div class="bg-indigo-600 rounded-lg sm:border-gray-100">
-    <div class="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between flex-wrap">
-        <div class="w-0 flex-1 flex items-center">
-          <span class="flex p-2 rounded-lg bg-indigo-800">
+  <div className="bg-indigo-600 rounded-lg sm:border-gray-100">
+    <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between flex-wrap">
+        <div className="w-0 flex-1 flex items-center">
+          <span className="flex p-2 rounded-lg bg-indigo-800">
             <svg
-              class="h-6 w-6 text-white"
+              className="h-6 w-6 text-white"
               stroke="currentColor"
               fill="none"
               viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ const Banner = ({ text }) => (
               <line x1="12" y1="17" x2="12.01" y2="17" />
             </svg>
           </span>
-          <p class="ml-3 font-medium text-white whitespace-wrap">{text}</p>
+          <p className="ml-3 font-medium text-white whitespace-wrap">{text}</p>
         </div>
       </div>
     </div>
