@@ -29,8 +29,10 @@ export default async (req, res) => {
               RETURNING *`,
             { phone, secret, code: Math.floor(100000 + Math.random() * 900000).toString() }
           );
+          return Math.floor(100000 + Math.random() * 900000).toString();
+        } else {
+          return person.code;
         }
-        return person.code;
       });
 
       await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone });
