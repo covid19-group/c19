@@ -1,3 +1,26 @@
+export const Toggle = ({ checked, onChange }) => {
+  return (
+    <div className="mt-1 sm:mt-4 sm:col-span-2">
+      <span
+        className={
+          (checked ? 'bg-indigo-600' : 'bg-gray-200') +
+          ' relative inline-block flex-no-shrink h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline'
+        }
+        role="checkbox"
+        tabindex="0"
+        onClick={() => onChange(!checked)}
+        aria-checked={(checked || false).toString()}>
+        <span
+          ariaHidden="true"
+          className={
+            (checked ? 'translate-x-5' : 'translate-x-0') +
+            ' inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200'
+          }></span>
+      </span>
+    </div>
+  );
+};
+
 export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder, type = 'text', ...props }) => (
   <div className="mt-1 sm:col-span-2 w-full">
     <div className="relative max-w-lg flex rounded-md shadow-sm">
@@ -18,18 +41,23 @@ export const InputWithFix = ({ id, prefix, suffix, value, onChange, placeholder,
   </div>
 );
 
-export const InputWithDropDown = ({ value, onChange, options = [], onSelectChange, placeholder }) => (
+export const InputWithDropDown = ({ id, value, onChange, options = [], onSelectChange, placeholder }) => (
   <div className="mt-1 relative">
     <div className="absolute inset-y-0 left-0 flex items-center">
       <select
         onChange={e => onSelectChange({ id: e.target.value })}
         className="form-select h-full py-0 pl-3 pr-8 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5">
         {options.map(option => (
-          <option>{option}</option>
+          <option key={option}>{option}</option>
         ))}
       </select>
     </div>
-    <input className="form-input block w-full pl-20 sm:text-sm sm:leading-5" placeholder={placeholder} />
+    <input
+      value={value}
+      onChange={e => onChange({ id, value: e.target.value })}
+      className="form-input block w-full pl-20 sm:text-sm sm:leading-5"
+      placeholder={placeholder}
+    />
   </div>
 );
 
@@ -45,7 +73,7 @@ export const Textarea = ({ id, value, onChange, placeholder, type = 'text' }) =>
         rows="3"
         className="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
     </div>
-    {description && <p className="mt-2 text-sm text-gray-500">{description}</p>}
+    {description && <div className="mt-2 text-sm text-gray-500">{description}</div>}
   </div>
 );
 
@@ -96,7 +124,7 @@ export const Checkbox = ({ id, label, checked, onChange, description }) => (
     </div>
     <div className="pl-7 text-sm leading-5">
       <span className="font-medium text-gray-700">{label}</span>
-      {description && <p className="text-gray-500">{description}</p>}
+      {description && <div className="text-gray-500">{description}</div>}
     </div>
   </label>
 );
@@ -114,7 +142,7 @@ export const Radio = ({ id, label, checked, onChange, description }) => (
     </div>
     <div className="pl-7 text-sm leading-5">
       <span className="font-medium text-gray-700">{label}</span>
-      {description && <p className="text-gray-500">{description}</p>}
+      {description && <div className="text-gray-500">{description}</div>}
     </div>
   </label>
 );
@@ -122,7 +150,7 @@ export const Radio = ({ id, label, checked, onChange, description }) => (
 export const Header = ({ title, description }) => (
   <div className="pb-4 border-b border-gray-200">
     <h3 className="text-lg leading-6 font-medium text-gray-900">{title}</h3>
-    <p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">{description}</p>
+    <div className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">{description}</div>
   </div>
 );
 
