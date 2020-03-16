@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-
+import Link from 'next/link';
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
 import PageLayout from '../components/PageLayout';
@@ -31,6 +31,20 @@ function Registration({ phone, survey }) {
 
   const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
+
+  if (!survey) {
+    return (
+      <PageLayout>
+        <p>
+          {content.expired.label}{' '}
+          <Link href="/">
+            <a className="text-indigo-600 hover:text-indigo-700">{content.expired.link}</a>
+          </Link>
+          .
+        </p>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>

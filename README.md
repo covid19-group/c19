@@ -1,30 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# C19 // COVID-19 Self Registration Project
 
-## Getting Started
+## Want help with!
+- [ ] Automatic tests
+- [ ] Stress testing
+- [ ] Letting Power BI connect to DB: https://www.reddit.com/r/PowerBI/comments/at3bvh/architectural_options_to_connect_refresh_data/ 
 
-First, run the development server:
+## Currently working on
+- [ ] Update survey content: https://docs.google.com/document/d/1P7QmhDXdapinsprc5VR02pXmEFCyODiFLpr7mLVyhgM/edit#
+- [ ] Create initial survey: https://docs.google.com/document/d/1P7QmhDXdapinsprc5VR02pXmEFCyODiFLpr7mLVyhgM/edit#
+- [ ] Add Rollbar error logging to front-end
+- [ ] Add Privacy Policy
+- [ ] Translate survey content to en-UK/da-DK
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Should be done later
+- [ ] Remove “Test number” in prod when live
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
-
-The easiest way to deploy your Next.js app is to use the [ZEIT Now Platform](https://zeit.co/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Nice-to-have
+- [ ] Add animations/transitions for better look and feel
+- [ ] Add iOS paste option upon receiving code
+- [ ] Add more languages
