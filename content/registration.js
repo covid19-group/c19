@@ -3,6 +3,10 @@ export default {
     by: 'Registrering for tlf.',
     title: 'Registration',
     submit: 'Submit Registration',
+    expired: {
+      label: 'Linket er udløbet,',
+      link: 'prøv venligst igen',
+    },
     phone: {
       label: 'Phone',
       placeholder: '+1 (111) 111 1111',
@@ -85,6 +89,10 @@ export default {
     phone: {
       label: 'Phone',
       placeholder: '+1 (111) 111 1111',
+    },
+    expired: {
+      label: 'This link has expired,',
+      link: 'please try again',
     },
     exposure: {
       label: 'Have you been exposed to any high risk environment within the past 14 days?',
