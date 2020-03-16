@@ -5,7 +5,7 @@ export default {
       {
         question: "Who's behind this project?",
         answer: 'Volunteering people in tech. For full list of contributers please refer to',
-        link: 'https://github.com/holgerthorup/corona/blob/master/README.md',
+        link: 'https://github.com/covid19-group/c19',
       },
     ],
   },
@@ -15,7 +15,7 @@ export default {
       {
         question: "Who's behind this project?",
         answer: 'Volunteering people in tech. For full list of contributers please refer to',
-        link: 'https://github.com/holgerthorup/corona/blob/master/README.md',
+        link: 'https://github.com/covid19-group/c19',
       },
     ],
   },
