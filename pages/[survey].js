@@ -146,6 +146,7 @@ function Registration({ phone, survey, initial }) {
           <Label label={content.conditions.label} description={content.conditions.description}>
             {Object.keys(content.conditions.options).map(key => (
               <Checkbox
+                key={key}
                 label={content.conditions.options[key].label}
                 description={content.conditions.options[key].description}
                 onChange={() => {
@@ -211,6 +212,7 @@ function Registration({ phone, survey, initial }) {
             {Object.keys(content.symptoms.options).map(key => (
               <Checkbox
                 label={content.symptoms.options[key]}
+                key={key}
                 onChange={() => {
                   if (symptoms.includes(key)) {
                     setSymptoms(symptoms.filter(string => string !== key));
@@ -242,14 +244,14 @@ function Registration({ phone, survey, initial }) {
             {Object.keys(content.distancing.options).map(key => {
               const label = content.distancing.options[key];
               const optionProps = { label, onChange: () => setDistancing(key), checked: key === distancing };
-              return <Radio {...optionProps} />;
+              return <Radio key={key} {...optionProps} />;
             })}
           </Label>
           <Label label={content.state.label}>
             {Object.keys(content.state.options).map(key => {
               const label = content.state.options[key];
               const optionProps = { label, onChange: () => setState(key), checked: key === state };
-              return <Radio {...optionProps} />;
+              return <Radio key={key} {...optionProps} />;
             })}
           </Label>
           {state === 'work' && (
@@ -265,14 +267,14 @@ function Registration({ phone, survey, initial }) {
             {Object.keys(content.neighbourhood.options).map(key => {
               const label = content.neighbourhood.options[key];
               const optionProps = { label, onChange: () => setNeighbourhood(key), checked: key === neighbourhood };
-              return <Radio {...optionProps} />;
+              return <Radio key={key} {...optionProps} />;
             })}
           </Label>
           <Label label={content.community.label}>
             {Object.keys(content.community.options).map(key => {
               const label = content.community.options[key];
               const optionProps = { label, onChange: () => setCommunity(key), checked: key === community };
-              return <Radio {...optionProps} />;
+              return <Radio key={key} {...optionProps} />;
             })}
           </Label>
         </>
