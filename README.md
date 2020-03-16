@@ -7,14 +7,9 @@
 - [ ] Letting Power BI connect to DB: https://www.reddit.com/r/PowerBI/comments/at3bvh/architectural_options_to_connect_refresh_data/
 
 ## Currently working on
-
+- [ ] Add animations/transitions for better look and feel
+- [ ] Remove “Test number” in prod when live
 - [ ] Add Privacy Policy
 
-### Should be done later
-
-- [ ] Remove “Test number” in prod when live
-
 ## Nice-to-have
-
-- [ ] Add animations/transitions for better look and feel
 - [ ] Add more languages

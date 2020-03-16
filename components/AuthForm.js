@@ -58,6 +58,7 @@ export default function AuthForm({ children }) {
 
   const verify = async (phone, code, reminders) => {
     setVerifying(true);
+    setAuthError(false);
     const response = await fetch('/api/post/verify', {
       method: 'POST',
       headers: {
@@ -72,6 +73,7 @@ export default function AuthForm({ children }) {
     if (response.ok) {
       const { id } = await response.json();
       router.push('/' + id);
+      setVerifying(false);
     } else {
       setVerifying(false);
       setAuthError(content.btn.error);
