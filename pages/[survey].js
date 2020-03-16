@@ -62,6 +62,18 @@ function Registration({ phone, survey, initial }) {
 
   const validTemperatureValue = temperatureValue > 30 && temperatureValue < 45;
 
+  const symptomsAdditionalAnswered = symptoms.reduce(
+    (acc, symptom) =>
+      !!(
+        acc &&
+        Object.keys(content.symptoms.additional).reduce(
+          (acc, key) => !!(acc && R.path([symptom, key], symptomsAdditional)),
+          true
+        )
+      ),
+    true
+  );
+
   const complete =
     !hasChanged ||
     (!!temperature &&
@@ -69,6 +81,7 @@ function Registration({ phone, survey, initial }) {
       !!distancing &&
       !!state &&
       (state !== 'work' || !!critical) &&
+      !!symptomsAdditionalAnswered &&
       !!community &&
       (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length)));
 
