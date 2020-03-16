@@ -366,7 +366,8 @@ export async function getServerSideProps(context) {
       (await t.oneOrNone(
         `SELECT *
         FROM survey
-        WHERE id = $/id/`,
+        WHERE id = $/id/
+          and date = current_date`,
         { id: survey }
       )) || {};
     if (!person) return {};
