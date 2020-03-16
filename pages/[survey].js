@@ -7,6 +7,7 @@ import ConfirmationModal from '../components/ConfirmationModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
+const R = require('ramda');
 
 function Registration({ phone, survey, initial }) {
   /* one time questions */
@@ -29,7 +30,10 @@ function Registration({ phone, survey, initial }) {
   const [temperatureValue, setTemperatureValue] = useState('');
   const [symptoms, setSymptoms] = useState([]);
 
-  /*TODO: Missing state handling for additional symptoms questions */
+  const [symptomsAdditional, setSymptomsAdditional] = useState({});
+  const changeSymptomsAdditional = (symptom, key, optionKey) => {
+    setSymptomsAdditional(R.assocPath([symptom, key], optionKey, symptomsAdditional));
+  };
 
   const [distancing, setDistancing] = useState(null);
   const [state, setState] = useState(null);
@@ -233,8 +237,8 @@ function Registration({ phone, survey, initial }) {
                   <Radio
                     key={key + '-' + optionKey}
                     label={content.symptoms.additional[key].options[optionKey]}
-                    checked={false}
-                    onChange={() => null}
+                    checked={R.path([symptom, key], symptomsAdditional) === optionKey}
+                    onChange={() => changeSymptomsAdditional(symptom, key, optionKey)}
                   />
                 ))}
               </Label>
