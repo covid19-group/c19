@@ -322,6 +322,7 @@ function Registration({ phone, survey, initial }) {
                       temperature,
                       temperatureValue,
                       symptoms,
+                      symptomsAdditional,
                       distancing,
                       state,
                       critical,
