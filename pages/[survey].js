@@ -11,7 +11,7 @@ import registrationContent from '../content/registration';
 function Registration({ phone, survey, initial }) {
   /* one time questions */
   /* TODO: Move so separate component */
-  const [sex, setSec] = useState(null);
+  const [sex, setSex] = useState(null);
   const [zip, setZip] = useState('');
   const [born, setBorn] = useState('');
   const [household, setHousehold] = useState('');
@@ -25,10 +25,12 @@ function Registration({ phone, survey, initial }) {
 
   /* each registration */
   const [exposure, setExposure] = useState([]);
-  const [temperature, setTemperature] = useState('');
+  const [temperature, setTemperature] = useState(null);
   const [temperatureValue, setTemperatureValue] = useState('');
   const [symptoms, setSymptoms] = useState([]);
+
   /*TODO: Missing state handling for additional symptoms questions */
+
   const [distancing, setDistancing] = useState(null);
   const [state, setState] = useState(null);
   const [critical, setCritical] = useState(null);
@@ -53,6 +55,18 @@ function Registration({ phone, survey, initial }) {
   }
 
   const unit = initial ? '14 ' + content.unit.days : '24 ' + content.unit.hours;
+
+  const validTemperatureValue = temperatureValue > 30 && temperatureValue < 45;
+
+  const complete =
+    !hasChanged ||
+    (!!temperature &&
+      (temperature !== 'measured' || validTemperatureValue) &&
+      !!distancing &&
+      !!state &&
+      (state !== 'work' || !!critical) &&
+      !!community &&
+      (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length)));
 
   return (
     <PageLayout>
@@ -98,23 +112,7 @@ function Registration({ phone, survey, initial }) {
           <Label label={content.born.label}>
             <div className="w-24">
               <InputWithFix
-                suffix={
-                  born.length === 4 && (
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-green-500">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  )
-                }
+                suffix={born.length === 4 && <Checkmark />}
                 value={born}
                 placeholder="1968"
                 onChange={({ value }) =>
@@ -126,28 +124,22 @@ function Registration({ phone, survey, initial }) {
           <Label label={content.zip.label}>
             <div className="w-24">
               <InputWithFix
-                suffix={
-                  zip.length === 4 && (
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-green-500">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  )
-                }
+                suffix={zip.length === 4 && <Checkmark />}
                 value={zip}
                 placeholder="2200"
                 onChange={({ value }) =>
                   setZip([...value].filter((v, idx) => idx < 4 && Number.isInteger(parseInt(v))).join(''))
                 }
+              />
+            </div>
+          </Label>
+          <Label label={content.household.label}>
+            <div className="w-24">
+              <InputWithFix
+                suffix={parseInt(household) > 0 && <Checkmark />}
+                value={household}
+                placeholder="4"
+                onChange={({ value }) => setHousehold([...value].filter(v => Number.isInteger(parseInt(v))).join(''))}
               />
             </div>
           </Label>
@@ -187,12 +179,15 @@ function Registration({ phone, survey, initial }) {
               onChange={() => setTemperature('measured')}
               description={
                 <InputWithFix
+                  suffix={validTemperatureValue && <Checkmark />}
                   value={temperatureValue}
                   placeholder="38"
                   prefix="°C"
                   onChange={({ value }) => {
                     setTemperature('measured');
-                    setTemperatureValue(value);
+                    setTemperatureValue(
+                      [...value].filter((v, idx) => idx < 2 && Number.isInteger(parseInt(v))).join('')
+                    );
                   }}
                 />
               }
@@ -284,6 +279,7 @@ function Registration({ phone, survey, initial }) {
       )}
       <div className="pt-5">
         <div className="flex justify-end">
+          {!error && !complete && <p className="mt-2 text-xs font-normal text-gray-700">{content.incomplete}</p>}
           <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
@@ -297,6 +293,10 @@ function Registration({ phone, survey, initial }) {
                   },
                   body: JSON.stringify({
                     value: {
+                      sex,
+                      born,
+                      household,
+                      conditions,
                       exposure,
                       temperature,
                       temperatureValue,
@@ -314,8 +314,13 @@ function Registration({ phone, survey, initial }) {
                 else setError('An unexpected error occured. Please try again.');
                 setSaving(false);
               }}
-              type="submit"
-              className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+              disabled={!complete}
+              className={
+                (complete
+                  ? 'text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
+                  : 'text-white bg-indigo-300 cursor-default focus:outline-none') +
+                'relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md transition duration-150 ease-in-out'
+              }>
               <LoadingSpinner
                 size={16}
                 color="white"
@@ -334,7 +339,7 @@ export async function getServerSideProps(context) {
   const db = require('../db');
   const secret = process.env.SECRET;
   const { survey } = context.query;
-  const { phone, value } = await db.task(async t => {
+  const { phone, value, surveys } = await db.task(async t => {
     const { person, value } =
       (await t.oneOrNone(
         `SELECT *
@@ -349,17 +354,39 @@ export async function getServerSideProps(context) {
       WHERE id = $/id/`,
       { secret, id: person }
     );
-    return { phone, value };
+    const { surveys } = await db.one(
+      `SELECT count(*) as surveys
+      FROM survey
+      WHERE person = $/person/`,
+      { person }
+    );
+    return { phone, value, surveys };
   });
   if (phone) {
     return {
       props: {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
-        initial: !!phone,
+        initial: !(surveys === 1 && !survey.value),
       },
     };
   } else return { props: {} };
 }
 
 export default Registration;
+
+const Checkmark = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-green-500">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+);

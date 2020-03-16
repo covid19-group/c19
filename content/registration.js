@@ -7,6 +7,7 @@ export default {
     },
     by: 'Registrering for tlf.',
     title: 'Registration',
+    incomplete: 'Svar venligst på alle spørgsmålene før du fortsætter',
     submit: 'Send registrering',
     expired: {
       label: 'Linket er udløbet,',
@@ -35,7 +36,7 @@ export default {
       label: 'Postnummer',
     },
     household: {
-      label: 'Hvor mange bor i dit husholdning?',
+      label: 'Hvor mange bor i din husstand?',
     },
     conditions: {
       label: 'Har du, eller har du haft, én eller flere af disse lidelser?',
@@ -180,6 +181,7 @@ export default {
     },
     by: 'Registration by No.',
     title: 'Registration',
+    incomplete: 'Please answer all the questions before submitting',
     submit: 'Submit Registration',
     expired: {
       label: 'This link has expired,',
