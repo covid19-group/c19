@@ -1,6 +1,9 @@
 {
   "version": 2,
   "env": {
+    "TWILIO_ACCOUNT_SID": "@twilio_account_sid",
+    "TWILIO_AUTH_TOKEN": "@twilio_auth_token",
+    "TWILIO_PHONE_NO": "@twilio_phone_no",
     "DATABASE": "@db",
     "SECRET": "@secret",
     "ROLLBAR_ACCESS_TOKEN": "@rollbar"
