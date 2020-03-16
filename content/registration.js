@@ -1,8 +1,13 @@
 export default {
   'da-DK': {
+    baseline: {
+      label: 'Baseline',
+      description:
+        'Denne første registrering er udvidet til at omfatte de seneste {unit}, og inkludere demografiske data samt syghistorik for at sætte en baseline til fremtidige registrering.',
+    },
     by: 'Registrering for tlf.',
     title: 'Registration',
-    submit: 'Submit Registration',
+    submit: 'Send registrering',
     expired: {
       label: 'Linket er udløbet,',
       link: 'prøv venligst igen',
@@ -15,6 +20,49 @@ export default {
     unit: {
       days: 'dage',
       hours: 'timer',
+    },
+    sex: {
+      label: 'Biologisk køn',
+      options: {
+        male: 'Mand',
+        female: 'Kvinde',
+      },
+    },
+    born: {
+      label: 'Fødselsår',
+    },
+    zip: {
+      label: 'Postnummer',
+    },
+    household: {
+      label: 'Hvor mange bor i dit husholdning?',
+    },
+    conditions: {
+      label: 'Har du, eller har du haft, én eller flere af disse lidelser?',
+      description: 'Vælg alle relevante',
+      options: {
+        diabetes: { label: 'Diabetes' },
+        heart: {
+          label: 'Hjertelidelser',
+          description: 'f.eks. hjertekarsygdomme, hjerteanfald, hjertefejl, angina',
+        },
+        lungs: {
+          label: 'Lungsygdomme',
+          description: 'f.eks. astma, KOL',
+        },
+        'blood-pressue': {
+          label: 'Forhøjet blodtryk',
+        },
+        cancer: {
+          label: 'Aktiv cancer diagnose',
+        },
+        hiv: {
+          label: 'HIV eller nedsat immunforsvar',
+        },
+        transplant: {
+          label: 'Tidligere organtransplantation',
+        },
+      },
     },
     exposure: {
       label:
@@ -46,12 +94,15 @@ export default {
       label: 'Har du, eller har du indenfor de sidste {unit} haft, én eller flere af disse symptomer?',
       description: 'Vælg alle de symptomer du har haft',
       options: {
-        chills: 'Kuldegysnigner',
+        fatique: 'Udmattedhed',
+        chills: 'Kuldegysninger',
         cough: 'Hoste',
         'short-breath': 'Åndedrætsbesvær eller stakåndethed',
         'tight-chest': 'Trykken for brystet',
         headache: 'Hovedpine',
         'muscle-ache': 'Muskelømhed',
+        nausea: 'Kvalme eller opkast',
+        diarrhea: 'Diarré',
       },
       additional: {
         timeframe: {
@@ -65,7 +116,7 @@ export default {
           },
         },
         development: {
-          label: 'Over den periode, din {symptom} blevet bedre eller værre?',
+          label: 'Over den periode, er din {symptom} blevet bedre eller værre?',
           options: {
             better: 'Bedre',
             worse: 'Værre',
@@ -122,6 +173,11 @@ export default {
     },
   },
   'en-UK': {
+    baseline: {
+      label: 'Baseline',
+      description:
+        'This first registration is extended to the past {unit} and include demographic and medical history information to set the basline for future registrations.',
+    },
     by: 'Registration by No.',
     title: 'Registration',
     submit: 'Submit Registration',
@@ -137,6 +193,49 @@ export default {
     unit: {
       days: 'days',
       hours: 'hours',
+    },
+    sex: {
+      label: 'Biological Sex',
+      options: {
+        male: 'Male',
+        female: 'Female',
+      },
+    },
+    born: {
+      label: 'Birth Year',
+    },
+    zip: {
+      label: 'Zip Code',
+    },
+    household: {
+      label: 'Number of People in Your Household',
+    },
+    conditions: {
+      label: 'Do you have or have you ever had any of the following conditions?',
+      description: 'Select all that apply',
+      options: {
+        diabetes: { label: 'Diabetes' },
+        heart: {
+          label: 'Heart disease',
+          description: 'e.g., coronary artery disease, previous heart attack, heart failure, angina, valvular disease',
+        },
+        lungs: {
+          label: 'Lung disease',
+          description: 'e.g., asthma, COPD',
+        },
+        'blood-pressue': {
+          label: 'High blood pressure',
+        },
+        cancer: {
+          label: 'Active cancer diagnosis',
+        },
+        hiv: {
+          label: 'HIV or an impaired immune system',
+        },
+        transplant: {
+          label: 'Previous organ transplant',
+        },
+      },
     },
     exposure: {
       label:
@@ -168,12 +267,15 @@ export default {
       label: 'Have you had any of the following symptoms in the past {unit}?',
       description: 'Select all that apply',
       options: {
+        fatique: 'Fatique',
         chills: 'Chills',
         cough: 'Cough',
         'short-breath': 'Difficulty breathing or shortness of breath',
         'tight-chest': 'Tightness in your chest',
         headache: 'Headache',
         'muscle-ache': 'Muscle aches',
+        nausea: 'Nausea or vomiting',
+        diarrhea: 'Diarrhea',
       },
       additional: {
         timeframe: {

@@ -1,30 +1,30 @@
 import fetch from 'node-fetch';
 import Link from 'next/link';
 import { useState, useContext } from 'react';
-import { Header, Label, Checkbox, Radio, Input, InputWithDropDown, Toggle } from '../components/Form';
+import { Header, Label, Checkbox, Radio, Input, InputWithFix, Toggle } from '../components/Form';
 import PageLayout from '../components/PageLayout';
 import ConfirmationModal from '../components/ConfirmationModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
-import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
-import celciusToFahrenheit from '../methods/celciusToFahrenheit';
 
-function Registration({ phone, survey }) {
+function Registration({ phone, survey, initial }) {
   /* one time questions */
   /* TODO: Move so separate component */
-  const [country, setCountry] = useState('');
-  const [age, setAge] = useState('');
+  const [sex, setSec] = useState(null);
+  const [zip, setZip] = useState('');
+  const [born, setBorn] = useState('');
+  const [household, setHousehold] = useState('');
+  const [conditions, setConditions] = useState([]);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
-  const [hasChanged, setHasChanged] = useState(true);
+  const [hasChanged, setHasChanged] = useState(initial);
 
   /* each registration */
   const [exposure, setExposure] = useState([]);
-  const [scale, setScale] = useState('°C');
   const [temperature, setTemperature] = useState('');
   const [temperatureValue, setTemperatureValue] = useState('');
   const [symptoms, setSymptoms] = useState([]);
@@ -37,14 +37,6 @@ function Registration({ phone, survey }) {
 
   const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
-
-  const isFirst = true;
-  const unit = isFirst ? '14 ' + content.unit.days : '24 ' + content.unit.hours;
-
-  // console.log({
-  //   c: scale === '°C' ? temperatureValue : fahrenheitToCelcius(temperatureValue),
-  //   f: scale === '°C' ? celciusToFahrenheit(temperatureValue) : temperatureValue,
-  // });
 
   if (!survey) {
     return (
@@ -60,6 +52,8 @@ function Registration({ phone, survey }) {
     );
   }
 
+  const unit = initial ? '14 ' + content.unit.days : '24 ' + content.unit.hours;
+
   return (
     <PageLayout>
       {showConfirmation && <ConfirmationModal language={language} close={() => setShowConfirmation(false)} />}
@@ -67,21 +61,112 @@ function Registration({ phone, survey }) {
         title={
           <div className="flex flex-wrap">
             <span className="flex-auto">
-              {content.by} {phone}
+              {initial && content.baseline.label} {content.by} {phone}
             </span>
             <span className="text-gray-500">
               {new Date().toLocaleString(language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
+            {initial && (
+              <p className="mt-2 text-sm text-gray-500">{content.baseline.description.replace('{unit}', unit)}</p>
+            )}
           </div>
         }
       />
-      <Label
-        label={content.noChange.label.replace('{unit}', unit)}
-        description={content.noChange.description.replace('{unit}', unit)}>
-        <Radio label={content.noChange.options.no} checked={!hasChanged} onChange={() => setHasChanged(!hasChanged)} />
-        <Radio label={content.noChange.options.yes} checked={hasChanged} onChange={() => setHasChanged(!hasChanged)} />
-      </Label>
-      {hasChanged && (
+      {!initial && (
+        <Label
+          label={content.noChange.label.replace('{unit}', unit)}
+          description={content.noChange.description.replace('{unit}', unit)}>
+          <Radio
+            label={content.noChange.options.no}
+            checked={!hasChanged}
+            onChange={() => setHasChanged(!hasChanged)}
+          />
+          <Radio
+            label={content.noChange.options.yes}
+            checked={hasChanged}
+            onChange={() => setHasChanged(!hasChanged)}
+          />
+        </Label>
+      )}
+      {initial && (
+        <>
+          <Label label={content.sex.label}>
+            {Object.keys(content.sex.options).map(key => (
+              <Radio key={key} label={content.sex.options[key]} checked={sex === key} onChange={() => setSex(key)} />
+            ))}
+          </Label>
+          <Label label={content.born.label}>
+            <div className="w-24">
+              <InputWithFix
+                suffix={
+                  born.length === 4 && (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-green-500">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  )
+                }
+                value={born}
+                placeholder="1968"
+                onChange={({ value }) =>
+                  setBorn([...value].filter((v, idx) => idx < 4 && Number.isInteger(parseInt(v))).join(''))
+                }
+              />
+            </div>
+          </Label>
+          <Label label={content.zip.label}>
+            <div className="w-24">
+              <InputWithFix
+                suffix={
+                  zip.length === 4 && (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-green-500">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  )
+                }
+                value={zip}
+                placeholder="2200"
+                onChange={({ value }) =>
+                  setZip([...value].filter((v, idx) => idx < 4 && Number.isInteger(parseInt(v))).join(''))
+                }
+              />
+            </div>
+          </Label>
+          <Label label={content.conditions.label} description={content.conditions.description}>
+            {Object.keys(content.conditions.options).map(key => (
+              <Checkbox
+                label={content.conditions.options[key].label}
+                description={content.conditions.options[key].description}
+                onChange={() => {
+                  if (conditions.includes(key)) {
+                    setConditions(conditions.filter(string => string !== key));
+                  } else setConditions(conditions.concat(key));
+                }}
+              />
+            ))}
+          </Label>
+        </>
+      )}
+      {(initial || hasChanged) && (
         <>
           <Label
             label={content.exposure.label.replace('{unit}', unit)}
@@ -101,11 +186,10 @@ function Registration({ phone, survey }) {
               label={content.temperature.options.measured}
               onChange={() => setTemperature('measured')}
               description={
-                <InputWithDropDown
+                <InputWithFix
                   value={temperatureValue}
-                  placeholder={scale === '°C' ? '38' : '98'}
-                  options={['°C', '°F']}
-                  onSelectChange={({ id }) => setScale(id)}
+                  placeholder="38"
+                  prefix="°C"
                   onChange={({ value }) => {
                     setTemperature('measured');
                     setTemperatureValue(value);
@@ -115,6 +199,7 @@ function Registration({ phone, survey }) {
             />
             {['subjective', 'normal'].map(key => (
               <Radio
+                key={key}
                 label={content.temperature.options[key].label}
                 description={content.temperature.options[key].description}
                 checked={temperature === key}
@@ -195,54 +280,52 @@ function Registration({ phone, survey }) {
               return <Radio {...optionProps} />;
             })}
           </Label>
-
-          <div className="pt-5">
-            <div className="flex justify-end">
-              <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
-              <span className="ml-3 inline-flex rounded-md shadow-sm">
-                <button
-                  onClick={async e => {
-                    setSaving(true);
-                    e.preventDefault();
-                    const response = await fetch('/api/post/survey', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({
-                        value: {
-                          country,
-                          age,
-                          exposure,
-                          exposureDate,
-                          symptoms,
-                          scale,
-                          temperature,
-                          temperatureValue,
-                          tested,
-                          state,
-                        },
-                        survey,
-                      }),
-                    });
-                    if (response.ok) setShowConfirmation(true);
-                    else setError('An unexpected error occured. Please try again.');
-                    setSaving(false);
-                  }}
-                  type="submit"
-                  className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                  <LoadingSpinner
-                    size={16}
-                    color="white"
-                    className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
-                  />
-                  <span className={saving ? 'invisible' : ''}>{content.submit}</span>
-                </button>
-              </span>
-            </div>
-          </div>
         </>
       )}
+      <div className="pt-5">
+        <div className="flex justify-end">
+          <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
+          <span className="ml-3 inline-flex rounded-md shadow-sm">
+            <button
+              onClick={async e => {
+                setSaving(true);
+                e.preventDefault();
+                const response = await fetch('/api/post/survey', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    value: {
+                      exposure,
+                      temperature,
+                      temperatureValue,
+                      symptoms,
+                      distancing,
+                      state,
+                      critical,
+                      neighbourhood,
+                      community,
+                    },
+                    survey,
+                  }),
+                });
+                if (response.ok) setShowConfirmation(true);
+                else setError('An unexpected error occured. Please try again.');
+                setSaving(false);
+              }}
+              type="submit"
+              className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+              <LoadingSpinner
+                size={16}
+                color="white"
+                className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
+              />
+              <span className={saving ? 'invisible' : ''}>{content.submit}</span>
+            </button>
+          </span>
+        </div>
+      </div>
     </PageLayout>
   );
 }
@@ -273,7 +356,7 @@ export async function getServerSideProps(context) {
       props: {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
-        submitted: value !== null,
+        initial: !!phone,
       },
     };
   } else return { props: {} };

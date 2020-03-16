@@ -1,10 +1,10 @@
 export default {
   'da-DK': {
     hero: {
-      titleBlack: '[COVID-19]',
-      titleBlue: 'Self-Reporting',
+      titleBlack: 'COVID-19',
+      titleBlue: 'Selv-rapportering',
       subtitle:
-        'Selv-rapportering hjælper myndighederne med at danne overblik over coronakrisen. Vi sender dig dagligt en SMS, og spørger dig, hvordan du er påvirket.',
+        'Selv-rapportering hjælper myndighederne med at danne overblik over coronakrisen. Vi sender dig dagligt en SMS og spørger dig, hvordan du er påvirket.',
       action: 'Sammen kan vi give myndighederne de bedste vilkår for at kontrollere krisen.',
       placeholder: 'Indtast telefonnummer',
       privacy: {
@@ -36,7 +36,7 @@ export default {
   },
   'en-UK': {
     hero: {
-      titleBlack: '[COVID-19]',
+      titleBlack: 'COVID-19',
       titleBlue: 'Self-Reporting',
       subtitle:
         'Lack of data on people who are not symptomatic enough to be hospitalized complicates our ability to make predictions about incoming waves of cases, future need of emergency supplies, etc.',

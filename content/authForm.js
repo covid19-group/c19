@@ -26,7 +26,7 @@ export default {
     },
     reminders: {
       label: 'Modtag påmindelser på SMS',
-      description: 'Du får et link til din daglige registrering',
+      description: 'Vi sender dig dagligt et link med spørgsmål',
     },
     btn: {
       label: 'Gå til tilmelding',
