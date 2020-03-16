@@ -213,6 +213,11 @@ export default function AuthForm({ children }) {
               <div key={idx} className="-ml-px flex-1 min-w-0 z-30">
                 <input
                   maxLength="1"
+                  onPaste={e => {
+                    e.preventDefault();
+                    const paste = (e.clipboardData || window.clipboardData).getData('text');
+                    setCode(paste.replace(/\D/g, ''));
+                  }}
                   onChange={e => {
                     const value = e.target.value;
                     setCode(
