@@ -218,7 +218,7 @@ export default function AuthForm({ children }) {
                   onPaste={e => {
                     e.preventDefault();
                     const paste = (e.clipboardData || window.clipboardData).getData('text');
-                    setCode(paste.replace(/\D/g, ''));
+                    setCode(paste.replace('c19.dk', '').replace(/\D/g, ''));
                   }}
                   onChange={e => {
                     const value = e.target.value;
