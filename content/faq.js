@@ -24,9 +24,19 @@ export default {
     title: 'Frequently asked questions',
     questions: [
       {
-        question: "Who's behind this project?",
-        answer: 'Volunteering people in tech. For full list of contributers please refer to',
+        question: "Who's behind c19.dk?",
+        answer: 'Volunteering people in tech. We are startup founders, engineers, designers etc.',
         link: 'https://github.com/covid19-group/c19',
+      },
+      {
+        question: 'Why c19.dk?',
+        answer:
+          'The "Flatten the curve" strategy means that we little information about the number of Danes with symptoms who are not in contact with the health services. This tool reveals the dark figures, for the authorities to predict the pressure on hospitals better.',
+      },
+      {
+        question: 'Why volunteer?',
+        answer:
+          "In France, perfume factories produce hand sanitizer. In United Kingdom, the car manufacturers produce respirators. In time of crisis we must all contribute with the things we're good at — and we're good with data!",
       },
     ],
   },
