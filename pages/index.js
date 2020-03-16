@@ -8,10 +8,21 @@ import { LanguageContext } from '../components/LanguageSelector';
 import Banner from '../components/Banner';
 
 export default function Landing() {
+  const environment = process.browser
+    ? origin.includes('c19.dk')
+      ? 'production'
+      : origin.includes('now.sh')
+      ? 'staging'
+      : 'development'
+    : process.env.NODE_ENV;
+
+  // TODO: don't overwrite with true
+  const showTestButton = true || environment !== 'production';
+
   return (
     <PageLayout>
       <Hero />
-      <Banner />
+      {showTestButton && <Banner />}
     </PageLayout>
   );
 }

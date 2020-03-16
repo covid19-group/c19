@@ -78,19 +78,32 @@ export default function AuthForm({ children }) {
     }
   };
 
+  const environment = process.browser
+    ? origin.includes('c19.dk')
+      ? 'production'
+      : origin.includes('now.sh')
+      ? 'staging'
+      : 'development'
+    : process.env.NODE_ENV;
+
+  // TODO: don't overwrite with true
+  const showTestButton = true || environment !== 'production';
+
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:shadow-lg sm:border sm:border-gray-100 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
-      <button
-        onClick={async e => {
-          e.preventDefault();
-          setPhone('+4599999999');
-          setCode('000000');
-          verify('+4599999999', '000000', true);
-        }}
-        className="ml-auto mb-6 bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-600 px-3 py-2 rounded-md w-full">
-        {content.testBtn}
-      </button>
-      <div className="opacity-25 bg-white z-50">
+      {showTestButton && (
+        <button
+          onClick={async e => {
+            e.preventDefault();
+            setPhone('+4599999999');
+            setCode('000000');
+            verify('+4599999999', '000000', true);
+          }}
+          className="ml-auto mb-6 bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-600 px-3 py-2 rounded-md w-full">
+          {content.testBtn}
+        </button>
+      )}
+      <div className={'bg-white z-50' + (showTestButton ? ' opacity-25' : '')}>
         <div className="w-full">
           <label className="block text-sm font-medium leading-5 text-gray-700">
             {content.phone.label}
