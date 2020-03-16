@@ -290,6 +290,7 @@ function Registration({ phone, survey, initial }) {
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
               onClick={async e => {
+                setError(false);
                 setSaving(true);
                 e.preventDefault();
                 const response = await fetch('/api/post/survey', {
@@ -298,6 +299,7 @@ function Registration({ phone, survey, initial }) {
                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({
+                    hasChanged,
                     value: {
                       sex,
                       born,
@@ -325,7 +327,7 @@ function Registration({ phone, survey, initial }) {
                 (complete
                   ? 'text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
                   : 'text-white bg-indigo-300 cursor-default focus:outline-none') +
-                'relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md transition duration-150 ease-in-out'
+                ' relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md transition duration-150 ease-in-out'
               }>
               <LoadingSpinner
                 size={16}
