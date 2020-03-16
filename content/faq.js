@@ -10,7 +10,7 @@ export default {
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          'Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange Danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
+          '"Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange Danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
 
       {
