@@ -23,6 +23,7 @@ export default function CustomHead() {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={subtitle} />
       <meta name="twitter:image" content="https://c19.dk/og.png" />
+      <script src="/rollbar.js"></script>
     </Head>
   );
 }
