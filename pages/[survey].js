@@ -1,13 +1,14 @@
 import fetch from 'node-fetch';
 import Link from 'next/link';
 import { useState, useContext } from 'react';
-import { Header, Label, Checkbox, Radio, Input, InputWithDropDown } from '../components/Form';
+import { Header, Label, Checkbox, Radio, Input, InputWithDropDown, Toggle } from '../components/Form';
 import PageLayout from '../components/PageLayout';
 import ConfirmationModal from '../components/ConfirmationModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
 import fahrenheitToCelcius from '../methods/fahrenheitToCelcius';
+import celciusToFahrenheit from '../methods/celciusToFahrenheit';
 
 function Registration({ phone, survey }) {
   /* one time questions */
@@ -19,18 +20,31 @@ function Registration({ phone, survey }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
+  const [hasChanged, setHasChanged] = useState(true);
+
   /* each registration */
   const [exposure, setExposure] = useState([]);
-  const [exposureDate, setExposureDate] = useState(null);
+  const [scale, setScale] = useState('°C');
+  const [temperature, setTemperature] = useState('');
+  const [temperatureValue, setTemperatureValue] = useState('');
   const [symptoms, setSymptoms] = useState([]);
-  const [scale, setScale] = useState('℃');
-  const [fever, setFever] = useState('');
-  const [feverValue, setFeverValue] = useState('');
-  const [tested, setTested] = useState(false);
-  const [state, setState] = useState([]);
+  /*TODO: Missing state handling for additional symptoms questions */
+  const [distancing, setDistancing] = useState(null);
+  const [state, setState] = useState(null);
+  const [critical, setCritical] = useState(null);
+  const [neighbourhood, setNeighbourhood] = useState(null);
+  const [community, setCommunity] = useState(null);
 
   const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
+
+  const isFirst = true;
+  const unit = isFirst ? '14 ' + content.unit.days : '24 ' + content.unit.hours;
+
+  // console.log({
+  //   c: scale === '°C' ? temperatureValue : fahrenheitToCelcius(temperatureValue),
+  //   f: scale === '°C' ? celciusToFahrenheit(temperatureValue) : temperatureValue,
+  // });
 
   if (!survey) {
     return (
@@ -61,131 +75,174 @@ function Registration({ phone, survey }) {
           </div>
         }
       />
-      <Label label={content.exposure.label}>
-        {Object.keys(content.exposure.options).map(key => {
-          let { label, description } = content.exposure.options[key];
-          description = description && (
-            <>
-              {description.value}
-              <a href={description.link.href} target={description.link.href} className="text-indigo-500">
-                {description.link.label}
-              </a>
-            </>
-          );
-          const optionProps = {
-            key,
-            label,
-            description,
-            onChange: () => {
-              if (exposure.includes(key)) {
-                setExposure(exposure.filter(string => string !== value));
-              } else setExposure(exposure.concat(key));
-            },
-          };
-          return <Checkbox {...optionProps} />;
-        })}
+      <Label
+        label={content.noChange.label.replace('{unit}', unit)}
+        description={content.noChange.description.replace('{unit}', unit)}>
+        <Radio label={content.noChange.options.no} checked={!hasChanged} onChange={() => setHasChanged(!hasChanged)} />
+        <Radio label={content.noChange.options.yes} checked={hasChanged} onChange={() => setHasChanged(!hasChanged)} />
       </Label>
-      {!!exposure.length && (
-        <Label label={content.exposureDate.label}>
-          <Input type="date" onChange={({ value }) => setExposureDate(value)} />
-        </Label>
-      )}
-      <Label label={content.symptoms.label}>
-        {Object.keys(content.symptoms.options).map(key => (
-          <Checkbox
-            label={content.symptoms.options[key]}
-            onChange={() => {
-              if (symptoms.includes(key)) {
-                setSymptoms(symptoms.filter(string => string !== value));
-              } else setSymptoms(symptoms.concat(key));
-            }}
-          />
-        ))}
-      </Label>
-      {symptoms.includes('fever') && (
-        <Label label={content.fever.label}>
-          <Radio
-            type="number"
-            checked={fever === 'measured'}
-            label={content.fever.options.measured}
-            onChange={() => setFever('measured')}
-            description={
-              fever === 'measured' && (
-                <InputWithDropDown
-                  placeholder={scale === '℃' ? '38' : '98'}
-                  options={['℃', '℉']}
-                  onSelectChange={({ id }) => setScale(id)}
-                  onChange={({ value }) => setFeverValue(scale === '℃' ? value : fahrenheitToCelcius(value))}
-                />
-              )
-            }
-          />
-          <Radio
-            label={content.fever.options.subjective}
-            checked={fever === 'subjective'}
-            onChange={() => {
-              setFever('subjective');
-              setFeverValue('');
-            }}
-          />
-        </Label>
-      )}
-      <Label label={content.tested.label} description={content.tested.description}>
-        <Radio label={content.tested.options.true} checked={tested} onChange={() => setTested(true)} />
-        <Radio label={content.tested.options.false} checked={!tested} onChange={() => setTested(false)} />
-      </Label>
-      <Label label={content.state.label}>
-        {Object.keys(content.state.options).map(key => {
-          const { label, description } = content.state.options[key];
-          const optionProps = { label, description, onChange: () => setState(key), checked: key === state };
-          return <Radio {...optionProps} />;
-        })}
-      </Label>
-      <div className="pt-5">
-        <div className="flex justify-end">
-          <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
-          <span className="ml-3 inline-flex rounded-md shadow-sm">
-            <button
-              onClick={async e => {
-                setSaving(true);
-                e.preventDefault();
-                const response = await fetch('/api/post/survey', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    value: {
-                      country,
-                      age,
-                      exposure,
-                      exposureDate,
-                      symptoms,
-                      scale,
-                      fever,
-                      feverValue,
-                      tested,
-                      state,
-                    },
-                    survey,
-                  }),
-                });
-                if (response.ok) setShowConfirmation(true);
-                else setError('An unexpected error occured. Please try again.');
-                setSaving(false);
-              }}
-              type="submit"
-              className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-              <LoadingSpinner
-                size={16}
-                color="white"
-                className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
+      {hasChanged && (
+        <>
+          <Label
+            label={content.exposure.label.replace('{unit}', unit)}
+            description={content.exposure.description.replace('{unit}', unit)}>
+            {Object.keys(content.exposure.options).map(key => (
+              <Radio
+                key={key}
+                label={content.exposure.options[key]}
+                checked={exposure === key}
+                onChange={() => setExposure(key)}
               />
-              <span className={saving ? 'invisible' : ''}>{content.submit}</span>
-            </button>
-          </span>
-        </div>
-      </div>
+            ))}
+          </Label>
+          <Label label={content.temperature.label.replace('{unit}', unit)}>
+            <Radio
+              checked={temperature === 'measured'}
+              label={content.temperature.options.measured}
+              onChange={() => setTemperature('measured')}
+              description={
+                <InputWithDropDown
+                  value={temperatureValue}
+                  placeholder={scale === '°C' ? '38' : '98'}
+                  options={['°C', '°F']}
+                  onSelectChange={({ id }) => setScale(id)}
+                  onChange={({ value }) => {
+                    setTemperature('measured');
+                    setTemperatureValue(value);
+                  }}
+                />
+              }
+            />
+            {['subjective', 'normal'].map(key => (
+              <Radio
+                label={content.temperature.options[key].label}
+                description={content.temperature.options[key].description}
+                checked={temperature === key}
+                onChange={() => {
+                  setTemperature(key);
+                  setTemperatureValue('');
+                }}
+              />
+            ))}
+          </Label>
+          <Label
+            label={content.symptoms.label.replace('{unit}', unit)}
+            description={content.symptoms.description.replace('{unit}', unit)}>
+            {Object.keys(content.symptoms.options).map(key => (
+              <Checkbox
+                label={content.symptoms.options[key]}
+                onChange={() => {
+                  if (symptoms.includes(key)) {
+                    setSymptoms(symptoms.filter(string => string !== key));
+                  } else setSymptoms(symptoms.concat(key));
+                }}
+              />
+            ))}
+          </Label>
+          {symptoms.map(symptom =>
+            Object.keys(content.symptoms.additional).map(key => (
+              <Label
+                key={key}
+                label={content.symptoms.additional[key].label.replace(
+                  '{symptom}',
+                  content.symptoms.options[symptom].toLowerCase()
+                )}>
+                {Object.keys(content.symptoms.additional[key].options).map(optionKey => (
+                  <Radio
+                    key={key + '-' + optionKey}
+                    label={content.symptoms.additional[key].options[optionKey]}
+                    checked={false}
+                    onChange={() => null}
+                  />
+                ))}
+              </Label>
+            ))
+          )}
+          <Label label={content.distancing.label.replace('{unit}', unit)}>
+            {Object.keys(content.distancing.options).map(key => {
+              const label = content.distancing.options[key];
+              const optionProps = { label, onChange: () => setDistancing(key), checked: key === distancing };
+              return <Radio {...optionProps} />;
+            })}
+          </Label>
+          <Label label={content.state.label}>
+            {Object.keys(content.state.options).map(key => {
+              const label = content.state.options[key];
+              const optionProps = { label, onChange: () => setState(key), checked: key === state };
+              return <Radio {...optionProps} />;
+            })}
+          </Label>
+          {state === 'work' && (
+            <Label label={content.critical.label}>
+              {Object.keys(content.critical.options).map(key => {
+                const label = content.critical.options[key];
+                const optionProps = { label, onChange: () => setCritical(key), checked: key === critical };
+                return <Radio {...optionProps} />;
+              })}
+            </Label>
+          )}
+          <Label label={content.neighbourhood.label}>
+            {Object.keys(content.neighbourhood.options).map(key => {
+              const label = content.neighbourhood.options[key];
+              const optionProps = { label, onChange: () => setNeighbourhood(key), checked: key === neighbourhood };
+              return <Radio {...optionProps} />;
+            })}
+          </Label>
+          <Label label={content.community.label}>
+            {Object.keys(content.community.options).map(key => {
+              const label = content.community.options[key];
+              const optionProps = { label, onChange: () => setCommunity(key), checked: key === community };
+              return <Radio {...optionProps} />;
+            })}
+          </Label>
+
+          <div className="pt-5">
+            <div className="flex justify-end">
+              <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
+              <span className="ml-3 inline-flex rounded-md shadow-sm">
+                <button
+                  onClick={async e => {
+                    setSaving(true);
+                    e.preventDefault();
+                    const response = await fetch('/api/post/survey', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        value: {
+                          country,
+                          age,
+                          exposure,
+                          exposureDate,
+                          symptoms,
+                          scale,
+                          temperature,
+                          temperatureValue,
+                          tested,
+                          state,
+                        },
+                        survey,
+                      }),
+                    });
+                    if (response.ok) setShowConfirmation(true);
+                    else setError('An unexpected error occured. Please try again.');
+                    setSaving(false);
+                  }}
+                  type="submit"
+                  className="relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                  <LoadingSpinner
+                    size={16}
+                    color="white"
+                    className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
+                  />
+                  <span className={saving ? 'invisible' : ''}>{content.submit}</span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </>
+      )}
     </PageLayout>
   );
 }

@@ -7,161 +7,239 @@ export default {
       label: 'Linket er udløbet,',
       link: 'prøv venligst igen',
     },
-    phone: {
-      label: 'Phone',
-      placeholder: '+1 (111) 111 1111',
+    noChange: {
+      label: 'Har noget ændret sig siden sidste rapportering?',
+      description: 'Hvis ikke registrerer vi en kopi af din seneste registrering for dig',
+      options: { no: 'Nej', yes: 'Ja, der er sket ændringer' },
+    },
+    unit: {
+      days: 'dage',
+      hours: 'timer',
     },
     exposure: {
-      label: 'Have you been exposed to any high risk environment within the past 14 days?',
+      label:
+        'Har du været i nærkontakt med personer der er blevet testet positiv for COVID-19 inden for de sidste {unit}?',
+      description:
+        'Nærkontakt med en bekræftet smittet inkluderer at bo i samme hus, ansigt-til-ansigt kontakt, blive hostet på, at være indenfor 2 meter af personen i mere end 15 minutter, eller at have været i kontakt med deres kropsvæsker',
       options: {
-        area: {
-          label: 'A highly contaminated area',
-          description: {
-            value: 'Red and orange areas classified by ',
-            link: {
-              href: 'https://um.dk/',
-              label: 'Ministry of Foreign Affairs of Denmark',
-            },
-          },
-        },
-        crowd: {
-          label: 'A large crowd (100+)',
-        },
-        tested: {
-          label: 'A patient who tested positive',
-        },
-        quarantined: {
-          label: 'A quarantined person',
-        },
+        yes: 'Ja',
+        no: 'Nej',
+        maybe:
+          'Jeg har været i nærkontakt med personer med feber, hoste eller åndedrætsbesvær, men jeg ved ikke om de er bekræftet smittet.',
       },
     },
-    exposureDate: {
-      label: 'When were you most recently exposed?',
+    temperature: {
+      label: 'Hvad er den højeste temperatur du har haft de sidste {unit}?',
+      options: {
+        measured: 'Jeg har målt min temperatur til',
+        subjective: {
+          label: 'Jeg tror jeg har feber, men har ikke målt',
+          description: 'Over 38°C / 100.4°F',
+        },
+        normal: {
+          label: 'Jeg tror min temperatur er normal, men har ikke målt.',
+          description: 'From 36.1°C to 37.2°C (97°F - 99°F) ',
+        },
+      },
     },
     symptoms: {
-      label: 'Do you any common symptoms of CORVID-19?',
+      label: 'Har du, eller har du indenfor de sidste {unit} haft, én eller flere af disse symptomer?',
+      description: 'Vælg alle de symptomer du har haft',
       options: {
-        fever: 'Fever',
-        cough: 'Cough',
-        breath: 'Short of breath',
+        chills: 'Kuldegysnigner',
+        cough: 'Hoste',
+        'short-breath': 'Åndedrætsbesvær eller stakåndethed',
+        'tight-chest': 'Trykken for brystet',
+        headache: 'Hovedpine',
+        'muscle-ache': 'Muskelømhed',
+      },
+      additional: {
+        timeframe: {
+          label: 'Hvor længe har du oplevet {symptom}?',
+          options: {
+            6: 'Mindre end 6 timer',
+            12: '6-12 timer',
+            24: '12-24 timer',
+            48: '1-2 dage',
+            72: 'Mere end 2 dage',
+          },
+        },
+        development: {
+          label: 'Over den periode, din {symptom} blevet bedre eller værre?',
+          options: {
+            better: 'Bedre',
+            worse: 'Værre',
+            unchanged: 'Ingen ændring',
+          },
+        },
+        contact: {
+          label: 'Har du været i nærkontakt med nogen der også havde {symptom}?',
+          options: {
+            yes: 'Ja',
+            no: 'Nej',
+          },
+        },
       },
     },
-    fever: {
-      label: 'How did you conclude a fever?',
+    distancing: {
+      label: 'Hvor mange personer har du været i nærkontakt med indenfor de sidste 24 timer?',
       options: {
-        measured: 'Measured',
-        subjective: 'Subjectively',
-      },
-    },
-    tested: {
-      label: 'Have you been tested?',
-      description: 'Not your test result',
-      options: {
-        true: 'Yes',
-        false: 'No',
+        none: 'Ingen',
+        few: 'Et par stykker',
+        many: 'Mange',
       },
     },
     state: {
-      label: 'What is your current state?',
+      label: 'Hvad er din nuværende status?',
       options: {
-        quarantined: {
-          label: 'Quarantined',
-          description: 'Working from home, only leaving the house for absolute necessities',
-        },
-        isolation: {
-          label: 'Isolation',
-          description: 'Never leaving the house, getting deliveries to your door',
-        },
-        hospitalized: {
-          label: 'Hospitalized',
-          description: 'In care with the health system',
-        },
-        neither: {
-          label: 'Neither',
-        },
+        wfh: 'Jeg arbejder hjemmefra',
+        home: 'Jeg er hjemme, men arbejder ikke',
+        work: 'Jeg går på arbejde',
+      },
+    },
+    critical: {
+      label: 'Arbejder du i en samfundskritisk rolle?',
+      options: {
+        yes: 'Ja',
+        no: 'Nej',
+      },
+    },
+    neighbourhood: {
+      label: 'Er det din oplevelse, at andre i dit område bliver hjemme?',
+      options: {
+        yes: 'Ja',
+        no: 'Nej',
+        maybe: 'Ved ikke',
+      },
+    },
+    community: {
+      label: 'Hvor mange kender du, hvis helbred har været direkte påvirket af COVID-19?',
+      options: {
+        none: 'Ingen',
+        few: 'Et par stykker',
+        many: 'Mange',
       },
     },
   },
   'en-UK': {
-    by: 'Registration by No. ',
+    by: 'Registration by No.',
     title: 'Registration',
     submit: 'Submit Registration',
-    phone: {
-      label: 'Phone',
-      placeholder: '+1 (111) 111 1111',
-    },
     expired: {
       label: 'This link has expired,',
       link: 'please try again',
     },
+    noChange: {
+      label: 'Has anything changed since your last report?',
+      description: "If not, we'll submit your registration with a copy of your most recent one",
+      options: { no: 'No', yes: 'Yes, I have changes to report' },
+    },
+    unit: {
+      days: 'days',
+      hours: 'hours',
+    },
     exposure: {
-      label: 'Have you been exposed to any high risk environment within the past 14 days?',
+      label:
+        'In the past {unit}, have you been in close contact with someone who has a laboratory-confirmed case of COVID-19?',
+      description:
+        'Close contact with a confirmed case includes living in the same house, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
       options: {
-        area: {
-          label: 'A highly contaminated area',
-          description: {
-            value: 'Red and orange areas classified by ',
-            link: {
-              href: 'https://um.dk/',
-              label: 'Ministry of Foreign Affairs of Denmark',
-            },
-          },
-        },
-        crowd: {
-          label: 'A large crowd (100+)',
-        },
-        tested: {
-          label: 'A patient who tested positive',
-        },
-        quarantined: {
-          label: 'A quarantined person',
-        },
+        yes: 'Yes',
+        no: 'No',
+        maybe:
+          'I had close contact with someone with fever, cough or trouble breathing, but I am not sure if they had a laboratory-confirmed case of COVID-19',
       },
     },
-    exposureDate: {
-      label: 'When were you most recently exposed?',
-    },
-    symptoms: {
-      label: 'Do you any common symptoms of CORVID-19?',
-      options: {
-        fever: 'Fever',
-        cough: 'Cough',
-        breath: 'Short of breath',
-      },
-    },
-    fever: {
-      label: 'How did you conclude a fever?',
+    temperature: {
+      label: 'What is the highest temperature you have had in the past {unit}?',
       options: {
         measured: 'Measured',
-        subjective: 'Subjectively',
+        subjective: {
+          label: 'I believe I have a fever, but haven’t measured',
+          description: 'Above 38°C / 100.4°F',
+        },
+        normal: {
+          label: 'I think it’s normal, but haven’t measured',
+          description: 'From 36.1°C to 37.2°C (97°F - 99°F) ',
+        },
       },
     },
-    tested: {
-      label: 'Have you been tested?',
-      description: 'Not your test result',
+    symptoms: {
+      label: 'Have you had any of the following symptoms in the past {unit}?',
+      description: 'Select all that apply',
       options: {
-        true: 'Yes',
-        false: 'No',
+        chills: 'Chills',
+        cough: 'Cough',
+        'short-breath': 'Difficulty breathing or shortness of breath',
+        'tight-chest': 'Tightness in your chest',
+        headache: 'Headache',
+        'muscle-ache': 'Muscle aches',
+      },
+      additional: {
+        timeframe: {
+          label: 'How long have you had {symptom}?',
+          options: {
+            6: '<6 hours',
+            12: '6-12 hours',
+            24: '12-24 hours',
+            48: '1-2 days',
+            72: 'More than 2 days',
+          },
+        },
+        development: {
+          label: 'Over that time period, has your {symptom} gotten better or worse?',
+          options: {
+            better: 'Better',
+            worse: 'Worse',
+            unchanged: 'No change',
+          },
+        },
+        contact: {
+          label: 'Have you been in contact with anyone who has had {symptom}?',
+          options: {
+            yes: 'Yes',
+            no: 'No',
+          },
+        },
+      },
+    },
+    distancing: {
+      label: 'How many people have you been within 1 meter of in the last {unit}?',
+      options: {
+        none: 'None',
+        few: 'A few',
+        many: 'Many',
       },
     },
     state: {
-      label: 'What is your current state?',
+      label: 'What’s your current status?',
       options: {
-        quarantined: {
-          label: 'Quarantined',
-          description: 'Working from home, only leaving the house for absolute necessities',
-        },
-        isolation: {
-          label: 'Isolation',
-          description: 'Never leaving the house, getting deliveries to your door',
-        },
-        hospitalized: {
-          label: 'Hospitalized',
-          description: 'In care with the health system',
-        },
-        neither: {
-          label: 'Neither',
-        },
+        wfh: 'Working from home',
+        home: 'Home, not working',
+        work: 'Going to work',
+      },
+    },
+    critical: {
+      label: 'Do you work in a critical position?',
+      options: {
+        yes: 'Yes',
+        no: 'No',
+      },
+    },
+    neighbourhood: {
+      label: 'Are people in your neighborhood staying home?',
+      options: {
+        yes: 'Yes',
+        no: 'No',
+        maybe: "Don't know",
+      },
+    },
+    community: {
+      label: 'How many people do you know whose health have been affected by COVID-19?',
+      options: {
+        none: 'None',
+        few: 'A few',
+        many: 'Many',
       },
     },
   },
