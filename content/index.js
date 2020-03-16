@@ -2,10 +2,11 @@ export default {
   'da-DK': {
     hero: {
       titleBlack: 'COVID-19',
-      titleBlue: 'Selv-rapportering',
+      titleBlue: 'Selvrapportering',
       subtitle:
-        'Selv-rapportering hjælper myndighederne med at danne overblik over coronakrisen. Vi sender dig dagligt en SMS og spørger dig, hvordan du er påvirket.',
-      action: 'Sammen kan vi give myndighederne de bedste vilkår for at kontrollere krisen.',
+        'Tilmeld dig og vær med til at kaste lys over Corona-mørketallet. Sammen kan vi hjælpe sundhedsvæsenet med mere repræsentativ data.',
+      action: 'Invitér dine venner her.',
+      share: 'Del via: ',
       placeholder: 'Indtast telefonnummer',
       privacy: {
         value: 'Vi går op i datasikkerhed. Læse vore privatlivspolitik her.',
@@ -37,10 +38,11 @@ export default {
   'en-UK': {
     hero: {
       titleBlack: 'COVID-19',
-      titleBlue: 'Self-Reporting',
+      titleBlue: 'Self Reporting',
       subtitle:
-        'Lack of data on people who are not symptomatic enough to be hospitalized complicates our ability to make predictions about incoming waves of cases, future need of emergency supplies, etc.',
-      action: 'Register now to help the nation plan ahead',
+        'Sign up and help shed light on the actual number of Danes infected with coronavirus. You’ll receive a daily text message including a simple health status survey for you to fill out.',
+      action: 'Together, we can help the health care system by providing more representative data.',
+      share: 'Share via: ',
       placeholder: 'Enter phone number',
       privacy: {
         value: 'We care about the protection of your data. Read our ',

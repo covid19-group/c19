@@ -44,6 +44,47 @@ const Hero = () => {
             <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-gray-900">{content.action}</p>
             </div>
+            <div className="block mt-5 flex pb-12">
+              <p>{content.share}</p>
+              <button
+                className="mx-1 text-indigo-600 hover:text-indigo-700"
+                onClick={() =>
+                  window.open(
+                    `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
+                    'sharer',
+                    'toolbar=0,status=0,width=560,height=640'
+                  )
+                }
+                target="_facebook">
+                Facebook
+              </button>
+              <button
+                onClick={() =>
+                  window.open(
+                    `http://www.twitter.com/share?text=${content.subtitle}&url=${window.location}`,
+                    'sharer',
+                    'toolbar=0,status=0,width=640,height=400'
+                  )
+                }
+                target="_twitter"
+                className="mx-1 text-indigo-600 hover:text-indigo-700">
+                Twitter
+              </button>
+              <button
+                onClick={() =>
+                  window.open(
+                    `https://www.linkedin.com/shareArticle?url=${window.location}&title=${
+                      content.subtitle
+                    }&summary=${content.titleBlack + ' ' + content.titleBlue}`,
+                    'sharer',
+                    'toolbar=0,status=0,width=480,height=560'
+                  )
+                }
+                target="_linkedin"
+                className="mx-1 text-indigo-600 hover:text-indigo-700">
+                Linkedin
+              </button>
+            </div>
           </div>
           <div className="relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
             <AuthForm />
