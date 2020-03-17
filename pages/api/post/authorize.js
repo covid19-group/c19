@@ -18,6 +18,7 @@ export default async (req, res) => {
           { phone, secret }
         );
         if (!person) {
+          const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
           person = await db.one(
             `INSERT INTO person (
                 phone,
@@ -27,9 +28,9 @@ export default async (req, res) => {
                 PGP_SYM_ENCRYPT($/code/, $/secret/)
               )
               RETURNING *`,
-            { phone, secret, code: Math.floor(100000 + Math.random() * 900000).toString() }
+            { phone, secret, code: generatedCode }
           );
-          return Math.floor(100000 + Math.random() * 900000).toString();
+          return generatedCode;
         } else {
           return person.code;
         }
