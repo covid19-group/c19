@@ -22,7 +22,7 @@ function Registration({ phone, survey, initial }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
-  const [hasChanged, setHasChanged] = useState(initial);
+  const [hasChanged, setHasChanged] = useState(initial || false);
 
   /* each registration */
   const [exposure, setExposure] = useState([]);
@@ -214,7 +214,7 @@ function Registration({ phone, survey, initial }) {
                     setTemperatureValue(value.replace(/[^\d\.,]/g, ''));
                   }}
                   onBlur={() => {
-                    temperatureValue && setTemperatureValue(parseFloat(temperatureValue.replace(',', '.')));
+                    temperatureValue && setTemperatureValue(parseFloat(String(temperatureValue).replace(',', '.')));
                   }}
                 />
               }
