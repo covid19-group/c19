@@ -17,6 +17,9 @@ export default {
         send: 'Send',
         code: 'Kode',
         sent: 'Sendt',
+
+        register: 'Registrer',
+        registered: 'Registreret',
       },
     },
     code: {
@@ -55,6 +58,9 @@ export default {
         send: 'Send',
         code: 'Code',
         sent: 'Sent',
+
+        register: 'Register',
+        registered: 'Registered',
       },
     },
     code: {

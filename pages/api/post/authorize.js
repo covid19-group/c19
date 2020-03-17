@@ -38,7 +38,7 @@ export default async (req, res) => {
             return person.code;
           }
         });
-        await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone });
+        // await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone });
 
         res.status(200).end();
       } else {

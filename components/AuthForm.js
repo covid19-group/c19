@@ -162,8 +162,9 @@ export default function AuthForm({ children }) {
                         }),
                       });
                       if (response.ok) {
-                        setPhoneError(false);
                         setAuthorized(true);
+                        setPhoneError(false);
+                        router.push('/success');
                       } else {
                         setPhoneError(content.phone.error.unknown);
                       }
@@ -195,13 +196,10 @@ export default function AuthForm({ children }) {
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
                         </span>
-                        {content.phone.btn.sent}{' '}
+                        {content.phone.btn.registered}
                       </>
                     ) : (
-                      <>
-                        {content.phone.btn.send}{' '}
-                        <span className="hidden sm:inline-block ml-1">{content.phone.btn.code}</span>
-                      </>
+                      <>{content.phone.btn.register}</>
                     )}
                   </span>
                 </button>
@@ -219,7 +217,7 @@ export default function AuthForm({ children }) {
           </label>
         </div>
 
-        <div className="mt-6">
+        {/*       <div className="mt-6">
           <label className="block text-sm font-medium leading-5 text-gray-700 mb-1">
             {content.code.label}
             <span className="block text-gray-500 font-normal text-xs">{content.code.description}</span>
@@ -269,7 +267,7 @@ export default function AuthForm({ children }) {
           </div>
         </div>
 
-        <div className="mt-6">
+       <div className="mt-6">
           <Checkbox
             label={content.reminders.label}
             checked={reminders}
@@ -301,7 +299,7 @@ export default function AuthForm({ children }) {
             </button>
           </span>
           {authError && <p className="mt-2 text-xs font-normal text-red-600">{authError}</p>}
-        </div>
+        </div>*/}
         <p className="mt-3 text-xs leading-5 text-gray-500">
           {content.privacy.prefix}
           <Link href="#">
