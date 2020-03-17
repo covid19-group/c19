@@ -71,8 +71,9 @@ export default function AuthForm({ children }) {
       }),
     });
     if (response.ok) {
-      const { id } = await response.json();
-      router.push('/' + id);
+      // const { id } = await response.json();
+      // router.push('/' + id);
+      router.push('/success');
       setVerifying(false);
     } else {
       setVerifying(false);
