@@ -10,6 +10,9 @@ export default async (req, res) => {
   try {
     if (req.method === 'POST') {
       const { phone, language } = req.body;
+      if (!(phone.slice(0, 3) === '+45')) {
+        res.status(400).json({ error: 'wrong_country_code' });
+      }
       if (isValidNumber(phone)) {
         const code = await db.task(async t => {
           let person = await db.oneOrNone(
