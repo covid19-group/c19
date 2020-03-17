@@ -322,6 +322,7 @@ function Registration({ phone, survey, initial }) {
                     hasChanged,
                     value: {
                       sex,
+                      zip,
                       born,
                       household,
                       conditions,
