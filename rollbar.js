@@ -1,12 +1,11 @@
 const Rollbar = require('rollbar');
 
 let options = {
-  accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
   captureUncaught: true,
   captureUnhandledRejections: true,
 };
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'development') {
   options = {
     ...options,
     accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
