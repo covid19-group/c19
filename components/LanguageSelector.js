@@ -50,6 +50,7 @@ export default function LanguageSelector() {
                 <div className="py-1">
                   {Object.keys(content).map(i18n => (
                     <button
+                      key={i18n}
                       onClick={() => {
                         setLanguage(i18n);
                         setShow(false);

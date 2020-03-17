@@ -135,7 +135,7 @@ export default {
       },
     },
     distancing: {
-      label: 'Hvor mange personer har du været i nærkontakt med indenfor de sidste 24 timer?',
+      label: 'Hvor mange personer har du været i nærkontakt med indenfor de sidste {unit}?',
       options: {
         none: 'Ingen',
         few: 'Et par stykker',
