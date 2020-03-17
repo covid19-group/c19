@@ -17,7 +17,7 @@ export default function Landing() {
     : process.env.NODE_ENV;
 
   // TODO: don't overwrite with true
-  const showTestButton = true || environment !== 'production';
+  const showTestButton = environment === 'development';
 
   return (
     <PageLayout>
