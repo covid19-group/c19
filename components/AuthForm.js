@@ -93,7 +93,7 @@ export default function AuthForm({ children }) {
   const showTestButton = environment === 'development';
 
   return (
-    <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:shadow-lg sm:border sm:border-gray-100 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
+    <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:border sm:border-gray-200 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
       {showTestButton && (
         <button
           onClick={async e => {
@@ -102,7 +102,7 @@ export default function AuthForm({ children }) {
             setCode('000000');
             verify('+4599999999', '000000', true);
           }}
-          className="ml-auto mb-6 bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-600 px-3 py-2 rounded-md w-full">
+          className="mb-6 bg-teal-500 text-white text-sm font-medium hover:bg-teal-600 p-3 rounded-md w-full">
           {content.testBtn}
         </button>
       )}
@@ -124,7 +124,7 @@ export default function AuthForm({ children }) {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-green-500">
+                      className="text-teal-500">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
@@ -180,13 +180,13 @@ export default function AuthForm({ children }) {
                     setAuthorizing(false);
                   }}
                   className={
-                    'relative py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-indigo-300 focus:shadow-outline-blue transition duration-150 ease-in-out'
+                    'relative py-2 px-4 mt-1 ml-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:text-gray-800 focus:outline-none focus:border-teal-500 focus:shadow-outline transition duration-150 ease-in-out'
                   }>
-                  <LoadingSpinner
-                    color="blue"
-                    size={16}
-                    className={authorizing ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
-                  />
+                  {authorizing && (
+                    <span className="absolute inset-0 h-full flex items-center justify-center">
+                      <LoadingSpinner color="teal" />
+                    </span>
+                  )}
                   <span className={'flex flex-1 flex-no-wrap' + (authorizing ? ' invisible' : '')}>
                     {authorized ? (
                       <>
@@ -271,7 +271,7 @@ export default function AuthForm({ children }) {
                   setCode('');
                   codeInputRef.current[0].focus();
                 }}
-                className={'text-sm ' + !!code.length ? 'text-indigo-500' : 'text-gray-500'}>
+                className={'text-sm ' + !!code.length ? 'text-teal-500' : 'text-gray-500'}>
                 {content.code.reset}
               </button>
             </div>
@@ -297,13 +297,13 @@ export default function AuthForm({ children }) {
                 verify(parsePhoneNumberFromString(phone).number, code, reminders);
               }}
               className={
-                'relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid && codeIsComplete
-                  ? 'bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
-                  : 'bg-gray-500 focus:shadow-outline-gray cursor-default')
+                'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
+                (phoneIsValid && codeIsComplete ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {verifying ? (
-                <LoadingSpinner size={16} color="white" className="absolute inset-0 h-full flex items-center" />
+                <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
+                  <LoadingSpinner color="white" />
+                </span>
               ) : (
                 content.btn.label
               )}

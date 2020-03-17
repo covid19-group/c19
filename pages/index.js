@@ -36,18 +36,24 @@ const Hero = () => {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
             <h2 className="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
+              <span style={{ transform: 'translateY(-0.075em)' }} className="inline-block text-teal-400">
+                [
+              </span>
               {content.titleBlack}
+              <span style={{ transform: 'translateY(-0.075em)' }} className="inline-block text-teal-400">
+                ]
+              </span>
               <br />
-              <span className="text-indigo-600">{content.titleBlue}</span>
+              <span className="text-teal-500">{content.titleBlue}</span>
             </h2>
-            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
+            <p className="mt-3 text-base text-gray-700 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
             <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-gray-900">{content.action}</p>
             </div>
             <div className="block mt-5 flex pb-12">
               <p>{content.share}</p>
               <button
-                className="mx-1 text-indigo-600 hover:text-indigo-700"
+                className="mx-1 font-medium text-teal-500 hover:text-teal-600"
                 onClick={() =>
                   window.open(
                     `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
@@ -67,7 +73,7 @@ const Hero = () => {
                   )
                 }
                 target="_twitter"
-                className="mx-1 text-indigo-600 hover:text-indigo-700">
+                className="mx-1 font-medium text-teal-500 hover:text-teal-600">
                 Twitter
               </button>
               <button
@@ -81,7 +87,7 @@ const Hero = () => {
                   )
                 }
                 target="_linkedin"
-                className="mx-1 text-indigo-600 hover:text-indigo-700">
+                className="mx-1 font-medium text-teal-500 hover:text-teal-600">
                 Linkedin
               </button>
             </div>
@@ -118,7 +124,7 @@ const Explanation = ({ language = 'en-US' }) => {
             const Icon = props => <svg {...props}> {icons[key]}</svg>;
             return (
               <div key={key} className="mt-10 lg:mt-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-teal-500 text-white">
                   <Icon
                     width="24"
                     height="24"
