@@ -20,7 +20,7 @@ export default ({ size, className, color }) => (
         type: 'spring',
         duration: 0.9,
       }}
-      style={{ scaleX: '-1' }}
+      style={{ scaleX: '-1', originX: '50%', originY: '50%', originZ: 0 }}
       fill="transparent"
       stroke={color === 'white' ? '#FFFFFF' : '#5850ec'}
       strokeWidth="3"
