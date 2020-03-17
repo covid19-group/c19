@@ -42,7 +42,7 @@ export default function ConfirmationModal({ language, show, close }) {
                 <button
                   type="button"
                   onClick={() => router.push('/')}
-                  className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-teal-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-teal-500 focus:outline-none focus:border-teal-700 focus:shadow-outline-teal transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                  className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-teal-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-teal-600 sm:text-sm sm:leading-5">
                   {content.close}
                 </button>
               </span>

@@ -65,7 +65,7 @@ export default function Unsubscribe() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-green-500">
+                      className="text-teal-500">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
@@ -116,10 +116,8 @@ export default function Unsubscribe() {
                 }
               }}
               className={
-                'relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid
-                  ? 'bg-teal-600 hover:bg-teal-500 focus:border-teal-700 focus:shadow-outline-teal active:bg-teal-700'
-                  : 'bg-gray-500 focus:shadow-outline-gray cursor-default')
+                'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
+                (phoneIsValid ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {unsubscribing ? (
                 <span className="absolute inset-0 h-full flex items-center justify-center text-lg">

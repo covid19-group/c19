@@ -296,8 +296,8 @@ export default function AuthForm({ children }) {
                 verify(parsePhoneNumberFromString(phone).number, code, reminders);
               }}
               className={
-                'relative w-full flex justify-center py-2 px-4 bg-teal-600 hover:bg-teal-600 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid && codeIsComplete ? '' : 'opacity-50 focus:shadow-none cursor-default')
+                'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
+                (phoneIsValid && codeIsComplete ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {verifying ? (
                 <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
