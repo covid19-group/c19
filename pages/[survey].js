@@ -83,6 +83,8 @@ function Registration({ phone, survey, initial }) {
       (state !== 'work' || !!critical) &&
       !!symptomsAdditionalAnswered &&
       !!community &&
+      !!neighbourhood &&
+      !!exposure &&
       (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length)));
 
   return (
