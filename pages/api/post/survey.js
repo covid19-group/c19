@@ -5,7 +5,8 @@ const secret = process.env.SECRET;
 
 export default async (req, res) => {
   try {
-    if (req.method === 'POST') {
+    if (req.method === 'POST' && false) {
+      // currently don't allow posting surveys
       const { hasChanged, value, survey } = req.body;
       if (hasChanged === false) {
         await db.task(async t => {

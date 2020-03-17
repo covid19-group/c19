@@ -25,29 +25,31 @@ export default async (req, res) => {
         if (!person.reminders && reminders) {
           await t.none(`UPDATE person SET reminders = true where id = $/id/`, { id: person.id });
         }
-        let survey = await t.oneOrNone(
-          `SELECT *
-          FROM survey
-          WHERE person = $/person/
-            AND date = current_date`,
-          { person: person.id }
-        );
-        if (!survey) {
-          survey = await t.oneOrNone(
-            `INSERT INTO survey  (
-                person
-              ) VALUES (
-                $/person/
-              )
-              RETURNING *`,
-            { person: person.id }
-          );
-        }
-        return { id: survey.id };
+        // let survey = await t.oneOrNone(
+        //   `SELECT *
+        //   FROM survey
+        //   WHERE person = $/person/
+        //     AND date = current_date`,
+        //   { person: person.id }
+        // );
+        // if (!survey) {
+        //   survey = await t.oneOrNone(
+        //     `INSERT INTO survey  (
+        //         person
+        //       ) VALUES (
+        //         $/person/
+        //       )
+        //       RETURNING *`,
+        //     { person: person.id }
+        //   );
+        // }
+        // return { id: survey.id };
+        return {};
       });
-      if (id) {
-        res.json({ id });
-      } else res.status(401).end();
+      // if (id) {
+      //   res.json({ id });
+      // } else res.status(401).end();
+      res.status(200).end();
     } else res.status(502).end();
   } catch (error) {
     console.error(error);
