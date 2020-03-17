@@ -21,5 +21,6 @@ export async function sendSMS({ body, to }) {
     return result;
   } catch (error) {
     rollbar.error('sendSMS: ' + error);
+    return false;
   }
 }

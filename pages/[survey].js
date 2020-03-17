@@ -398,7 +398,7 @@ export async function getServerSideProps(context) {
       props: {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
-        initial: parseInt(surveys) === 1 && !value,
+        initial: parseInt(surveys) === 1,
       },
     };
   } else return { props: {} };
