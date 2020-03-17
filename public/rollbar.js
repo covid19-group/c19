@@ -2,7 +2,7 @@ var origin = window.location.origin;
 var environment = origin.includes('c19.dk') ? 'production' : origin.includes('now.sh') ? 'staging' : 'development';
 
 // Rollbar Snippet
-if (!environment.includes('localhost:3000')) {
+if (!environment !== 'development') {
   var _rollbarConfig = {
     accessToken: 'cf29fae9fe484f42b831615f07df98b7',
     captureUncaught: true,
