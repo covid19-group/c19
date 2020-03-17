@@ -164,7 +164,16 @@ export default function AuthForm({ children }) {
                         setPhoneError(false);
                         setAuthorized(true);
                       } else {
-                        setPhoneError(content.phone.error.unknown);
+                        const error = await response
+                          .json()
+                          .then(value => {
+                            return value && value.error;
+                          })
+                          .catch(() => {
+                            return null;
+                          });
+                        if (error === 'wrong_country_code') setPhoneError(content.phone.error.wrongCountryCode);
+                        else setPhoneError(content.phone.error.unknown);
                       }
                     }
                     setAuthorizing(false);
