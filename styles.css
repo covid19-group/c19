@@ -1,3 +1,54 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap');
+
+/* purgecss start ignore */
+
+@tailwind base;
+
+/* Boilerplate */
+
+html {
+  @apply antialiased font-sans leading-tight text-gray-900;
+  font-feature-settings: 'liga' 1;
+}
+body {
+  @apply m-0;
+}
+svg {
+  height: 1em;
+  width: auto;
+}
+/* svg * {
+  @apply stroke-current;
+}
+svg.fill * {
+  @apply fill-current;
+  stroke: none;
+} */
+a {
+  @apply inline-block;
+}
+a,
+button {
+  @apply rounded-sm transition duration-150 ease-in-out;
+}
+a:focus,
+button:focus {
+  @apply outline-none shadow-outline;
+}
+p {
+  @apply leading-normal;
+}
+
+@tailwind components;
+
+/* Custom components */
+
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+/* Custom utilities */
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
