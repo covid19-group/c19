@@ -49,7 +49,7 @@ export default async (req, res) => {
       // if (id) {
       //   res.json({ id });
       // } else res.status(401).end();
-      res.status(200).end();
+      res.status(200).json({});
     } else res.status(502).end();
   } catch (error) {
     console.error(error);
