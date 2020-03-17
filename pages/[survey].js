@@ -50,7 +50,7 @@ function Registration({ phone, survey, initial }) {
         <p>
           {content.expired.label}{' '}
           <Link href="/">
-            <a className="text-indigo-600 hover:text-indigo-700">{content.expired.link}</a>
+            <a className="text-teal-600 hover:text-teal-700">{content.expired.link}</a>
           </Link>
           .
         </p>
@@ -89,18 +89,20 @@ function Registration({ phone, survey, initial }) {
 
   return (
     <PageLayout>
-      {showConfirmation && <ConfirmationModal language={language} close={() => setShowConfirmation(false)} />}
+      <ConfirmationModal language={language} show={showConfirmation} close={() => setShowConfirmation(false)} />
       <Header
         title={
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap items-baseline">
             <span className="flex-auto">
               {initial && content.baseline.label} {content.by} {phone}
             </span>
-            <span className="text-gray-500">
+            <span className="text-base pt-1 text-gray-500">
               {new Date().toLocaleString(language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
             {initial && (
-              <p className="mt-2 text-sm text-gray-500">{content.baseline.description.replace('{unit}', unit)}</p>
+              <p className="max-w-xl mt-4 text-sm text-gray-500">
+                {content.baseline.description.replace('{unit}', unit)}
+              </p>
             )}
           </div>
         }
@@ -304,7 +306,7 @@ function Registration({ phone, survey, initial }) {
         </>
       )}
       <div className="pt-5">
-        <div className="flex justify-end">
+        <div className="flex items-baseline justify-end">
           {!error && !complete && <p className="mt-2 text-xs font-normal text-gray-700">{content.incomplete}</p>}
           <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
           <span className="ml-3 inline-flex rounded-md shadow-sm">
@@ -346,16 +348,14 @@ function Registration({ phone, survey, initial }) {
               }}
               disabled={!complete}
               className={
-                (complete
-                  ? 'text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
-                  : 'text-white bg-indigo-300 cursor-default focus:outline-none') +
-                ' relative inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md transition duration-150 ease-in-out'
+                (complete ? 'hover:bg-teal-600' : 'opacity-50 cursor-default focus:outline-none') +
+                ' relative inline-flex justify-center text-white bg-teal-500 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md'
               }>
-              <LoadingSpinner
-                size={16}
-                color="white"
-                className={saving ? 'absolute inset-0 h-full flex items-center' : 'hidden'}
-              />
+              {saving && (
+                <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
+                  <LoadingSpinner color="white" />
+                </span>
+              )}
               <span className={saving ? 'invisible' : ''}>{content.submit}</span>
             </button>
           </span>
@@ -398,7 +398,7 @@ export async function getServerSideProps(context) {
       props: {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
-        initial: parseInt(surveys) === 1 && !value,
+        initial: parseInt(surveys) === 1,
       },
     };
   } else return { props: {} };
@@ -416,7 +416,7 @@ const Checkmark = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="text-green-500">
+    className="text-teal-500">
     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
     <polyline points="22 4 12 14.01 9 11.01" />
   </svg>

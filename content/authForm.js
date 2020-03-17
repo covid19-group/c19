@@ -7,6 +7,7 @@ export default {
       description: 'Venligst inkluder landekode',
       error: {
         incomplete: 'Venligst indtast et gyldigt telefonnummer først',
+        wrongCountryCode: 'Vi understøtter på nuværende tidspunkt kun danske numre',
         missingCountryCode: 'Venligst inkluder din landekode (f.eks. +45)',
         invalid: 'Det ser ikke rigtigt ud. Prøv venligst igen.',
         unknown: 'Der skete en fejl. Prøv igen senere.',
@@ -48,6 +49,7 @@ export default {
       description: 'Please include country code',
       error: {
         incomplete: 'Please enter a valid phone number first',
+        wrongCountryCode: 'We currently only support danish phone numbers',
         missingCountryCode: 'Please specify your country code (e.g. +44)',
         invalid: "This doesn't look right. Try again.",
         unknown: 'An error occured. Please try again later.',

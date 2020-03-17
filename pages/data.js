@@ -8,7 +8,7 @@ export default function Data() {
   const content = contentData[language];
   return (
     <PageLayout>
-      <div className="w-full relative overflow-hidden sm:border sm:border-gray-100 sm:shadow-lg sm:rounded-lg overflow-y-hidden">
+      <div className="w-full relative overflow-hidden sm:border sm:border-gray-100 sm:rounded-lg overflow-y-hidden">
         <Banner text={content.banner} />
         <div className="min-h-screen -mt-4 relative">
           <iframe
@@ -29,11 +29,11 @@ export default function Data() {
 }
 
 const Banner = ({ text }) => (
-  <div className="bg-indigo-600 rounded-lg sm:border-gray-100">
+  <div className="bg-teal-500 rounded-lg sm:border-gray-100">
     <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between flex-wrap">
         <div className="w-0 flex-1 flex items-center">
-          <span className="flex p-2 rounded-lg bg-indigo-800">
+          <span className="flex p-2 rounded-lg bg-teal-700">
             <svg
               className="h-6 w-6 text-white"
               stroke="currentColor"

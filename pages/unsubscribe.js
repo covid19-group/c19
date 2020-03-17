@@ -36,7 +36,7 @@ export default function Unsubscribe() {
             {content.success.description}
             <button
               onClick={() => router.push('/')}
-              className="text-sm font-medium text-indigo-500 hover:text-indigo-600 ml-1">
+              className="text-sm font-medium text-teal-500 hover:text-teal-600 ml-1">
               {content.success.link}
             </button>
           </p>
@@ -65,7 +65,7 @@ export default function Unsubscribe() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-green-500">
+                      className="text-teal-500">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                       <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
@@ -116,13 +116,13 @@ export default function Unsubscribe() {
                 }
               }}
               className={
-                'relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid
-                  ? 'bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'
-                  : 'bg-gray-500 focus:shadow-outline-gray cursor-default')
+                'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
+                (phoneIsValid ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {unsubscribing ? (
-                <LoadingSpinner size={16} color="white" className="absolute inset-0 h-full flex items-center" />
+                <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
+                  <LoadingSpinner color="white" />
+                </span>
               ) : (
                 content.btn.label
               )}

@@ -24,7 +24,7 @@ export default function LanguageSelector() {
       <div className="relative inline-block text-left">
         <div onClick={() => setShow(true)}>
           <span className="rounded-md shadow-sm">
-            <button className="text-left inline-flex justify-center w-32 rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+            <button className="text-left inline-flex justify-center w-32 rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:border-teal-500 active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
               <NameFlag {...content[language]} />
               <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -50,6 +50,7 @@ export default function LanguageSelector() {
                 <div className="py-1">
                   {Object.keys(content).map(i18n => (
                     <button
+                      key={i18n}
                       onClick={() => {
                         setLanguage(i18n);
                         setShow(false);

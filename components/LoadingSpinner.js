@@ -22,7 +22,7 @@ export default ({ size, className, color }) => (
       }}
       style={{ scaleX: '-1', originX: '50%', originY: '50%', originZ: 0 }}
       fill="transparent"
-      stroke={color === 'white' ? '#FFFFFF' : '#5850ec'}
+      stroke={color === 'white' ? '#FFFFFF' : '#38B2AC'}
       strokeWidth="3"
       strokeLinecap="round"
       strokeLinejoin="round"
