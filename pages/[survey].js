@@ -198,14 +198,19 @@ function Registration({ phone, survey, initial }) {
               description={
                 <InputWithFix
                   suffix={validTemperatureValue && <Checkmark />}
-                  value={temperatureValue}
+                  value={
+                    typeof temperatureValue === 'number'
+                      ? temperatureValue.toString().replace('.', content.unit.decimalSeperator)
+                      : temperatureValue
+                  }
                   placeholder="38"
                   prefix="°C"
                   onChange={({ value }) => {
                     setTemperature('measured');
-                    setTemperatureValue(
-                      [...value].filter((v, idx) => idx < 2 && Number.isInteger(parseInt(v))).join('')
-                    );
+                    setTemperatureValue(value.replace(/[^\d\.,]/g, ''));
+                  }}
+                  onBlur={() => {
+                    temperatureValue && setTemperatureValue(parseFloat(temperatureValue.replace(',', '.')));
                   }}
                 />
               }

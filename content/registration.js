@@ -21,6 +21,7 @@ export default {
     unit: {
       days: 'dage',
       hours: 'timer',
+      decimalSeperator: ',',
     },
     sex: {
       label: 'Biologisk køn',
@@ -195,6 +196,7 @@ export default {
     unit: {
       days: 'days',
       hours: 'hours',
+      decimalSeperator: '.',
     },
     sex: {
       label: 'Biological Sex',
