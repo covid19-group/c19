@@ -12,8 +12,7 @@ export default async (req, res) => {
       const { phone, language } = req.body;
       if (!(phone.slice(0, 3) === '+45')) {
         res.status(400).json({ error: 'wrong_country_code' });
-      }
-      if (isValidNumber(phone)) {
+      } else if (isValidNumber(phone)) {
         const code = await db.task(async t => {
           let person = await db.oneOrNone(
             `SELECT *,
