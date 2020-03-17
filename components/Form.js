@@ -3,7 +3,7 @@ export const Toggle = ({ checked, onChange }) => {
     <div className="mt-1 sm:mt-4 sm:col-span-2">
       <span
         className={
-          (checked ? 'bg-indigo-600' : 'bg-gray-200') +
+          (checked ? 'bg-teal-500' : 'bg-gray-200') +
           ' relative inline-block flex-no-shrink h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline'
         }
         role="checkbox"
@@ -124,7 +124,7 @@ export const Checkbox = ({ id, label, checked, onChange, description }) => (
         checked={checked}
         onChange={e => onChange({ id, value: !!checked })}
         type="checkbox"
-        className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+        className="form-checkbox h-4 w-4 text-teal-500 transition duration-150 ease-in-out"
       />
     </div>
     <div className="pl-7 text-sm leading-5">
@@ -142,7 +142,7 @@ export const Radio = ({ id, label, checked, onChange, description }) => (
         checked={checked}
         onChange={e => onChange({ id })}
         type="radio"
-        className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+        className="form-radio h-4 w-4 text-teal-500 transition duration-150 ease-in-out"
       />
     </div>
     <div className="pl-7 text-sm leading-5">

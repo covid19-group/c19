@@ -22,14 +22,14 @@ export default function Faq() {
                   }>
                   <dt className="text-base leading-6 font-medium text-gray-900 md:col-span-5">{question}</dt>
                   <dd className="mt-2 md:mt-0 md:col-span-7">
-                    <p className="text-base leading-6 text-gray-500">
-                      {answer}
-                      {link && (
-                        <a href={link} className="block text-indigo-500 truncate">
+                    <p className="text-base leading-6 text-gray-700">{answer}</p>
+                    {link && (
+                      <p className="text-base leading-6 text-gray-700">
+                        <a href={link} className="text-teal-500 hover:teal-600 truncate">
                           {link}
                         </a>
-                      )}
-                    </p>
+                      </p>
+                    )}
                   </dd>
                 </div>
               );
