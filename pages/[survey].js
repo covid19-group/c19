@@ -89,7 +89,7 @@ function Registration({ phone, survey, initial }) {
 
   return (
     <PageLayout>
-      {showConfirmation && <ConfirmationModal language={language} close={() => setShowConfirmation(false)} />}
+      <ConfirmationModal language={language} show={showConfirmation} close={() => setShowConfirmation(false)} />
       <Header
         title={
           <div className="flex flex-wrap items-baseline">
@@ -100,7 +100,9 @@ function Registration({ phone, survey, initial }) {
               {new Date().toLocaleString(language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
             {initial && (
-              <p className="max-w-xl mt-4 text-sm text-gray-500">{content.baseline.description.replace('{unit}', unit)}</p>
+              <p className="max-w-xl mt-4 text-sm text-gray-500">
+                {content.baseline.description.replace('{unit}', unit)}
+              </p>
             )}
           </div>
         }
@@ -346,9 +348,7 @@ function Registration({ phone, survey, initial }) {
               }}
               disabled={!complete}
               className={
-                (complete
-                  ? 'hover:bg-teal-600'
-                  : 'opacity-50 cursor-default focus:outline-none') +
+                (complete ? 'hover:bg-teal-600' : 'opacity-50 cursor-default focus:outline-none') +
                 ' relative inline-flex justify-center text-white bg-teal-500 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md'
               }>
               {saving && (
