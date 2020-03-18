@@ -7,6 +7,7 @@ if (environment !== 'development') {
     accessToken: 'cf29fae9fe484f42b831615f07df98b7',
     captureUncaught: true,
     captureUnhandledRejections: true,
+    scrubTelemetryInputs: true,
     payload: {
       environment: origin,
       client: {
