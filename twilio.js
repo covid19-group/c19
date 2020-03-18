@@ -20,7 +20,7 @@ export async function sendSMS({ body, to }) {
     if (process.env.NODE_ENV === 'development') console.log(result);
     return result;
   } catch (error) {
-    rollbar.error('sendSMS: ' + error);
+    rollbar.error('sendSMS: ' + error.message.replace(to, '[scrubbed phone no]'));
     return false;
   }
 }
