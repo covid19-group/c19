@@ -1,11 +1,14 @@
 import { useContext } from 'react';
 import PageLayout from '../components/PageLayout';
 import contentFaq from '../content/faq';
+import contentContributors from '../content/contributors';
 import { LanguageContext } from '../components/LanguageSelector';
+import ReactMarkdown from 'react-markdown';
 
 export default function Faq() {
   const { language } = useContext(LanguageContext);
   const content = contentFaq[language];
+  const contributors = contentContributors[language];
   return (
     <PageLayout>
       <div className="mx-auto">
@@ -35,6 +38,23 @@ export default function Faq() {
               );
             })}
           </dl>
+        </div>
+      </div>
+      <div className="mx-auto mt-16">
+        <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
+          {contributors.title}
+        </h2>
+        <p className="text-gray-700 mt-2">{contributors.subtitle}</p>
+        <div className="mt-4 border-t-2 border-gray-200 pt-6">
+          <ul>
+            {contentContributors.contributors.map((value, idx) => {
+              return (
+                <li className="mt-2">
+                  <ReactMarkdown source={value} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </PageLayout>
