@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from 'react';
-import flag from 'country-code-emoji';
+import getFlagEmoji from 'country-code-emoji';
 import content from '../content/language';
 
 export const LanguageContext = createContext();
@@ -15,7 +15,7 @@ export default function LanguageSelector() {
   const { language, setLanguage } = useContext(LanguageContext);
   const NameFlag = ({ name, flag }) => (
     <>
-      <span className="mr-1">{flag}</span>
+      <span className="mr-1">{getFlagEmoji(flag)}</span>
       {name}
     </>
   );

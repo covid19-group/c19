@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithFix, Toggle } from '../components/Form';
 import PageLayout from '../components/PageLayout';
@@ -22,7 +23,7 @@ function Registration({ phone, survey, initial }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
-  const [hasChanged, setHasChanged] = useState(initial);
+  const [hasChanged, setHasChanged] = useState(initial || false);
 
   /* each registration */
   const [exposure, setExposure] = useState([]);
@@ -194,7 +195,7 @@ function Registration({ phone, survey, initial }) {
               />
             ))}
           </Label>
-          <Label label={content.temperature.label.replace('{unit}', unit)}>
+          <Label label={<ReactMarkdown source={content.temperature.label.replace('{unit}', unit)} />}>
             <Radio
               checked={temperature === 'measured'}
               label={content.temperature.options.measured}
@@ -214,7 +215,7 @@ function Registration({ phone, survey, initial }) {
                     setTemperatureValue(value.replace(/[^\d\.,]/g, ''));
                   }}
                   onBlur={() => {
-                    temperatureValue && setTemperatureValue(parseFloat(temperatureValue.replace(',', '.')));
+                    temperatureValue && setTemperatureValue(parseFloat(String(temperatureValue).replace(',', '.')));
                   }}
                 />
               }
@@ -323,6 +324,7 @@ function Registration({ phone, survey, initial }) {
                   body: JSON.stringify({
                     hasChanged,
                     value: {
+                      initial: initial || false,
                       sex,
                       zip,
                       born,
