@@ -3,7 +3,7 @@ export default {
     title: 'Med frivillige bidrag fra',
     subtitle: 'Et kæmpe tak til alle involveret! Vi kunne ikke have gjort det uden jeres hjælp.',
     services: {
-      prefix: 'Og til de serviceudbydere der sponsorer den infratruktur og softaware vi bygger på:',
+      prefix: 'Og til de serviceudbydere der sponsorer den infratruktur og software vi bygger på:',
       list: [
         '[AWS](https://aws.amazon.com/) for stabil data storage',
         '[Zeit](http://zeit.co/) for skalerbar hosting',
@@ -20,7 +20,7 @@ export default {
     title: 'Volunteering Contributors',
     subtitle: "A huge thank you to everyone involved! We couldn't have done it without you.",
     services: {
-      prefix: 'And to the service providers who sponsored the infratructure and software we rely on:',
+      prefix: 'And to the service providers who sponsored the infrastructure and software we rely on:',
       list: [
         '[AWS](https://aws.amazon.com/) for reliable data storage',
         '[Zeit](http://zeit.co/) for scalable hosting',
