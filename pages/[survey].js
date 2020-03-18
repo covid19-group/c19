@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import { useState, useContext } from 'react';
 import { Header, Label, Checkbox, Radio, Input, InputWithFix, Toggle } from '../components/Form';
 import PageLayout from '../components/PageLayout';
@@ -194,7 +195,7 @@ function Registration({ phone, survey, initial }) {
               />
             ))}
           </Label>
-          <Label label={content.temperature.label.replace('{unit}', unit)}>
+          <Label label={<ReactMarkdown source={content.temperature.label.replace('{unit}', unit)} />}>
             <Radio
               checked={temperature === 'measured'}
               label={content.temperature.options.measured}
