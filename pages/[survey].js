@@ -323,6 +323,7 @@ function Registration({ phone, survey, initial }) {
                   body: JSON.stringify({
                     hasChanged,
                     value: {
+                      initial: initial || false,
                       sex,
                       zip,
                       born,
