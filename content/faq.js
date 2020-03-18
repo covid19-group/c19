@@ -4,7 +4,8 @@ export default {
     questions: [
       {
         question: 'Hvem er bag c19.dk?',
-        answer: 'En række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv.',
+        answer:
+          'En række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors)',
       },
       {
         question: 'Hvorfor c19.dk?',
