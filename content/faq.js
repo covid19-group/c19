@@ -5,7 +5,6 @@ export default {
       {
         question: 'Hvem er bag c19.dk?',
         answer: 'En række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv.',
-        link: 'https://github.com/covid19-group/c19',
       },
       {
         question: 'Hvorfor c19.dk?',
@@ -25,7 +24,6 @@ export default {
       {
         question: "Who's behind c19.dk?",
         answer: 'Volunteering people in tech. We are startup founders, engineers, designers etc.',
-        link: 'https://github.com/covid19-group/c19',
       },
       {
         question: 'Why c19.dk?',
