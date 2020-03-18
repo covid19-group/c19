@@ -34,6 +34,7 @@ export default {
     signup: '... and expanding. [Sign up to contribute here](https://airtable.com/shrM3SHGwxEnnCChj).',
   },
   contributors: [
+    'Jesper Theil Thomsen, CEO @ [Soundboks](https://soundboks.com)',
     'Louis Arge, Software Engineer @ [Pelion](https://pelion.app/)',
     'Dominic Parr, Venture Analyst @ [Accelerace](https://www.accelerace.io/)',
     'Martin Krag, Investor @ [byFounders](https://byfounders.vc/)',
