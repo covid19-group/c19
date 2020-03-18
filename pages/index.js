@@ -50,7 +50,7 @@ const Hero = () => {
             <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-gray-900">{content.action}</p>
             </div>
-            <div className="block mt-5 flex pb-12">
+            <div className="flex sm:justify-center lg:justify-start mt-5 pb-12">
               <p>{content.share}</p>
               <button
                 className="mx-1 font-medium text-teal-500 hover:text-teal-600"
