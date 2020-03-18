@@ -14,7 +14,7 @@ export default {
         // '[TDC](https://tdc.dk/) for skaleret kommunikation til danskerne',
       ],
     },
-    signup: '... og flere tilkomne. [Skriv dig op til at bidrage her](https://airtable.com/shrM3SHGwxEnnCChj).',
+    signup: '... og flere tilkomne. [Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
   },
   'en-UK': {
     title: 'Volunteering Contributors',
@@ -31,7 +31,7 @@ export default {
         // '[TDC](https://tdc.dk/) for scaled communication to the Danes',
       ],
     },
-    signup: '... and expanding. [Sign up to contribute here](https://airtable.com/shrM3SHGwxEnnCChj).',
+    signup: '... and expanding. [Sign up to contribute](https://airtable.com/shrM3SHGwxEnnCChj).',
   },
   contributors: [
     'Jesper Theil Thomsen, CEO @ [Soundboks](https://soundboks.com)',
