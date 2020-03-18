@@ -70,7 +70,7 @@ export default {
       label:
         'Har du været i nærkontakt med personer der er blevet testet positiv for COVID-19 inden for de sidste {unit}?',
       description:
-        'Nærkontakt med en bekræftet smittet inkluderer at bo i samme hus, ansigt-til-ansigt kontakt, blive hostet på, at være indenfor 2 meter af personen i mere end 15 minutter, eller at have været i kontakt med deres kropsvæsker',
+        'Nærkontakt med en bekræftet smittet inkluderer at bo sammen, ansigt-til-ansigt kontakt, blive hostet på, at være indenfor 2 meter af personen i mere end 15 minutter, eller at have været i kontakt med deres kropsvæsker',
       options: {
         yes: 'Ja',
         no: 'Nej',
@@ -96,7 +96,7 @@ export default {
       label: 'Har du, eller har du indenfor de sidste {unit} haft, én eller flere af disse symptomer?',
       description: 'Vælg alle de symptomer du har haft',
       options: {
-        fatique: 'Udmattedhed',
+        fatigue: 'Udmattedhed',
         chills: 'Kuldegysninger',
         cough: 'Hoste',
         'short-breath': 'Åndedrætsbesvær eller stakåndethed',
@@ -146,7 +146,7 @@ export default {
       label: 'Hvad er din nuværende status?',
       options: {
         wfh: 'Jeg arbejder hjemmefra',
-        home: 'Jeg er hjemme, men arbejder ikke',
+        home: 'Jeg er hjemme, og arbejder ikke',
         work: 'Jeg går på arbejde',
       },
     },
@@ -245,7 +245,7 @@ export default {
       label:
         'In the past {unit}, have you been in close contact with someone who has a laboratory-confirmed case of COVID-19?',
       description:
-        'Close contact with a confirmed case includes living in the same house, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
+        'Close contact with a confirmed case includes living together, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
       options: {
         yes: 'Yes',
         no: 'No',
@@ -271,7 +271,7 @@ export default {
       label: 'Have you had any of the following symptoms in the past {unit}?',
       description: 'Select all that apply',
       options: {
-        fatique: 'Fatique',
+        fatigue: 'Fatigue',
         chills: 'Chills',
         cough: 'Cough',
         'short-breath': 'Difficulty breathing or shortness of breath',
