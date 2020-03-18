@@ -58,36 +58,31 @@ export default {
         cancer: {
           label: 'Aktiv cancer diagnose',
         },
-        hiv: {
-          label: 'HIV eller nedsat immunforsvar',
-        },
-        transplant: {
-          label: 'Tidligere organtransplantation',
-        },
       },
     },
     exposure: {
       label:
         'Har du været i nærkontakt med personer der er blevet testet positiv for COVID-19 inden for de sidste {unit}?',
       description:
-        'Nærkontakt med en bekræftet smittet inkluderer at bo sammen, ansigt-til-ansigt kontakt, blive hostet på, at være indenfor 2 meter af personen i mere end 15 minutter, eller at have været i kontakt med deres kropsvæsker',
+        'Nærkontakt er defineret ved at bo sammen, ansigt-til-ansigt kontakt, blive hostet på, at være indenfor 2 meter af personen i mere end 15 minutter, eller at have været i kontakt med deres kropsvæsker',
       options: {
         yes: 'Ja',
         no: 'Nej',
+        unknown: 'Ved ikke',
         maybe:
           'Jeg har været i nærkontakt med personer med feber, hoste eller åndedrætsbesvær, men jeg ved ikke om de er bekræftet smittet.',
       },
     },
     temperature: {
-      label: 'Hvad er den højeste temperatur du har haft de sidste {unit}?',
+      label: 'Hvad er den **højeste** temperatur du har haft de sidste {unit}?',
       options: {
         measured: 'Jeg har målt min temperatur til',
         subjective: {
-          label: 'Jeg tror jeg har feber, men har ikke målt',
+          label: 'Jeg tror jeg har feber, men har ikke målt den',
           description: 'Over 38°C / 100.4°F',
         },
         normal: {
-          label: 'Jeg tror min temperatur er normal, men har ikke målt.',
+          label: 'Jeg tror min temperatur er normal, men har ikke målt den',
           description: 'From 36.1°C to 37.2°C (97°F - 99°F) ',
         },
       },
@@ -98,7 +93,8 @@ export default {
       options: {
         fatigue: 'Udmattedhed',
         chills: 'Kuldegysninger',
-        cough: 'Hoste',
+        'dry-cough': 'Tør hoste',
+        'productive-cough': 'Produktiv hoste (hoste med slim)',
         'short-breath': 'Åndedrætsbesvær eller stakåndethed',
         'tight-chest': 'Trykken for brystet',
         headache: 'Hovedpine',
@@ -233,28 +229,23 @@ export default {
         cancer: {
           label: 'Active cancer diagnosis',
         },
-        hiv: {
-          label: 'HIV or an impaired immune system',
-        },
-        transplant: {
-          label: 'Previous organ transplant',
-        },
       },
     },
     exposure: {
       label:
         'In the past {unit}, have you been in close contact with someone who has a laboratory-confirmed case of COVID-19?',
       description:
-        'Close contact with a confirmed case includes living together, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
+        'Close contact is defined as living together, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
       options: {
         yes: 'Yes',
         no: 'No',
+        unknown: "Don't know",
         maybe:
           'I had close contact with someone with fever, cough or trouble breathing, but I am not sure if they had a laboratory-confirmed case of COVID-19',
       },
     },
     temperature: {
-      label: 'What is the highest temperature you have had in the past {unit}?',
+      label: 'What is the **highest** temperature you have had in the past {unit}?',
       options: {
         measured: 'Measured',
         subjective: {
@@ -273,7 +264,8 @@ export default {
       options: {
         fatigue: 'Fatigue',
         chills: 'Chills',
-        cough: 'Cough',
+        'dry-cough': 'Dry cough',
+        'productive-cough': 'Producive cough (cough with mucus)',
         'short-breath': 'Difficulty breathing or shortness of breath',
         'tight-chest': 'Tightness in your chest',
         headache: 'Headache',
