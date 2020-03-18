@@ -1,15 +1,5 @@
 # C19 // COVID-19 Self Registration Project
 
-## Want help with!
+C19 is an Open Source COVID-19 self registration tool build by volunteering people in tech. We are startup founders, engineers, designers etc. with resources sponsored by tech-companies around the world.
 
-- [ ] Automatic tests
-- [ ] Stress testing
-- [ ] Letting Power BI connect to DB: https://www.reddit.com/r/PowerBI/comments/at3bvh/architectural_options_to_connect_refresh_data/
-
-## Currently working on
-- [ ] Add animations/transitions for better look and feel
-- [ ] Remove “Test number” in prod when live
-- [ ] Add Privacy Policy
-
-## Nice-to-have
-- [ ] Add more languages
+We're currently piloting in Denmark on https://c19.dk.
