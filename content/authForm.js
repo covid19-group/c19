@@ -4,7 +4,7 @@ export default {
     or: 'Eller',
     phone: {
       label: 'Telefonnummer',
-      description: 'Venligst inkluder landekode',
+      description: '',
       error: {
         incomplete: 'Venligst indtast et gyldigt telefonnummer først',
         wrongCountryCode: 'Vi understøtter på nuværende tidspunkt kun danske numre',
@@ -43,7 +43,7 @@ export default {
     or: 'Or',
     phone: {
       label: 'Phone Number',
-      description: 'Please include country code',
+      description: '',
       error: {
         incomplete: 'Please enter a valid phone number first',
         wrongCountryCode: 'We currently only support danish phone numbers',

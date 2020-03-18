@@ -218,10 +218,7 @@ export default function AuthForm({ children }) {
             </div>
             {!!error && (
               <p className="mt-2 text-xs font-normal text-red-600">
-                {phoneError ||
-                  (!parsedPhone || !parsedPhone.country
-                    ? content.phone.error.missingCountryCode
-                    : content.phone.error.invalid)}
+                {phoneError || content.phone.error.invalid}
                 {!!renewing && renewing + ' ' + content.phone.error.secs}
               </p>
             )}
