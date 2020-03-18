@@ -10,13 +10,12 @@ export default {
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          '"Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange Danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
+          '"Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
-
       {
         question: 'Hvorfor være frivillig?',
         answer:
-          'I frankring laver perfume-fabrkikkerne håndsprit. I England laver bilfabrkikanterne respiratorer. I krisetid må vi alle hjælpe med det vi er gode til — og vi er gode til data!',
+          'I Frankring laver parfume-fabrikkerne håndsprit. I England laver bilfabrikanterne respiratorer. I krisetid må vi alle hjælpe med det vi er gode til — og vi er gode til data!',
       },
     ],
   },
@@ -31,7 +30,7 @@ export default {
       {
         question: 'Why c19.dk?',
         answer:
-          'The "Flatten the curve" strategy means that we little information about the number of Danes with symptoms who are not in contact with the health services. This tool reveals the dark figures, for the authorities to predict the pressure on hospitals better.',
+          'The "Flatten the curve" strategy means that we have little information about the number of Danes with symptoms who are not in contact with the health services. This tool reveals the dark figures, for the authorities to predict the pressure on hospitals better.',
       },
       {
         question: 'Why volunteer?',
