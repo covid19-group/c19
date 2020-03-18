@@ -131,14 +131,14 @@ export default function AuthForm({ children }) {
                 }
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
-                prefix={parsedPhone && parsedPhone.country ? flag(parsedPhone.country) : '🌍'}
+                prefix={'+45'} //parsedPhone && parsedPhone.country ? flag(parsedPhone.country) : '🌍'}
                 type="phone"
-                value={asYouTypeParser.input(phone)}
+                value={asYouTypeParser.input(phone).slice(4)}
                 onChange={({ value }) => {
                   phoneError && setPhoneError(false);
-                  setPhone(value);
+                  setPhone('+45' + value);
                 }}
-                placeholder="+45 60 55 07 09"
+                placeholder="60 55 07 09"
               />
               <span className="inline-flex rounded-md shadow-sm">
                 <button
