@@ -52,3 +52,44 @@ p {
 .smooth-scroll {
   scroll-behavior: smooth;
 }
+
+.react-markdown {
+  @apply break-words;
+}
+.react-markdown *:last-child {
+  @apply mb-0;
+}
+.react-markdown h1 {
+  @apply text-xl mt-4 mb-3;
+}
+.react-markdown h2 {
+  @apply text-lg mt-4 mb-3;
+}
+.react-markdown h3,
+.react-markdown h4,
+.react-markdown h5,
+.react-markdown h6 {
+  @apply text-base mt-4 mb-2;
+}
+.react-markdown p {
+  @apply text-gray-800 mb-2;
+}
+.react-markdown a {
+  @apply text-teal-500;
+}
+.react-markdown ul,
+.react-markdown ol {
+  @apply leading-normal max-w-2xl mb-2 text-gray-800 pl-4;
+}
+.react-markdown ul {
+  @apply list-disc;
+}
+.react-markdown ol {
+  @apply list-decimal;
+}
+.react-markdown li {
+  @apply mb-2;
+}
+.react-markdown blockquote {
+  @apply border-l-2 border-teal-900 pl-2;
+}

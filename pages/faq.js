@@ -25,14 +25,9 @@ export default function Faq() {
                   }>
                   <dt className="text-base leading-6 font-medium text-gray-900 md:col-span-5">{question}</dt>
                   <dd className="mt-2 md:mt-0 md:col-span-7">
-                    <p className="text-base leading-6 text-gray-700">{answer}</p>
-                    {link && (
-                      <p className="text-base leading-6 text-gray-700">
-                        <a href={link} className="text-teal-500 hover:teal-600 truncate">
-                          {link}
-                        </a>
-                      </p>
-                    )}
+                    <p className="text-base leading-6 text-gray-700">
+                      <ReactMarkdown source={answer} className="react-markdown" />
+                    </p>
                   </dd>
                 </div>
               );
@@ -41,7 +36,7 @@ export default function Faq() {
         </div>
       </div>
       <div className="mx-auto mt-16">
-        <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
+        <h2 id="contributors" className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
           {contributors.title}
         </h2>
         <p className="text-gray-700 mt-2">{contributors.subtitle}</p>
@@ -50,7 +45,20 @@ export default function Faq() {
             {contentContributors.contributors.map((value, idx) => {
               return (
                 <li className="mt-2">
-                  <ReactMarkdown source={value} />
+                  <ReactMarkdown source={value} className="react-markdown" />
+                </li>
+              );
+            })}
+            <li className="mt-2">
+              <ReactMarkdown source={contributors.signup} className="react-markdown" />
+            </li>
+          </ul>
+          <p className="mt-6 font-medium">{contributors.services.prefix}</p>
+          <ul>
+            {contributors.services.list.map((value, idx) => {
+              return (
+                <li className="mt-2">
+                  <ReactMarkdown source={value} className="react-markdown" />
                 </li>
               );
             })}
