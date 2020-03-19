@@ -4,7 +4,7 @@ export default {
       titleBlack: 'COVID-19',
       titleBlue: 'Selvrapportering',
       subtitle:
-        'Tilmeld dig og vær med til at kaste lys over Corona-mørketallet. Sammen kan vi hjælpe sundhedsvæsenet med mere repræsentative data.',
+        'Tilmeld dig og vær med til at kaste lys over Corona-mørketallet. Sammen kan vi hjælpe sundhedsvæsenet med mere repræsentative data. **C19.DK går ikke i luften uden godkendelse fra de relevante myndigheder.**',
       action: 'Invitér dine venner her.',
       share: 'Del via: ',
       placeholder: 'Indtast telefonnummer',
