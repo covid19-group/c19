@@ -16,13 +16,13 @@ export default function CustomHead() {
       <meta property="og:title" content={title} />
       <meta property="og:site_name" content={title} />
       <meta property="og:description" content={subtitle} />
-      <meta property="og:image" content="https://c19.dk/og.png" />
+      <meta property="og:image" content="https://c19.dk/og-image.png" />
       <meta property="og:url" content="https://c19.dk/" />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={subtitle} />
-      <meta name="twitter:image" content="https://c19.dk/og.png" />
+      <meta name="twitter:image" content="https://c19.dk/og-image.png" />
       <script src="/rollbar.js"></script>
     </Head>
   );
