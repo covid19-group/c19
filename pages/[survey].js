@@ -10,7 +10,7 @@ import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
 const R = require('ramda');
 
-function Registration({ phone, survey, initial }) {
+function Registration({ phone, survey, initial, reminders }) {
   /* one time questions */
   /* TODO: Move so separate component */
   const [sex, setSex] = useState(null);
@@ -23,6 +23,7 @@ function Registration({ phone, survey, initial }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
+  const [wantReminders, setWantReminders] = useState(!reminders);
   const [hasChanged, setHasChanged] = useState(initial || false);
 
   /* each registration */
@@ -307,15 +308,39 @@ function Registration({ phone, survey, initial }) {
         </>
       )}
       <div className="pt-5">
-        <div className="flex items-baseline justify-end">
+        <div className="flex flex-wrap-reverse items-center justify-end">
           {!error && !complete && <p className="mt-2 text-xs font-normal text-gray-700">{content.incomplete}</p>}
           <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
+          {!error && reminders === false && (
+            <div className="sm:-mt-4 text-gray-700">
+              <Checkbox
+                checked={wantReminders}
+                onChange={() => setWantReminders(!wantReminders)}
+                label={content.reminders}
+              />
+            </div>
+          )}
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
               onClick={async e => {
                 setError(false);
                 setSaving(true);
                 e.preventDefault();
+
+                /* If user didn't receive reminders, but changed their mind, update reminder preferences,
+                   but don't await it to go through – shouldn't interfere with form submission UX */
+                if (!reminders && wantReminders) {
+                  fetch('/api/post/subscribe', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      survey,
+                    }),
+                  });
+                }
+
                 const response = await fetch('/api/post/survey', {
                   method: 'POST',
                   headers: {
@@ -351,7 +376,7 @@ function Registration({ phone, survey, initial }) {
               disabled={!complete}
               className={
                 (complete ? 'hover:bg-teal-600' : 'opacity-50 cursor-default focus:outline-none') +
-                ' relative inline-flex justify-center text-white bg-teal-500 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md'
+                ' flex-shrink-0 relative inline-flex justify-center text-white bg-teal-500 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md'
               }>
               {saving && (
                 <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
@@ -371,7 +396,7 @@ export async function getServerSideProps(context) {
   const db = require('../db');
   const secret = process.env.SECRET;
   const { survey } = context.query;
-  const { phone, value, surveys } = await db.task(async t => {
+  const { phone, value, surveys, reminders } = await db.task(async t => {
     const { person, value } =
       (await t.oneOrNone(
         `SELECT *
@@ -381,8 +406,8 @@ export async function getServerSideProps(context) {
         { id: survey }
       )) || {};
     if (!person) return {};
-    const { phone } = await db.oneOrNone(
-      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone
+    const { phone, reminders } = await db.oneOrNone(
+      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders
       FROM person
       WHERE id = $/id/`,
       { secret, id: person }
@@ -393,7 +418,7 @@ export async function getServerSideProps(context) {
       WHERE person = $/person/`,
       { person }
     );
-    return { phone, value, surveys };
+    return { phone, value, surveys, reminders };
   });
   if (phone) {
     return {
@@ -401,6 +426,7 @@ export async function getServerSideProps(context) {
         phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
         survey,
         initial: parseInt(surveys) === 1,
+        reminders,
       },
     };
   } else return { props: {} };
