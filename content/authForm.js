@@ -37,8 +37,8 @@ export default {
       error: 'Koden er ugyldig.',
     },
     privacy: {
-      prefix: 'Vi går op i datasikkerhed. Læs vores privatlivspolitik',
-      label: 'Privatlivspolitik',
+      prefix: 'Vi går op i datasikkerhed. Ved at fortsætte accepterer du samtidig denne',
+      label: 'Samtykkeerklæring',
     },
   },
   'en-UK': {
@@ -79,8 +79,8 @@ export default {
       error: 'The code is invalid.',
     },
     privacy: {
-      prefix: 'We care about the protection of your data. Read our',
-      label: 'Privacy Policy',
+      prefix: 'We care about protecting your data. By continuing you acknowledge to have read and accept this',
+      label: 'Decleration of Consent',
     },
   },
 };

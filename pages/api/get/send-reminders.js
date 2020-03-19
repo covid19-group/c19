@@ -37,7 +37,10 @@ export default async (req, res) => {
                 RETURNING *`,
                 { person: person.id }
               );
-              await sendSMS({ body: smsContent['en-UK'].followUpSurvey + survey.id, to: person.phone });
+              await sendSMS({
+                body: smsContent['en-UK'].followUpSurvey + survey.id + '. ' + smsContent['en-UK'].unsubscribe,
+                to: person.phone,
+              });
             }
           })
         );
