@@ -29,6 +29,7 @@ export default {
       options: {
         male: 'Mand',
         female: 'Kvinde',
+        other: 'Andet',
       },
     },
     born: {
@@ -201,6 +202,7 @@ export default {
       options: {
         male: 'Male',
         female: 'Female',
+        other: 'Other',
       },
     },
     born: {
