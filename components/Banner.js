@@ -6,7 +6,7 @@ export default function Banner() {
   const { language } = useContext(LanguageContext);
   const content = bannerConent[language];
   return (
-    <div className="fixed inset-x-0 bottom-0">
+    <div className="fixed inset-x-0 bottom-0 z-30">
       <div className="bg-teal-500">
         <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between flex-wrap">
