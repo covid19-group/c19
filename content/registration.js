@@ -3,7 +3,7 @@ export default {
     baseline: {
       label: 'Baseline',
       description:
-        'Denne første registrering er udvidet til at omfatte de seneste {unit}, og inkludere demografiske data samt syghistorik for at sætte en baseline til fremtidige registrering.',
+        'Denne første registrering er udvidet til at omfatte de seneste {unit}, og inkluderer demografiske data samt sygehistorie for at sætte en baseline til fremtidige registrering.',
     },
     by: 'Registrering for tlf.',
     title: 'Registration',
@@ -29,6 +29,7 @@ export default {
       options: {
         male: 'Mand',
         female: 'Kvinde',
+        other: 'Andet',
       },
     },
     born: {
@@ -50,14 +51,14 @@ export default {
           description: 'f.eks. hjertekarsygdomme, hjerteanfald, hjertefejl, angina',
         },
         lungs: {
-          label: 'Lungsygdomme',
+          label: 'Lungesygdomme',
           description: 'f.eks. astma, KOL',
         },
         'blood-pressue': {
           label: 'Forhøjet blodtryk',
         },
         cancer: {
-          label: 'Aktiv cancer diagnose',
+          label: 'Aktiv cancer-diagnose',
         },
       },
     },
@@ -92,10 +93,10 @@ export default {
       label: 'Har du, eller har du indenfor de sidste {unit} haft, én eller flere af disse symptomer?',
       description: 'Vælg alle de symptomer du har haft',
       options: {
-        fatigue: 'Udmattedhed',
+        fatigue: 'Udmattethed',
         chills: 'Kuldegysninger',
         'dry-cough': 'Tør hoste',
-        'productive-cough': 'Produktiv hoste (hoste med slim)',
+        'productive-cough': 'Hoste med slim',
         'short-breath': 'Åndedrætsbesvær eller stakåndethed',
         'tight-chest': 'Trykken for brystet',
         headache: 'Hovedpine',
@@ -175,7 +176,7 @@ export default {
     baseline: {
       label: 'Baseline',
       description:
-        'This first registration is extended to the past {unit} and include demographic and medical history information to set the basline for future registrations.',
+        'This first registration is extended to the past {unit} and include demographic and medical history information to set the baseline for future registrations.',
     },
     by: 'Registration by No.',
     title: 'Registration',
@@ -201,6 +202,7 @@ export default {
       options: {
         male: 'Male',
         female: 'Female',
+        other: 'Other',
       },
     },
     born: {
@@ -237,7 +239,7 @@ export default {
       label:
         'In the past {unit}, have you been in close contact with someone who has a laboratory-confirmed case of COVID-19?',
       description:
-        'Close contact is defined as living together, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 6 feet of the person for more than 15 minutes, or contact with their body fluids.',
+        'Close contact is defined as living together, face-to-face contact (e.g., talking for more than a few minutes), being coughed on, being within 2 meters of the person for more than 15 minutes, or contact with their body fluids.',
       options: {
         yes: 'Yes',
         no: 'No',
@@ -267,7 +269,7 @@ export default {
         fatigue: 'Fatigue',
         chills: 'Chills',
         'dry-cough': 'Dry cough',
-        'productive-cough': 'Producive cough (cough with mucus)',
+        'productive-cough': 'Cough with mucus',
         'short-breath': 'Difficulty breathing or shortness of breath',
         'tight-chest': 'Tightness in your chest',
         headache: 'Headache',
@@ -304,7 +306,7 @@ export default {
       },
     },
     distancing: {
-      label: 'How many people have you been within 1 meter of in the last {unit}?',
+      label: 'How many people have you been in close physical contact with in the last {unit}?',
       options: {
         none: 'None',
         few: 'A few',

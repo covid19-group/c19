@@ -1,5 +1,4 @@
 import { useState, createContext, useContext } from 'react';
-import getFlagEmoji from 'country-code-emoji';
 import content from '../content/language';
 
 export const LanguageContext = createContext();
@@ -13,19 +12,13 @@ export function LanguageProvider({ children }) {
 export default function LanguageSelector() {
   const [show, setShow] = useState(false);
   const { language, setLanguage } = useContext(LanguageContext);
-  const NameFlag = ({ name, flag }) => (
-    <>
-      <span className="mr-1">{getFlagEmoji(flag)}</span>
-      {name}
-    </>
-  );
   return (
     <LanguageProvider>
       <div className="relative inline-block text-left">
         <div onClick={() => setShow(true)}>
           <span className="rounded-md shadow-sm">
             <button className="text-left inline-flex justify-center w-32 rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:border-teal-500 active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
-              <NameFlag {...content[language]} />
+              {content[language].name}
               <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
@@ -57,7 +50,7 @@ export default function LanguageSelector() {
                         window.localStorage.setItem('i18n', i18n);
                       }}
                       className="text-left w-full block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-                      <NameFlag {...content[i18n]} />
+                      {content[i18n].name}
                     </button>
                   ))}
                 </div>
