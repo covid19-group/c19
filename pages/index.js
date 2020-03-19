@@ -16,13 +16,10 @@ export default function Landing() {
       : 'development'
     : process.env.NODE_ENV;
 
-  // TODO: don't overwrite with true
-  const showTestButton = environment === 'development';
-
   return (
     <PageLayout>
       <Hero />
-      {showTestButton && <Banner />}
+      <Banner />
     </PageLayout>
   );
 }

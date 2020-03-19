@@ -21,10 +21,7 @@ export default function Banner() {
                   />
                 </svg>
               </span>
-              <p className="ml-3 font-medium text-white truncate">
-                <span className="md:hidden">{content.title}</span>
-                <span className="hidden md:inline">{content.subtitle}</span>
-              </p>
+              <p className="ml-3 font-medium text-white break-words">{content}</p>
             </div>
           </div>
         </div>
