@@ -93,6 +93,16 @@ export default function AuthForm({ children }) {
 
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:border sm:border-gray-200 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
+      <div className="flex">
+        <label className="w-1/2 m-0 cursor-pointer provider">
+          {content.phone.types.whatsApp}
+          <input name="provider" type="radio" value="0" className="hidden" />
+        </label>
+        <label className="w-1/2 m-0 cursor-pointer provider">
+          {content.phone.types.telephone}
+          <input name="provider" type="radio" value="1" className="hidden" />
+        </label>
+      </div>
       {showTestButton && (
         <button
           onClick={async e => {

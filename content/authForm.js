@@ -3,6 +3,10 @@ export default {
     testBtn: 'Brug test telefonnummer',
     or: 'Eller',
     phone: {
+      types: {
+        whatsApp: "WhatsApp",
+        telephone: "Telefon"
+      },
       label: 'Telefonnummer',
       description: '',
       error: {
@@ -42,6 +46,10 @@ export default {
     testBtn: 'Use Test Number',
     or: 'Or',
     phone: {
+      types: {
+        whatsApp: "WhatsApp",
+        telephone: "Telephone"
+      },
       label: 'Phone Number',
       description: '',
       error: {
