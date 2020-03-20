@@ -29,7 +29,7 @@ const Hero = () => {
   const content = contentMain[language].hero;
   return (
     <div className="relative bg-white overflow-hidden">
-      <div className="mt-8 mx-auto max-w-screen-xl sm:mt-12 md:mt-16 xl:mt-20">
+      <div className="mt-8 mx-auto max-w-screen-xl sm:mt-12 md:mt-16 xl:mt-20 pb-24 lg:pb-0">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
             <h2 className="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
