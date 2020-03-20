@@ -13,7 +13,7 @@ export default async (req, res) => {
       if (!(phone.slice(0, 3) === '+45')) {
         res.status(400).json({ error: 'wrong_country_code' });
       } else if (isValidNumber(phone)) {
-        const code = await db.task(async t => {
+        const { code, id } = await db.task(async t => {
           let person = await db.oneOrNone(
             `SELECT *,
               PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone,
@@ -35,12 +35,12 @@ export default async (req, res) => {
               RETURNING *`,
               { phone, secret, code: generatedCode }
             );
-            return generatedCode;
+            return { ...person, code: generatedCode };
           } else {
-            return person.code;
+            return person;
           }
         });
-        await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone });
+        await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone, id });
 
         res.status(200).end();
       } else {

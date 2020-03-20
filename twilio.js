@@ -5,10 +5,10 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const phoneNo = process.env.TWILIO_PHONE_NO;
 const client = require('twilio')(accountSid, authToken);
 
-export async function sendSMS({ body, to }) {
+export async function sendSMS({ body, to, id }) {
   try {
     if (process.env.NODE_ENV === 'development') {
-      console.log({ body, to });
+      console.log({ body, to, id });
       return {};
     }
     if (to === '+4599999999') return {};
@@ -20,7 +20,7 @@ export async function sendSMS({ body, to }) {
     if (process.env.NODE_ENV === 'development') console.log(result);
     return result;
   } catch (error) {
-    rollbar.error('sendSMS: ' + error.message.replace(to, '[scrubbed phone no]'));
+    rollbar.error('sendSMS: ' + error.message.replace(to, '[scrubbed phone no]') + ` (user id: ${id})`);
     return false;
   }
 }
