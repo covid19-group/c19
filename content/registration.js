@@ -41,6 +41,9 @@ export default {
     household: {
       label: 'Hvor mange bor i din husstand?',
     },
+    children: {
+      label: 'Heraf, hvor mange i husholdningen er børn under 18 år?',
+    },
     conditions: {
       label: 'Har du, eller har du haft, én eller flere af disse lidelser?',
       description: 'Vælg alle relevante',
@@ -213,6 +216,9 @@ export default {
     },
     household: {
       label: 'Number of People in Your Household',
+    },
+    children: {
+      label: 'Hereof, how many in your household are children under the age of 18?',
     },
     conditions: {
       label: 'Do you have or have you ever had any of the following conditions?',

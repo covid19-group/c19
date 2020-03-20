@@ -17,6 +17,7 @@ function Registration({ phone, survey, initial, reminders }) {
   const [zip, setZip] = useState('');
   const [born, setBorn] = useState('');
   const [household, setHousehold] = useState('');
+  const [children, setChildren] = useState('');
   const [conditions, setConditions] = useState([]);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -94,19 +95,26 @@ function Registration({ phone, survey, initial, reminders }) {
       <ConfirmationModal language={language} show={showConfirmation} close={() => setShowConfirmation(false)} />
       <Header
         title={
-          <div className="flex flex-wrap items-baseline">
-            <span className="flex-auto">
-              {initial && content.baseline.label} {content.by} {phone}
-            </span>
-            <span className="text-base pt-1 text-gray-500">
-              {new Date().toLocaleString(language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
+          <>
+            <div className="flex flex-wrap items-baseline">
+              <span className="flex-auto">
+                {initial && content.baseline.label} {content.by} {phone}
+              </span>
+              <span className="text-base pt-1 text-gray-500">
+                {new Date().toLocaleString(language, {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            </div>
             {initial && (
               <p className="max-w-xl mt-4 text-sm text-gray-500">
                 {content.baseline.description.replace('{unit}', unit)}
               </p>
             )}
-          </div>
+          </>
         }
       />
       {!initial && (
@@ -166,6 +174,18 @@ function Registration({ phone, survey, initial, reminders }) {
               />
             </div>
           </Label>
+          {household > 1 && (
+            <Label label={content.children.label}>
+              <div className="w-24">
+                <InputWithFix
+                  suffix={parseInt(children) >= 0 && <Checkmark />}
+                  value={children}
+                  placeholder="2"
+                  onChange={({ value }) => setChildren([...value].filter(v => Number.isInteger(parseInt(v))).join(''))}
+                />
+              </div>
+            </Label>
+          )}
           <Label label={content.conditions.label} description={content.conditions.description}>
             {Object.keys(content.conditions.options).map(key => (
               <Checkbox
@@ -354,6 +374,7 @@ function Registration({ phone, survey, initial, reminders }) {
                       zip,
                       born,
                       household,
+                      children,
                       conditions,
                       exposure,
                       temperature,
