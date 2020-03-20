@@ -9,7 +9,7 @@ export default function Consent() {
   const content = consent[language];
   return (
     <PageLayout>
-      <ReactMarkdown source={content} className="react-markdown" />
+      <ReactMarkdown source={content} className="react-markdown pb-20" />
     </PageLayout>
   );
 }
