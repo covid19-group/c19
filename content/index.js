@@ -5,7 +5,7 @@ export default {
       titleBlue: 'Selvrapportering',
       subtitle:
         'Tilmeld dig og vær med til at kaste lys over Corona-mørketallet. Du modtager en SMS dagligt med et kort spørgeskema om din helbredsstatus. Sammen hjælper vi sundhedsvæsenet til mere repræsentative data.',
-      action: 'Meld dig til, selvom du er rask',
+      action: 'Meld dig til, selvom du er rask.',
       share: 'Del via: ',
       placeholder: 'Indtast telefonnummer',
       privacy: {
