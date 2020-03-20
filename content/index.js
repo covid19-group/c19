@@ -5,7 +5,7 @@ export default {
       titleBlue: 'Selvrapportering',
       subtitle:
         'Tilmeld dig og vær med til at kaste lys over Corona-mørketallet. Sammen kan vi hjælpe sundhedsvæsenet med mere repræsentative data.',
-      action: 'Invitér dine venner her.',
+      action: 'Meld dig til, selvom du er rask.',
       share: 'Del via: ',
       placeholder: 'Indtast telefonnummer',
       privacy: {
