@@ -310,7 +310,7 @@ export default function AuthForm({ children }) {
         </div>
         <p className="mt-3 text-xs leading-5 text-gray-500">
           {content.privacy.prefix}
-          <Link href="#">
+          <Link href="/consent">
             <a className="font-medium text-gray-900 underline ml-1">{content.privacy.label}</a>
           </Link>
         </p>
