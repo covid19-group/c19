@@ -49,5 +49,9 @@ export default {
     'Rasmus Kolbe, Influencer & Creative Director @ [CUBE](https://wearecube.se/)',
     'Jeppe Rindom, CEO @ [Pleo](https://www.pleo.io/)',
     'Holger Thorup, CTO @ [Pelion](https://pelion.app/)',
+    'Emil Bender Lassen, CEO @ [Project Access](https://projectaccess.org)',
+    'Mads Damsbo, CEO @ [makropol.dk](https://makropol.dk) and [kasparai.com](https://kasparai.com)',
+    'Christian Skovholm, Software Engineer, tidl. @ [Netcompany](https://netcompany.com)',
+    'Tristan Homsi, Founder @ [Readwise.io](https://readwise.io)',
   ],
 };
