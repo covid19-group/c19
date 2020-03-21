@@ -37,7 +37,7 @@ function Success() {
               className="mx-1 font-medium text-white hover:text-teal-100"
               onClick={() =>
                 window.open(
-                  `https://www.facebook.com/sharer/sharer.php?u=${window.location}`,
+                  `https://www.facebook.com/sharer/sharer.php?u=${window.origin}`,
                   'sharer',
                   'toolbar=0,status=0,width=560,height=640'
                 )
@@ -48,7 +48,7 @@ function Success() {
             <button
               onClick={() =>
                 window.open(
-                  `http://www.twitter.com/share?text=${indexContentLanguage.subtitle}&url=${window.location}`,
+                  `http://www.twitter.com/share?text=${indexContentLanguage.subtitle}&url=${window.origin}`,
                   'sharer',
                   'toolbar=0,status=0,width=640,height=400'
                 )
@@ -60,7 +60,7 @@ function Success() {
             <button
               onClick={() =>
                 window.open(
-                  `https://www.linkedin.com/shareArticle?url=${window.location}&title=${
+                  `https://www.linkedin.com/shareArticle?url=${window.origin}&title=${
                     indexContentLanguage.subtitle
                   }&summary=${indexContentLanguage.titleBlack + ' ' + indexContentLanguage.titleBlue}`,
                   'sharer',
