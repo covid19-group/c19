@@ -5,7 +5,7 @@ export default {
     phone: {
       types: {
         whatsApp: "WhatsApp",
-        telephone: "Telefon"
+        teleProvider: "Telefon"
       },
       label: 'Telefonnummer',
       description: '',
@@ -48,7 +48,7 @@ export default {
     phone: {
       types: {
         whatsApp: "WhatsApp",
-        telephone: "Telephone"
+        teleProvider: "Telephone"
       },
       label: 'Phone Number',
       description: '',

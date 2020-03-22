@@ -35,13 +35,9 @@ module.exports = {
     require('@tailwindcss/ui'),
     plugin(function({ addUtilities }) {
       const newUtilities = {
-        '.provider': {
-          'padding': '2.5rem',
-          'background-color': '#fff',
+        '.active-provider': {
+          'border-bottom': '3px solid #38b2ac'
           
-        },
-        'provider-active': {
-          'border-bottom': '3px solid #0694a2'
         }
       }
 

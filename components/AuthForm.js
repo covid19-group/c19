@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { LanguageContext } from './LanguageSelector';
 import LoadingSpinner from './LoadingSpinner';
 import authContent from '../content/authForm';
+import cn from "classnames";
 
 export default function AuthForm({ children }) {
   const router = useRouter();
@@ -42,6 +43,8 @@ export default function AuthForm({ children }) {
     }
   }, [renewing]);
 
+  const [whatsAppProviderSelected, setWhatsAppProviderSelected] = useState(false)
+
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
   const [reminders, setReminders] = useState(true);
@@ -55,6 +58,7 @@ export default function AuthForm({ children }) {
   const error = phoneError || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
 
   const content = authContent[language];
+  const providerClassnames = ["flex", "justify-center", "w-1/2", "m-0", "cursor-pointer", "p-4"]
 
   const verify = async (phone, code, reminders) => {
     setVerifying(true);
@@ -89,20 +93,10 @@ export default function AuthForm({ children }) {
     : process.env.NODE_ENV;
 
   // TODO: don't overwrite with true
-  const showTestButton = environment === 'development';
+  const showTestButton = environment === 'production';
 
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:border sm:border-gray-200 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
-      <div className="flex">
-        <label className="w-1/2 m-0 cursor-pointer provider">
-          {content.phone.types.whatsApp}
-          <input name="provider" type="radio" value="0" className="hidden" />
-        </label>
-        <label className="w-1/2 m-0 cursor-pointer provider">
-          {content.phone.types.telephone}
-          <input name="provider" type="radio" value="1" className="hidden" />
-        </label>
-      </div>
       {showTestButton && (
         <button
           onClick={async e => {
@@ -117,6 +111,16 @@ export default function AuthForm({ children }) {
       )}
       <div className={'bg-white z-50' + (showTestButton ? ' opacity-25' : '')}>
         <div className="w-full">
+          <div className="flex mb-6">
+            <label className={cn(providerClassnames, { "active-provider": !whatsAppProviderSelected })}>
+              {content.phone.types.teleProvider}
+              <input name="provider" type="radio" value="0" className="hidden" onClick={() => setWhatsAppProviderSelected(false)} />
+            </label>
+            <label className={cn(providerClassnames, { "active-provider": whatsAppProviderSelected })}>
+              {content.phone.types.whatsApp}
+              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsAppProviderSelected(true) } />
+            </label>
+          </div>
           <label className="block text-sm font-medium leading-5 text-gray-700">
             {content.phone.label}
             <span className="block text-gray-500 font-normal text-xs">{content.phone.description}</span>
