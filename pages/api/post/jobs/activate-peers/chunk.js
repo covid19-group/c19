@@ -1,41 +1,23 @@
-import db from '../../../db';
-import rollbar from '../../../rollbar';
-import { sendSMS } from '../../../twilio';
-import smsContent from '../../../content/sms';
+import db from '../../../../../db';
+import rollbar from '../../../../../rollbar';
+import { sendSMS } from '../../../../../twilio';
+import smsContent from '../../../../../content/sms';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
 
 export default async (req, res) => {
   try {
-    const { password, limit } = req.body;
+    const { password, chunk } = req.body;
 
     if (password === adminPassword) {
       // TODO: have a password check or some security so only we can run the job
       await db.task(async t => {
-        const results = (
-          await t.any(
-            `SELECT
-  p.id,
-  p.last_reminded::date,
-  PGP_SYM_DECRYPT((p.phone)::bytea, $/secret/) AS phone
-FROM person p
-WHERE
-  reminders
-  and verified
-  and NOT EXISTS (
-    select l.id from "message_log" l
-      where l.person = p.id
-      and l.type = 'activate_peers'
-  )`,
-            { secret }
-          )
-        ).slice(0, limit || 100);
-
         await Promise.all(
-          results.map(async person => {
+          chunk.map(async person => {
             sendSMS({
               body: smsContent['en-UK'].activatePeers,
               to: person.phone,
+              id: person.id,
             });
 
             const messageLog = await t.one(
