@@ -19,7 +19,7 @@ export default async (req, res) => {
               PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone,
               PGP_SYM_DECRYPT(code::bytea, $/secret/) as code
             FROM person
-            WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/`,
+            WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')`,
             { phone, secret }
           );
           if (!person) {
@@ -27,10 +27,12 @@ export default async (req, res) => {
             person = await db.one(
               `INSERT INTO person (
                 phone,
-                code
+                code,
+                phoneHash
               ) values (
                 PGP_SYM_ENCRYPT($/phone/, $/secret/),
-                PGP_SYM_ENCRYPT($/code/, $/secret/)
+                PGP_SYM_ENCRYPT($/code/, $/secret/),
+                ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
               )
               RETURNING *`,
               { phone, secret, code: generatedCode }

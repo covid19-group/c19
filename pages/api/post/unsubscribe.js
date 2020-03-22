@@ -10,7 +10,7 @@ export default async (req, res) => {
       await db.none(
         `UPDATE person
             SET reminders = false
-          WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/`,
+          WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')`,
         { phone, secret }
       );
       res.status(200).end();
