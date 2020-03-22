@@ -17,7 +17,7 @@ export default async (req, res) => {
             PGP_SYM_DECRYPT(phone::bytea, $/secret/) AS phone
         FROM person
         WHERE
-            last_reminded::date < now()::date and reminders`,
+            last_reminded::date < now()::date and reminders and verified`,
           { secret }
         );
 
