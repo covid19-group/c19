@@ -248,7 +248,11 @@ export default function AuthForm({ children }) {
                         .join('')
                     );
                     const nextField = codeInputRef.current[idx + 1];
-                    idx !== 5 && nextField ? nextField.focus() : setTimeout(() => submitBtnRef.current.focus(), 100);
+                    idx !== 5 && nextField
+                      ? nextField.focus()
+                      : setTimeout(() => {
+                          submitBtnRef.current && submitBtnRef.current.focus();
+                        }, 100);
                   }}
                   value={[...code][idx] || ''}
                   ref={input => (codeInputRef.current[idx] = input)}
