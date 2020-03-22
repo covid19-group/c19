@@ -7,6 +7,7 @@
     "DATABASE": "@db",
     "SECRET": "@secret",
     "ROLLBAR_ACCESS_TOKEN": "@rollbar",
-    "ADMIN_PASSWORD": "@admin_password"
+    "ADMIN_PASSWORD": "@admin_password",
+    "DATA_WAREHOUSE": "@data_warehouse"
   }
 }

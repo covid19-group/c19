@@ -10,7 +10,7 @@ const R = require('ramda');
 export default async (req, res) => {
   try {
     const { password, chunkSize } = req.body;
-    const chunkEndpoint = 'http://' + req.headers.host + '/api/post/jobs/activate-peers/chunk';
+    const chunkEndpoint = 'https://' + req.headers.host + '/api/post/jobs/activate-peers/chunk';
 
     // TODO: remove this "false" and implement twilio/sinch batch sending, otherwise we'll get "Too Many Requests" from twilio.
     if (password === adminPassword && false) {
