@@ -7,13 +7,14 @@ const adminPassword = process.env.ADMIN_PASSWORD;
 
 export default async (req, res) => {
   try {
-    const { password } = req.body;
+    const { password, limit } = req.body;
 
     if (password === adminPassword) {
       // TODO: have a password check or some security so only we can run the job
       await db.task(async t => {
-        const results = await t.any(
-          `SELECT
+        const results = (
+          await t.any(
+            `SELECT
   p.id,
   p.last_reminded::date,
   PGP_SYM_DECRYPT((p.phone)::bytea, $/secret/) AS phone
@@ -26,12 +27,13 @@ WHERE
       where l.person = p.id
       and l.type = 'activate_peers'
   )`,
-          { secret }
-        );
+            { secret }
+          )
+        ).slice(0, limit || 100);
 
         await Promise.all(
           results.map(async person => {
-            await sendSMS({
+            sendSMS({
               body: smsContent['en-UK'].activatePeers,
               to: person.phone,
             });
