@@ -5,13 +5,17 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const phoneNo = process.env.TWILIO_PHONE_NO;
 const client = require('twilio')(accountSid, authToken);
 
-export async function sendSMS({ body, to, id }) {
+export async function sendSMS({ body, to, id, whatsApp }) {
   try {
     if (process.env.NODE_ENV === 'development') {
       console.log({ body, to, id });
       return {};
     }
     if (to === '+4599999999') return {};
+
+    // Set whatsApp prefix in case of whatsApp message
+    to = (whatsApp) ? "whatsapp:" += to : to
+
     const result = await client.messages.create({
       body,
       from: phoneNo,

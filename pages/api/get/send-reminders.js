@@ -14,7 +14,8 @@ export default async (req, res) => {
           `SELECT
             id,
             last_reminded::date,
-            PGP_SYM_DECRYPT(phone::bytea, $/secret/) AS phone
+            PGP_SYM_DECRYPT(phone::bytea, $/secret/) AS phone,
+            whatsapp
         FROM person
         WHERE
             last_reminded::date < now()::date and reminders`,
@@ -40,6 +41,8 @@ export default async (req, res) => {
               await sendSMS({
                 body: smsContent['en-UK'].followUpSurvey + survey.id + '. ' + smsContent['en-UK'].unsubscribe,
                 to: person.phone,
+                id: null,
+                whatsApp: person.whatsapp
               });
             }
           })

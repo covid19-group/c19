@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { LanguageContext } from './LanguageSelector';
 import LoadingSpinner from './LoadingSpinner';
 import authContent from '../content/authForm';
-import cn from "classnames";
 
 export default function AuthForm({ children }) {
   const router = useRouter();
@@ -43,7 +42,7 @@ export default function AuthForm({ children }) {
     }
   }, [renewing]);
 
-  const [whatsAppProviderSelected, setWhatsAppProviderSelected] = useState(false)
+  const [whatsApp, setWhatsApp] = useState(false)
 
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
@@ -58,7 +57,7 @@ export default function AuthForm({ children }) {
   const error = phoneError || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
 
   const content = authContent[language];
-  const providerClassnames = ["flex", "justify-center", "w-1/2", "m-0", "cursor-pointer", "p-4"]
+  const providerClassnames = ["flex justify-center w-1/2 m-0 cursor-pointer pb-2"]
 
   const verify = async (phone, code, reminders) => {
     setVerifying(true);
@@ -112,13 +111,13 @@ export default function AuthForm({ children }) {
       <div className={'bg-white z-50' + (showTestButton ? ' opacity-25' : '')}>
         <div className="w-full">
           <div className="flex mb-6">
-            <label className={cn(providerClassnames, { "active-provider": !whatsAppProviderSelected })}>
+            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (!whatsApp && "active-provider")}>
               {content.phone.types.teleProvider}
-              <input name="provider" type="radio" value="0" className="hidden" onClick={() => setWhatsAppProviderSelected(false)} />
+              <input name="provider" type="radio" value="0" className="hidden" onClick={() => setWhatsApp(false)} />
             </label>
-            <label className={cn(providerClassnames, { "active-provider": whatsAppProviderSelected })}>
+            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (whatsApp && "active-provider")}>
               {content.phone.types.whatsApp}
-              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsAppProviderSelected(true) } />
+              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsApp(true) } />
             </label>
           </div>
           <label className="block text-sm font-medium leading-5 text-gray-700">
@@ -171,6 +170,7 @@ export default function AuthForm({ children }) {
                         },
                         body: JSON.stringify({
                           phone: parsePhoneNumberFromString(phone).number,
+                          whatsApp: whatsApp,
                           language,
                         }),
                       });

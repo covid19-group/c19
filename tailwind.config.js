@@ -36,7 +36,11 @@ module.exports = {
     plugin(function({ addUtilities }) {
       const newUtilities = {
         '.active-provider': {
-          'border-bottom': '3px solid #38b2ac'
+          '-webkit-user-select': 'none',
+          '-moz-user-select': 'none',
+          '-ms-user-select': 'none',
+          'user-select': 'none',
+          'border-bottom': '3px solid #0694A2'
           
         }
       }

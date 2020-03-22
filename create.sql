@@ -26,6 +26,7 @@ create table person
 	phone text not null,
 	created_on timestamp with time zone default now() not null,
 	code text not null,
+	whatsapp boolean default false not null,
 	verified boolean default false not null,
 	reminders boolean default false not null,
 	last_reminded timestamp with time zone
