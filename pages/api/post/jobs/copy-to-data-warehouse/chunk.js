@@ -5,14 +5,14 @@ import smsContent from '../../../../../content/sms';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
 const pgp = require('pg-promise')();
-const dataWarehouse = pgp(process.env.DATA_WAREHOUSE);
+const dwh = pgp(process.env.DWH);
 
 export default async (req, res) => {
   try {
     const { password, chunk } = req.body;
 
     if (password === adminPassword) {
-      dataWarehouse.task(async t => {
+      dwh.task(async t => {
         await t.batch(
           chunk.map(person => {
             return t.one(
