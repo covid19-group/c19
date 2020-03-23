@@ -22,7 +22,7 @@ export default async (req, res) => {
         await t.none('truncate signups');
         await t.batch(
           data.map(row => {
-            return t.one(
+            return t.none(
               `insert into signups
               (
                 date,
