@@ -3,7 +3,7 @@ import rollbar from '../../../../../rollbar';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
 const pgp = require('pg-promise')();
-const dataWarehouse = pgp(process.env.DATA_WAREHOUSE);
+const dwh = pgp(process.env.DWH);
 
 export default async (req, res) => {
   try {
@@ -19,8 +19,8 @@ export default async (req, res) => {
                created_on::date,
                extract(hour from created_on)
         order by date desc, "time" desc;`);
-      dataWarehouse.task(async t => {
-        await t.none('truncate table signups');
+      dwh.task(async t => {
+        await t.none('truncate signups');
         await t.batch(
           data.map(row => {
             return t.one(
