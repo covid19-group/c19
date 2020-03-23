@@ -20,8 +20,6 @@ export default async (req, res) => {
               (
                 id,
                 value,
-                created_on,
-                modified_on,
                 date,
                 person
               )
@@ -29,8 +27,6 @@ export default async (req, res) => {
               (
                 $/id/,
                 $/value/,
-                $/created_on/,
-                $/modified_on/,
                 $/date/,
                 $/person/
               )
@@ -38,8 +34,6 @@ export default async (req, res) => {
                 do update
                 set
                   value = $/value/,
-                  created_on = $/created_on/,
-                  modified_on = $/modified_on/,
                   date = $/date/,
                   person = $/person/
                 where "survey".id = $/id/
@@ -47,8 +41,6 @@ export default async (req, res) => {
               {
                 id: person.id,
                 value: person.value,
-                created_on: person.created_on,
-                modified_on: person.modified_on,
                 date: person.date,
                 person: person.person,
               }
