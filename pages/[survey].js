@@ -338,7 +338,7 @@ function Registration({ phone, survey, initial, reminders, consented }) {
             description={
               <p>
                 {auth.consent.description}
-                <a href="/privacy" target="_privacy" className="font-medium ml-1 text-gray-900 underline">
+                <a href="/privacy" target="_privacy" className="font-medium text-gray-900 underline">
                   {auth.consent.privacy}
                 </a>
               </p>
