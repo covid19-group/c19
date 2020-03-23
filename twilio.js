@@ -24,3 +24,20 @@ export async function sendSMS({ body, to, id }) {
     return false;
   }
 }
+
+export async function sendBulk({ body, numbers }) {
+  try {
+    console.log({ body, numbers }, process.env.TWILIO_NOTIFY_SERVICE_SID);
+    const service = client.notify.services(process.env.TWILIO_NOTIFY_SERVICE_SID);
+    const bindings = numbers.map(number => {
+      return JSON.stringify({ binding_type: 'sms', address: number });
+    });
+    await service.notifications.create({
+      toBinding: bindings,
+      body: body,
+    });
+  } catch (error) {
+    rollbar.error('Send Bulk: ', error, { body, numbers });
+    return false;
+  }
+}

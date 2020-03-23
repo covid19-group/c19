@@ -47,7 +47,6 @@ export default function LanguageSelector() {
                       onClick={() => {
                         setLanguage(i18n);
                         setShow(false);
-                        window.localStorage.setItem('i18n', i18n);
                       }}
                       className="text-left w-full block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                       {content[i18n].name}

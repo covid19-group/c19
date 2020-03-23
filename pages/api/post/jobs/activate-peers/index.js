@@ -12,22 +12,21 @@ export default async (req, res) => {
     const { password, chunkSize } = req.body;
     const chunkEndpoint = 'https://' + req.headers.host + '/api/post/jobs/activate-peers/chunk';
 
-    // TODO: remove this "false" and implement twilio/sinch batch sending, otherwise we'll get "Too Many Requests" from twilio.
-    if (password === adminPassword && false) {
+    if (password === adminPassword) {
       await db.task(async t => {
         const results = await t.any(
           `SELECT
-      p.id,
-      p.last_reminded::date,
-      PGP_SYM_DECRYPT((p.phone)::bytea, $/secret/) AS phone
-    FROM person p
-    WHERE
-      reminders
-      and verified
-      and NOT EXISTS (
-        select l.id from "message_log" l
-          where l.person = p.id
-          and l.type = 'activate_peers'
+              p.id,
+              p.last_reminded::date,
+              PGP_SYM_DECRYPT((p.phone)::bytea, $/secret/) AS phone
+          FROM person p
+          WHERE
+            reminders
+            and verified
+            and NOT EXISTS (
+              select l.id from "message_log" l
+                where l.person = p.id
+                and l.type = 'activate_peers'
       )`,
           { secret }
         );
@@ -44,8 +43,10 @@ export default async (req, res) => {
           })
         );
       });
+      res.status(200).end();
+    } else {
+      res.status(401).end();
     }
-    res.status(200).end();
   } catch (error) {
     console.error(error);
     rollbar.error(error);
