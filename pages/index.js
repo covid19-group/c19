@@ -17,13 +17,9 @@ function Landing({ count }) {
       : 'development'
     : process.env.NODE_ENV;
 
-  // TODO: don't overwrite with true
-  const showTestButton = environment === 'development';
-
   return (
     <PageLayout>
       <Hero count={count} />
-      {showTestButton && <Banner />}
     </PageLayout>
   );
 }
@@ -31,9 +27,7 @@ function Landing({ count }) {
 export async function getServerSideProps() {
   const db = require('../db');
   const data = await db.one(`select count(*) as count from person`);
-  console.log({ data });
   const { count } = data || {};
-
   return { props: { count } };
 }
 
@@ -63,7 +57,7 @@ const Hero = ({ count }) => {
                 className="react-markdown"
                 source={content.subtitle.replace(
                   '{count}',
-                  count ? count.toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
+                  count ? Number(count).toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
                 )}
               />
             </p>

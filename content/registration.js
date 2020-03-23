@@ -8,7 +8,6 @@ export default {
     by: 'Registrering for tlf.',
     title: 'Registration',
     incomplete: 'Svar venligst på alle spørgsmålene før du fortsætter',
-    reminders: 'Modtag link til din daglige registreting via SMS',
     submit: 'Send registrering',
     expired: {
       label: 'Linket er udløbet,',
@@ -184,7 +183,6 @@ export default {
     by: 'Registration by No.',
     title: 'Registration',
     incomplete: 'Please answer all the questions before submitting',
-    reminders: 'Receive a link to your daily registration by SMS',
     submit: 'Submit Registration',
     expired: {
       label: 'This link has expired,',

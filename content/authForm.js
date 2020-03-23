@@ -27,15 +27,17 @@ export default {
     },
     reminders: {
       label: 'Modtag påmindelser på SMS',
-      description: 'Vi sender dig dagligt et link med spørgsmål',
+      description: 'Send mig dagligt et link til registrering',
     },
     btn: {
       label: 'Gå til tilmelding',
       error: 'Koden er ugyldig.',
     },
-    privacy: {
-      prefix: 'Vi går op i datasikkerhed. Ved at fortsætte accepterer du samtidig denne',
-      label: 'Samtykkeerklæring',
+    consent: {
+      label: 'Behandling af persondata',
+      description:
+        'Vi må behandle dine persondata for at skabe et overblik over befolkningens symptomer ifm. med epidemier, fx COVID-19. Læs vores ',
+      privacy: 'Privatlivspolitik',
     },
   },
   'en-UK': {
@@ -66,15 +68,17 @@ export default {
     },
     reminders: {
       label: 'Receive SMS notifications',
-      description: "You'll get a link to your daily register",
+      description: 'Send me a link to the daily registration',
     },
     btn: {
       label: 'Continue to Registration',
       error: 'The code is invalid.',
     },
-    privacy: {
-      prefix: 'We care about protecting your data. By continuing you acknowledge to have read and accept this',
-      label: 'Decleration of Consent',
+    consent: {
+      label: 'Use of personal data',
+      description:
+        'We may use your personal data to create an overview of symptoms in the public from epidemic outbreaks, e.g. COVID-19. Read our',
+      privacy: 'Privacy Policy',
     },
   },
 };
