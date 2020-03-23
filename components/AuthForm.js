@@ -92,7 +92,7 @@ export default function AuthForm({ children }) {
     : process.env.NODE_ENV;
 
   // TODO: don't overwrite with true
-  const showTestButton = environment === 'production';
+  const showTestButton = environment === 'development';
 
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:border sm:border-gray-200 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
