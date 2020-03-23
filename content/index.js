@@ -41,7 +41,7 @@ export default {
       titleBlue: 'Self Reporting',
       subtitle:
         'Sign up and help shed light on the actual number of Danes infected with coronavirus. You’ll receive a daily text message including a simple health status survey. Together, we can help the health care system by providing more representative data.',
-      action: "Sign up, even if you don't have symyoms.",
+      action: "Sign up, even if you don't have symptoms.",
       share: 'Share via: ',
       placeholder: 'Enter phone number',
       privacy: {
