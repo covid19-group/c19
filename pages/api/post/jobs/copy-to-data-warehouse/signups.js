@@ -1,15 +1,14 @@
 import db from '../../../../../db';
+import dwh from '../../../../../dwh';
 import rollbar from '../../../../../rollbar';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
-const pgp = require('pg-promise')();
-const dataWarehouse = pgp(process.env.DATA_WAREHOUSE);
 
 export default async (req, res) => {
   try {
     const { password } = req.body;
     if (password === adminPassword) {
-      const data = db.any(`
+      const data = await db.any(`
         select
                created_on::date as date,
                extract(hour from created_on) as time,
@@ -19,11 +18,11 @@ export default async (req, res) => {
                created_on::date,
                extract(hour from created_on)
         order by date desc, "time" desc;`);
-      dataWarehouse.task(async t => {
-        await t.none('truncate table signups');
+      await dwh.task(async t => {
+        await t.none('truncate signups');
         await t.batch(
           data.map(row => {
-            return t.one(
+            return t.none(
               `insert into signups
               (
                 date,
