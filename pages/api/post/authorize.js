@@ -27,14 +27,14 @@ export default async (req, res) => {
             const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             person = await db.one(
               `INSERT INTO person (
+                whatsapp,
                 phone,
                 code,
-                whatsapp,
                 phoneHash
               ) values (
+                $/whatsApp/,
                 PGP_SYM_ENCRYPT($/phone/, $/secret/),
                 PGP_SYM_ENCRYPT($/code/, $/secret/),
-                $/whatsApp/,
                 ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
               )
               RETURNING *`,
