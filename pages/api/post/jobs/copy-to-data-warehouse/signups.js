@@ -8,7 +8,7 @@ export default async (req, res) => {
   try {
     const { password } = req.body;
     if (password === adminPassword) {
-      const data = db.any(`
+      const data = await db.any(`
         select
                created_on::date as date,
                extract(hour from created_on) as time,
@@ -18,7 +18,7 @@ export default async (req, res) => {
                created_on::date,
                extract(hour from created_on)
         order by date desc, "time" desc;`);
-      dwh.task(async t => {
+      await dwh.task(async t => {
         await t.none('truncate signups');
         await t.batch(
           data.map(row => {
