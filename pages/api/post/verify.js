@@ -25,6 +25,7 @@ export default async (req, res) => {
         if (!person.reminders && reminders) {
           await t.none(`UPDATE person SET reminders = true where id = $/id/`, { id: person.id });
         }
+        return person;
         // let survey = await t.oneOrNone(
         //   `SELECT *
         //   FROM survey
@@ -44,12 +45,9 @@ export default async (req, res) => {
         //   );
         // }
         // return { id: survey.id };
-        return {};
       });
-      // if (id) {
-      //   res.json({ id });
-      // } else res.status(401).end();
-      res.status(200).json({});
+      if (id) res.status(200).json({});
+      else res.status(401).end();
     } else res.status(502).end();
   } catch (error) {
     console.error(error);
