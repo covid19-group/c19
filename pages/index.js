@@ -84,7 +84,7 @@ const Hero = ({ count }) => {
               <button
                 onClick={() =>
                   window.open(
-                    `http://www.twitter.com/share?text=${content.subtitle}&url=${window.location}`,
+                    `http://www.twitter.com/share?text=${content.subtitle.split('.')[0]}&url=${window.location}`,
                     'sharer',
                     'toolbar=0,status=0,width=640,height=400'
                   )
@@ -97,7 +97,7 @@ const Hero = ({ count }) => {
                 onClick={() =>
                   window.open(
                     `https://www.linkedin.com/shareArticle?url=${window.location}&title=${
-                      content.subtitle
+                      content.subtitle.split('.')[0]
                     }&summary=${content.titleBlack + ' ' + content.titleBlue}`,
                     'sharer',
                     'toolbar=0,status=0,width=480,height=560'

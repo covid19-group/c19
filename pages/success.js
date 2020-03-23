@@ -48,7 +48,9 @@ function Success() {
             <button
               onClick={() =>
                 window.open(
-                  `http://www.twitter.com/share?text=${indexContentLanguage.subtitle}&url=${window.origin}`,
+                  `http://www.twitter.com/share?text=${indexContentLanguage.subtitle.split('.')[0]}&url=${
+                    window.origin
+                  }`,
                   'sharer',
                   'toolbar=0,status=0,width=640,height=400'
                 )
@@ -61,7 +63,7 @@ function Success() {
               onClick={() =>
                 window.open(
                   `https://www.linkedin.com/shareArticle?url=${window.origin}&title=${
-                    indexContentLanguage.subtitle
+                    indexContentLanguage.subtitle.split('.')[0]
                   }&summary=${indexContentLanguage.titleBlack + ' ' + indexContentLanguage.titleBlue}`,
                   'sharer',
                   'toolbar=0,status=0,width=480,height=560'
