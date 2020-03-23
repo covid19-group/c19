@@ -6,7 +6,7 @@ const secret = process.env.SECRET;
 export default async (req, res) => {
   try {
     if (req.method === 'POST') {
-      const { phone, code, reminders } = req.body;
+      const { phone, code, reminders, consent } = req.body;
       const { id } = await db.task(async t => {
         const person = await t.oneOrNone(
           `SELECT
@@ -24,6 +24,9 @@ export default async (req, res) => {
         }
         if (!person.reminders && reminders) {
           await t.none(`UPDATE person SET reminders = true where id = $/id/`, { id: person.id });
+        }
+        if (!person.consent) {
+          await t.none(`UPDATE person SET consent = true where id = $/id/`, { id: person.id });
         }
         return person;
         // let survey = await t.oneOrNone(

@@ -45,6 +45,7 @@ export default function AuthForm({ children }) {
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
   const [reminders, setReminders] = useState(true);
+  const [consent, setConsent] = useState(false);
 
   const [focused, setFocused] = useState(false);
 
@@ -56,7 +57,7 @@ export default function AuthForm({ children }) {
 
   const content = authContent[language];
 
-  const verify = async (phone, code, reminders) => {
+  const verify = async (phone, code, consent) => {
     setVerifying(true);
     setAuthError(false);
     const response = await fetch('/api/post/verify', {
@@ -68,6 +69,7 @@ export default function AuthForm({ children }) {
         phone,
         code,
         reminders,
+        consent,
       }),
     });
     if (response.ok) {
@@ -100,7 +102,9 @@ export default function AuthForm({ children }) {
             e.preventDefault();
             setPhone('+4599999999');
             setCode('000000');
-            verify('+4599999999', '000000', true);
+            setConsent(true);
+            setReminders(true);
+            verify('+4599999999', '000000', true, true);
           }}
           className="mb-6 bg-teal-500 text-white text-sm font-medium hover:bg-teal-600 p-3 rounded-md w-full">
           {content.testBtn}
@@ -284,22 +288,37 @@ export default function AuthForm({ children }) {
             label={content.reminders.label}
             checked={reminders}
             onChange={() => setReminders(!reminders)}
-            description={content.reminders.description}
+            description={<p className="text-xs leading-5 text-gray-500">{content.reminders.description}</p>}
+          />
+          <Checkbox
+            label={content.consent.label}
+            checked={consent}
+            onChange={() => setConsent(!consent)}
+            description={
+              <p className="text-xs leading-5 text-gray-500">
+                {content.consent.description}
+                <Link href="/privacy">
+                  <a className="font-medium ml-1 text-gray-900 underline">{content.consent.privacy}</a>
+                </Link>
+              </p>
+            }
           />
         </div>
 
         <div className="mt-6">
           <span className="block w-full rounded-md shadow-sm">
             <button
-              disabled={!(codeIsComplete && phoneIsValid)}
+              disabled={!(codeIsComplete && phoneIsValid && consent)}
               ref={btn => (submitBtnRef.current = btn)}
               onClick={e => {
                 e.preventDefault();
-                verify(parsePhoneNumberFromString(phone).number, code, reminders);
+                verify(parsePhoneNumberFromString(phone).number, code, reminders, consent);
               }}
               className={
                 'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid && codeIsComplete ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
+                (phoneIsValid && codeIsComplete && consent
+                  ? 'hover:bg-teal-600'
+                  : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {verifying ? (
                 <span className="absolute inset-0 h-full flex items-center justify-center text-lg">
@@ -312,12 +331,6 @@ export default function AuthForm({ children }) {
           </span>
           {authError && <p className="mt-2 text-xs font-normal text-red-600">{authError}</p>}
         </div>
-        <p className="mt-3 text-xs leading-5 text-gray-500">
-          {content.privacy.prefix}
-          <Link href="/consent">
-            <a className="font-medium text-gray-900 underline ml-1">{content.privacy.label}</a>
-          </Link>
-        </p>
       </div>
     </form>
   );

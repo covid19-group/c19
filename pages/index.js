@@ -58,7 +58,7 @@ const Hero = ({ count }) => {
                 className="react-markdown"
                 source={content.subtitle.replace(
                   '{count}',
-                  count ? count.toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
+                  count ? Number(count).toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
                 )}
               />
             </p>
