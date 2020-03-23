@@ -20,7 +20,7 @@ export default async (req, res) => {
               PGP_SYM_DECRYPT(code::bytea, $/secret/) as code,
               whatsapp
             FROM person
-            WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/`,
+            WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')`,
             { phone, secret }
           );
           if (!person) {
@@ -29,11 +29,13 @@ export default async (req, res) => {
               `INSERT INTO person (
                 phone,
                 code,
-                whatsapp
+                whatsapp,
+                phoneHash
               ) values (
                 PGP_SYM_ENCRYPT($/phone/, $/secret/),
                 PGP_SYM_ENCRYPT($/code/, $/secret/),
-                $/whatsApp/
+                $/whatsApp/,
+                ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
               )
               RETURNING *`,
               { phone, secret, whatsApp: whatsApp, code: generatedCode }

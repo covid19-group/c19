@@ -18,7 +18,7 @@ export default async (req, res) => {
             whatsapp
         FROM person
         WHERE
-            last_reminded::date < now()::date and reminders`,
+            last_reminded::date < now()::date and reminders and verified`,
           { secret }
         );
 

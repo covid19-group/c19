@@ -6,6 +6,9 @@
     "TWILIO_PHONE_NO": "@twilio_phone_no",
     "DATABASE": "@db",
     "SECRET": "@secret",
-    "ROLLBAR_ACCESS_TOKEN": "@rollbar"
+    "SURVEY_SECRET": "@survey_secret",
+    "ROLLBAR_ACCESS_TOKEN": "@rollbar",
+    "ADMIN_PASSWORD": "@admin_password",
+    "DATA_WAREHOUSE": "@data_warehouse"
   }
 }

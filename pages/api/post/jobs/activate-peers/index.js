@@ -1,0 +1,63 @@
+import db from '../../../../../db';
+import rollbar from '../../../../../rollbar';
+import { sendSMS } from '../../../../../twilio';
+import smsContent from '../../../../../content/sms';
+import fetch from 'node-fetch';
+const secret = process.env.SECRET;
+const adminPassword = process.env.ADMIN_PASSWORD;
+const R = require('ramda');
+
+export default async (req, res) => {
+  try {
+    const { password, chunkSize } = req.body;
+    const chunkEndpoint = 'https://' + req.headers.host + '/api/post/jobs/activate-peers/chunk';
+
+    // TODO: remove this "false" and implement twilio/sinch batch sending, otherwise we'll get "Too Many Requests" from twilio.
+    if (password === adminPassword && false) {
+      await db.task(async t => {
+        const results = await t.any(
+          `SELECT
+      p.id,
+      p.last_reminded::date,
+      PGP_SYM_DECRYPT((p.phone)::bytea, $/secret/) AS phone
+    FROM person p
+    WHERE
+      reminders
+      and verified
+      and NOT EXISTS (
+        select l.id from "message_log" l
+          where l.person = p.id
+          and l.type = 'activate_peers'
+      )`,
+          { secret }
+        );
+
+        const chunkResults = await Promise.all(
+          R.splitEvery(chunkSize || 100, results).map(chunk => {
+            return fetch(chunkEndpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ password, chunk }),
+            });
+          })
+        );
+      });
+    }
+    res.status(200).end();
+  } catch (error) {
+    console.error(error);
+    rollbar.error(error);
+    res.status(500).end();
+  }
+};
+
+//function to split into chunks; used a for loop to do this, so put it in seperate function, to keep functional paradigm
+function splitIntoChunks(persons, chunkSize) {
+  let chunks = [];
+
+  for (let i = 0; i < array.length / chunkSize; i++) {
+    chunks.push(persons.slice(i * chunkSize, i * chunkSize + chunkSize));
+  }
+}
