@@ -1,7 +1,7 @@
 require('dotenv').config();
 const pgp = require('pg-promise')();
 
-const DB_KEY = Symbol.for('corona.db');
+const DB_KEY = Symbol.for('corona.dwh');
 const globalSymbols = Object.getOwnPropertySymbols(global);
 const hasDb = globalSymbols.indexOf(DB_KEY) > -1;
 if (!hasDb) {
