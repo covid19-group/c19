@@ -1,9 +1,8 @@
 import db from '../../../../../db';
+import dwh from '../../../../../dwh';
 import rollbar from '../../../../../rollbar';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
-const pgp = require('pg-promise')();
-const dwh = pgp(process.env.DWH);
 
 export default async (req, res) => {
   try {
