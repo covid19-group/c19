@@ -1,5 +1,6 @@
 // tailwind.config.js
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require("tailwindcss/plugin")
 
 module.exports = {
   theme: {
@@ -30,5 +31,21 @@ module.exports = {
       },
     }),
   },
-  plugins: [require('@tailwindcss/ui')],
+  plugins: [
+    require('@tailwindcss/ui'),
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.active-provider': {
+          '-webkit-user-select': 'none',
+          '-moz-user-select': 'none',
+          '-ms-user-select': 'none',
+          'user-select': 'none',
+          'border-bottom': '3px solid #0694A2'
+          
+        }
+      }
+
+      addUtilities(newUtilities)
+    })
+  ],
 };

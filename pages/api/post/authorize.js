@@ -9,7 +9,7 @@ const secret = process.env.SECRET;
 export default async (req, res) => {
   try {
     if (req.method === 'POST') {
-      const { phone, language } = req.body;
+      const { phone, whatsApp, language } = req.body;
       if (!(phone.slice(0, 3) === '+45')) {
         res.status(400).json({ error: 'wrong_country_code' });
       } else if (isValidNumber(phone)) {
@@ -17,30 +17,35 @@ export default async (req, res) => {
           let person = await db.oneOrNone(
             `SELECT *,
               PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone,
-              PGP_SYM_DECRYPT(code::bytea, $/secret/) as code
+              PGP_SYM_DECRYPT(code::bytea, $/secret/) as code,
+              whatsapp
             FROM person
-            WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/`,
+            WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')`,
             { phone, secret }
           );
           if (!person) {
             const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             person = await db.one(
               `INSERT INTO person (
+                whatsapp,
                 phone,
-                code
+                code,
+                phoneHash
               ) values (
+                $/whatsApp/,
                 PGP_SYM_ENCRYPT($/phone/, $/secret/),
-                PGP_SYM_ENCRYPT($/code/, $/secret/)
+                PGP_SYM_ENCRYPT($/code/, $/secret/),
+                ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
               )
               RETURNING *`,
-              { phone, secret, code: generatedCode }
+              { phone, secret, whatsApp: whatsApp, code: generatedCode }
             );
             return { ...person, code: generatedCode };
           } else {
             return person;
           }
         });
-        await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone, id });
+        await sendSMS({ body: smsContent[language || 'en-UK'].authCode + code, to: phone, id, whatsApp });
 
         res.status(200).end();
       } else {

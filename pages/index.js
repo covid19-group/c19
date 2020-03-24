@@ -6,8 +6,9 @@ import contentMain from '../content';
 import { useContext } from 'react';
 import { LanguageContext } from '../components/LanguageSelector';
 import Banner from '../components/Banner';
+import ReactMarkdown from 'react-markdown';
 
-export default function Landing() {
+function Landing({ count }) {
   const environment = process.browser
     ? origin.includes('c19.dk')
       ? 'production'
@@ -21,13 +22,24 @@ export default function Landing() {
 
   return (
     <PageLayout>
-      <Hero />
+      <Hero count={count} />
       {showTestButton && <Banner />}
     </PageLayout>
   );
 }
 
-const Hero = () => {
+export async function getServerSideProps() {
+  const db = require('../db');
+  const data = await db.one(`select count(*) as count from person`);
+  console.log({ data });
+  const { count } = data || {};
+
+  return { props: { count } };
+}
+
+export default Landing;
+
+const Hero = ({ count }) => {
   const { language } = useContext(LanguageContext);
   const content = contentMain[language].hero;
   return (
@@ -46,7 +58,15 @@ const Hero = () => {
               <br />
               <span className="text-teal-500">{content.titleBlue}</span>
             </h2>
-            <p className="mt-3 text-base text-gray-700 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{content.subtitle}</p>
+            <p className="mt-3 text-base text-gray-700 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+              <ReactMarkdown
+                className="react-markdown"
+                source={content.subtitle.replace(
+                  '{count}',
+                  count ? count.toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
+                )}
+              />
+            </p>
             <div className="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-gray-900">{content.action}</p>
             </div>
@@ -67,7 +87,7 @@ const Hero = () => {
               <button
                 onClick={() =>
                   window.open(
-                    `http://www.twitter.com/share?text=${content.subtitle}&url=${window.location}`,
+                    `http://www.twitter.com/share?text=${content.subtitle.split('.')[0]}&url=${window.location}`,
                     'sharer',
                     'toolbar=0,status=0,width=640,height=400'
                   )
@@ -80,7 +100,7 @@ const Hero = () => {
                 onClick={() =>
                   window.open(
                     `https://www.linkedin.com/shareArticle?url=${window.location}&title=${
-                      content.subtitle
+                      content.subtitle.split('.')[0]
                     }&summary=${content.titleBlack + ' ' + content.titleBlue}`,
                     'sharer',
                     'toolbar=0,status=0,width=480,height=560'

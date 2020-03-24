@@ -14,7 +14,7 @@ export default async (req, res) => {
             reminders,
             verified
           FROM person
-          WHERE PGP_SYM_DECRYPT(phone::bytea, $/secret/) = $/phone/
+          WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
             AND PGP_SYM_DECRYPT(code::bytea, $/secret/) = $/code/`,
           { phone, code, secret }
         );

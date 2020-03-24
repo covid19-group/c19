@@ -42,6 +42,8 @@ export default function AuthForm({ children }) {
     }
   }, [renewing]);
 
+  const [whatsApp, setWhatsApp] = useState(false)
+
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
   const [reminders, setReminders] = useState(true);
@@ -55,6 +57,7 @@ export default function AuthForm({ children }) {
   const error = phoneError || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
 
   const content = authContent[language];
+  const providerClassnames = ["flex justify-center w-1/2 m-0 cursor-pointer pb-2"]
 
   const verify = async (phone, code, reminders) => {
     setVerifying(true);
@@ -107,6 +110,16 @@ export default function AuthForm({ children }) {
       )}
       <div className={'bg-white z-50' + (showTestButton ? ' opacity-25' : '')}>
         <div className="w-full">
+          <div className="flex mb-6">
+            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (!whatsApp && "active-provider")}>
+              {content.phone.types.teleProvider}
+              <input name="provider" type="radio" value="0" className="hidden" onClick={() => setWhatsApp(false)} />
+            </label>
+            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (whatsApp && "active-provider")}>
+              {content.phone.types.whatsApp}
+              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsApp(true) } />
+            </label>
+          </div>
           <label className="block text-sm font-medium leading-5 text-gray-700">
             {content.phone.label}
             <span className="block text-gray-500 font-normal text-xs">{content.phone.description}</span>
@@ -157,6 +170,7 @@ export default function AuthForm({ children }) {
                         },
                         body: JSON.stringify({
                           phone: parsePhoneNumberFromString(phone).number,
+                          whatsApp: whatsApp,
                           language,
                         }),
                       });
@@ -248,7 +262,11 @@ export default function AuthForm({ children }) {
                         .join('')
                     );
                     const nextField = codeInputRef.current[idx + 1];
-                    idx !== 5 && nextField ? nextField.focus() : setTimeout(() => submitBtnRef.current.focus(), 100);
+                    idx !== 5 && nextField
+                      ? nextField.focus()
+                      : setTimeout(() => {
+                          submitBtnRef.current && submitBtnRef.current.focus();
+                        }, 100);
                   }}
                   value={[...code][idx] || ''}
                   ref={input => (codeInputRef.current[idx] = input)}

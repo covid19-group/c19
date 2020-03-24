@@ -63,6 +63,8 @@ at rette, begrænse eller bede os om at slette dine data ved at kontakte C19.DK 
 
 Du har også ret til at klage over vores behandling af persondata til Datatilsynet, Carl Jacobsens Vej 35, 2500 Valby,
 læse mere her: https://www.datatilsynet.dk/generelt-om-databeskyttelse/klage-til-datatilsynet/.
+
+Du kan læse mere om dine rettigheder og vores behandling af data i vores [privatlivspolitik](/privacy).
 `,
   'en-UK': `
 # C19.DK Decleration of Consent
@@ -129,5 +131,7 @@ correct, limit or ask us to delete your data by contacting C19.DK (Holger Thorup
 
 You also have the right to complain about our handling of personal information to Datatilsynet, Carl Jacobsens Vej 35,
 2500 Valby, read more here: https://www.datatilsynet.dk/generelt-om-databeskyttelse/klage-til-datatilsynet/.
+
+You can read more about your rights and our data processing in our [Privacy Policy](/privacy).
 `,
 };
