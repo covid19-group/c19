@@ -1,7 +1,5 @@
 import db from '../../../../../db';
 import rollbar from '../../../../../rollbar';
-import { sendSMS } from '../../../../../twilio';
-import smsContent from '../../../../../content/sms';
 import fetch from 'node-fetch';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
@@ -10,8 +8,10 @@ const R = require('ramda');
 export default async (req, res) => {
   try {
     const { password, chunkSize } = req.body;
-    const chunkEndpoint = 'https://' + req.headers.host + '/api/post/jobs/activate-peers/chunk';
-
+    const chunkEndpoint =
+      (process.env.NODE_ENV === 'production' ? 'https://' : 'http://') +
+      req.headers.host +
+      '/api/post/jobs/activate-peers/chunk';
     if (password === adminPassword) {
       await db.task(async t => {
         const results = await t.any(
