@@ -42,7 +42,7 @@ export default function AuthForm({ children }) {
     }
   }, [renewing]);
 
-  const [whatsApp, setWhatsApp] = useState(false)
+  const [whatsApp, setWhatsApp] = useState(false);
 
   const [code, setCode] = useState('');
   const [phone, setPhone] = useState('');
@@ -58,7 +58,7 @@ export default function AuthForm({ children }) {
   const error = phoneError || (phone.length && !focused && (!parsedPhone || !parsedPhone.country || !phoneIsValid));
 
   const content = authContent[language];
-  const providerClassnames = ["flex justify-center w-1/2 m-0 cursor-pointer pb-2"]
+  const providerClassnames = ['flex justify-center w-1/2 m-0 cursor-pointer pb-2'];
 
   const verify = async (phone, code, consent) => {
     setVerifying(true);
@@ -94,7 +94,7 @@ export default function AuthForm({ children }) {
     : process.env.NODE_ENV;
 
   // TODO: don't overwrite with true
-  const showTestButton = environment === 'development';
+  const showTestButton = false && environment === 'development';
 
   return (
     <form className="sm:mx-auto sm:w-full max-w-sm sm:px-8 sm:border sm:border-gray-200 sm:rounded-lg sm:py-8 sm:mb-4 mt-4 lg:-mt-12">
@@ -115,13 +115,13 @@ export default function AuthForm({ children }) {
       <div className={'bg-white z-50' + (showTestButton ? ' opacity-25' : '')}>
         <div className="w-full">
           <div className="flex mb-6">
-            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (!whatsApp && "active-provider")}>
+            <label className={'flex justify-center w-1/2 m-0 cursor-pointer pb-2 ' + (!whatsApp && 'active-provider')}>
               {content.phone.types.teleProvider}
               <input name="provider" type="radio" value="0" className="hidden" onClick={() => setWhatsApp(false)} />
             </label>
-            <label className={"flex justify-center w-1/2 m-0 cursor-pointer pb-2 " + (whatsApp && "active-provider")}>
+            <label className={'flex justify-center w-1/2 m-0 cursor-pointer pb-2 ' + (whatsApp && 'active-provider')}>
               {content.phone.types.whatsApp}
-              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsApp(true) } />
+              <input name="provider" type="radio" value="1" className="hidden" onClick={() => setWhatsApp(true)} />
             </label>
           </div>
           <label className="block text-sm font-medium leading-5 text-gray-700">
@@ -245,7 +245,9 @@ export default function AuthForm({ children }) {
         <div className="mt-6">
           <label className="block text-sm font-medium leading-5 text-gray-700 mb-1">
             {content.code.label}
-            <span className="block text-gray-500 font-normal text-xs">{content.code.description}</span>
+            <span className="block text-gray-500 font-normal text-xs">
+              {content.code.description.replace('SMS', whatsApp ? 'WhatsApp' : 'SMS')}
+            </span>
           </label>
           <div className="-mt-px flex">
             {[0, 1, 2, 3, 4, 5].map(idx => (
@@ -298,7 +300,7 @@ export default function AuthForm({ children }) {
 
         <div className="mt-6">
           <Checkbox
-            label={content.reminders.label}
+            label={content.reminders.label.replace('SMS', whatsApp ? 'WhatsApp' : 'SMS')}
             checked={reminders}
             onChange={() => setReminders(!reminders)}
             description={<p className="text-xs leading-5 text-gray-500">{content.reminders.description}</p>}
