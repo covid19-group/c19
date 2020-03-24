@@ -1,7 +1,5 @@
 import rollbar from '../../../rollbar';
 import db from '../../../db';
-
-const secret = process.env.SECRET;
 const survey_secret = process.env.SURVEY_SECRET;
 
 export default async (req, res) => {
@@ -17,21 +15,19 @@ export default async (req, res) => {
             WHERE id = $/survey/`,
             { survey }
           );
-          const lastSurvey = await t.one(
-            `SELECT "value"
-            FROM SURVEY
-            WHERE person = $/person/
-              AND id <> $/survey/
-            ORDER BY date desc
-            LIMIT 1`,
-            { person, survey }
-          );
           await t.none(
             `UPDATE survey
-                SET value = PGP_SYM_ENCRYPT($/value/, $/survey_secret/),
+                SET value = (
+                    SELECT "value"
+                    FROM SURVEY
+                    WHERE person = $/person/
+                      AND id <> $/survey/
+                    ORDER BY date desc
+                    LIMIT 1
+                  ),
                   modified_on = now()
                 WHERE id = $/survey/`,
-            { value: lastSurvey.value, survey, survey_secret }
+            { survey, person }
           );
         });
       } else {

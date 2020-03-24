@@ -5,8 +5,12 @@ import { LanguageContext } from '../components/LanguageSelector';
 
 export default function CustomHead() {
   const { language } = useContext(LanguageContext);
-  const { subtitle, titleBlue, titleBlack } = content[language].hero;
+  let { subtitle, titleBlue, titleBlack } = content[language].hero;
   const title = titleBlue + ' ' + titleBlack;
+  subtitle = subtitle
+    .replace('{count}', 'tusindvis')
+    .split('**')
+    .join('');
   return (
     <Head>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />

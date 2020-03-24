@@ -12,7 +12,8 @@ export default async (req, res) => {
           `SELECT
             id,
             reminders,
-            verified
+            verified,
+            consent
           FROM person
           WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
             AND PGP_SYM_DECRYPT(code::bytea, $/secret/) = $/code/`,
