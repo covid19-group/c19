@@ -239,6 +239,7 @@ export default function AuthForm({ children }) {
               <div key={idx} className="-ml-px flex-1 min-w-0 z-30">
                 <input
                   maxLength="1"
+                  type="number"
                   onPaste={e => {
                     e.preventDefault();
                     const paste = (e.clipboardData || window.clipboardData).getData('text');
@@ -252,12 +253,14 @@ export default function AuthForm({ children }) {
                         .concat(value)
                         .join('')
                     );
-                    const nextField = codeInputRef.current[idx + 1];
-                    idx !== 5 && nextField
-                      ? nextField.focus()
-                      : setTimeout(() => {
-                          submitBtnRef.current && submitBtnRef.current.focus();
-                        }, 100);
+                    if (value) {
+                      const nextField = codeInputRef.current[idx + 1];
+                      idx !== 5 && nextField
+                        ? nextField.focus()
+                        : setTimeout(() => {
+                            submitBtnRef.current && submitBtnRef.current.focus();
+                          }, 100);
+                    }
                   }}
                   value={[...code][idx] || ''}
                   ref={input => (codeInputRef.current[idx] = input)}
