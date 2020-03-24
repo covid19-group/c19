@@ -1,6 +1,6 @@
 import db from '../../../../../db';
 import rollbar from '../../../../../rollbar';
-import { sendSMS } from '../../../../../twilio';
+import { sendBulk } from '../../../../../twilio';
 import smsContent from '../../../../../content/sms';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
