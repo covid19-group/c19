@@ -4,7 +4,7 @@
     "TWILIO_ACCOUNT_SID": "@twilio_account_sid",
     "TWILIO_AUTH_TOKEN": "@twilio_auth_token",
     "TWILIO_PHONE_NO": "@twilio_phone_no",
-    "TWILIO_NOTIFY_SERVICE_SID": "twilio_notify_service_sid",
+    "TWILIO_NOTIFY_SERVICE_SID": "@twilio_notify_service_sid",
     "DATABASE": "@db",
     "SECRET": "@secret",
     "SURVEY_SECRET": "@survey_secret",
