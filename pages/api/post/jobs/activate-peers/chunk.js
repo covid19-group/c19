@@ -1,6 +1,6 @@
 import db from '../../../../../db';
 import rollbar from '../../../../../rollbar';
-import { sendSMS } from '../../../../../twilio';
+import { sendBulk } from '../../../../../twilio';
 import smsContent from '../../../../../content/sms';
 const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
@@ -8,19 +8,11 @@ const adminPassword = process.env.ADMIN_PASSWORD;
 export default async (req, res) => {
   try {
     const { password, chunk } = req.body;
-
     if (password === adminPassword) {
-      // TODO: have a password check or some security so only we can run the job
       await db.task(async t => {
         await Promise.all(
           chunk.map(async person => {
-            sendSMS({
-              body: smsContent['en-UK'].activatePeers,
-              to: person.phone,
-              id: person.id,
-            });
-
-            const messageLog = await t.one(
+            await t.one(
               `INSERT INTO "message_log"  (
                 person,
                 type
@@ -31,13 +23,17 @@ export default async (req, res) => {
               RETURNING *`,
               { person: person.id }
             );
-
-            return;
           })
         );
       });
+      await sendBulk({
+        body: smsContent['da-DK'].activatePeers,
+        numbers: chunk.map(person => person.phone),
+      });
+      res.status(200).end();
+    } else {
+      res.status(401).end();
     }
-    res.status(200).end();
   } catch (error) {
     console.error(error);
     rollbar.error(error);

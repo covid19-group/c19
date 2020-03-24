@@ -1,9 +1,6 @@
 import db from '../../../../../db';
 import dwh from '../../../../../dwh';
-import rollbar from '../../../../../rollbar';
-import { sendSMS } from '../../../../../twilio';
 import smsContent from '../../../../../content/sms';
-const secret = process.env.SECRET;
 const adminPassword = process.env.ADMIN_PASSWORD;
 
 export default async (req, res) => {
@@ -11,7 +8,7 @@ export default async (req, res) => {
     const { password, chunk } = req.body;
 
     if (password === adminPassword) {
-      dwh.task(async t => {
+      await dwh.task(async t => {
         await t.batch(
           chunk.map(person => {
             return t.one(
@@ -47,8 +44,11 @@ export default async (req, res) => {
           })
         );
       });
+      chunk;
+      res.status(200).end();
+    } else {
+      res.status(401).end();
     }
-    res.status(200).end();
   } catch (error) {
     console.error(error);
     rollbar.error(error);

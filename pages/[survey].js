@@ -8,11 +8,11 @@ import ConfirmationModal from '../components/ConfirmationModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { LanguageContext } from '../components/LanguageSelector';
 import registrationContent from '../content/registration';
+import authContent from '../content/authForm';
 const R = require('ramda');
 
-function Registration({ phone, survey, initial, reminders }) {
+function Registration({ phone, survey, initial, reminders, consented }) {
   /* one time questions */
-  /* TODO: Move so separate component */
   const [sex, setSex] = useState(null);
   const [zip, setZip] = useState('');
   const [born, setBorn] = useState('');
@@ -24,6 +24,7 @@ function Registration({ phone, survey, initial, reminders }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
 
+  const [consent, setConsent] = useState(false);
   const [wantReminders, setWantReminders] = useState(!reminders);
   const [hasChanged, setHasChanged] = useState(initial || false);
 
@@ -46,6 +47,7 @@ function Registration({ phone, survey, initial, reminders }) {
 
   const { language } = useContext(LanguageContext);
   const content = registrationContent[language];
+  const auth = authContent[language];
 
   if (!survey) {
     return (
@@ -78,17 +80,18 @@ function Registration({ phone, survey, initial, reminders }) {
   );
 
   const complete =
-    !hasChanged ||
-    (!!temperature &&
-      (temperature !== 'measured' || validTemperatureValue) &&
-      !!distancing &&
-      !!state &&
-      (state !== 'work' || !!critical) &&
-      !!symptomsAdditionalAnswered &&
-      !!community &&
-      !!neighbourhood &&
-      !!exposure &&
-      (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length)));
+    (consented || consent) &&
+    (!hasChanged ||
+      (!!temperature &&
+        (temperature !== 'measured' || validTemperatureValue) &&
+        !!distancing &&
+        !!state &&
+        (state !== 'work' || !!critical) &&
+        !!symptomsAdditionalAnswered &&
+        !!community &&
+        !!neighbourhood &&
+        !!exposure &&
+        (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length))));
 
   return (
     <PageLayout>
@@ -327,19 +330,37 @@ function Registration({ phone, survey, initial, reminders }) {
           </Label>
         </>
       )}
+      {consented === false && (
+        <Label label={auth.consent.label}>
+          <Checkbox
+            checked={consent}
+            onChange={() => setConsent(!consent)}
+            description={
+              <p>
+                {auth.consent.description}
+                <a href="/privacy" target="_privacy" className="font-medium text-gray-900 underline">
+                  {auth.consent.privacy}
+                </a>
+              </p>
+            }
+          />
+        </Label>
+      )}
+      {reminders === false && (
+        <Label label={auth.reminders.label}>
+          <Checkbox
+            checked={wantReminders}
+            onChange={() => setWantReminders(!wantReminders)}
+            label={auth.reminders.description}
+          />
+        </Label>
+      )}
       <div className="pt-5">
-        <div className="flex flex-wrap-reverse items-center justify-end">
-          {!error && !complete && <p className="mt-2 text-xs font-normal text-gray-700">{content.incomplete}</p>}
+        {!error && !complete && (
+          <p className="my-2 text-right text-xs font-normal text-gray-700">{content.incomplete}</p>
+        )}
+        <div className="flex items-center justify-end">
           <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
-          {!error && reminders === false && (
-            <div className="sm:-mt-4 text-gray-700">
-              <Checkbox
-                checked={wantReminders}
-                onChange={() => setWantReminders(!wantReminders)}
-                label={content.reminders}
-              />
-            </div>
-          )}
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
               onClick={async e => {
@@ -351,6 +372,20 @@ function Registration({ phone, survey, initial, reminders }) {
                    but don't await it to go through – shouldn't interfere with form submission UX */
                 if (!reminders && wantReminders) {
                   fetch('/api/post/subscribe', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      survey,
+                    }),
+                  });
+                }
+
+                /* If user didn't complete the right consent form, we force them to do it here,
+                  but shouldn't interfere with form submission UX */
+                if (!consented && consent) {
+                  fetch('/api/post/consent', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -417,7 +452,7 @@ export async function getServerSideProps(context) {
   const db = require('../db');
   const secret = process.env.SECRET;
   const { survey } = context.query;
-  const { phone, value, surveys, reminders } = await db.task(async t => {
+  const { phone, value, surveys, reminders, consent } = await db.task(async t => {
     const { person, value } =
       (await t.oneOrNone(
         `SELECT *
@@ -427,8 +462,8 @@ export async function getServerSideProps(context) {
         { id: survey }
       )) || {};
     if (!person) return {};
-    const { phone, reminders } = await db.oneOrNone(
-      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders
+    const { phone, reminders, consent } = await db.oneOrNone(
+      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders, consent
       FROM person
       WHERE id = $/id/`,
       { secret, id: person }
@@ -439,7 +474,7 @@ export async function getServerSideProps(context) {
       WHERE person = $/person/`,
       { person }
     );
-    return { phone, value, surveys, reminders };
+    return { phone, value, surveys, reminders, consent };
   });
   if (phone) {
     return {
@@ -448,6 +483,7 @@ export async function getServerSideProps(context) {
         survey,
         initial: parseInt(surveys) === 1,
         reminders,
+        consented: consent,
       },
     };
   } else return { props: {} };
