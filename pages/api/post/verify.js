@@ -29,7 +29,7 @@ export default async (req, res) => {
           await t.none(`UPDATE person SET consent = true where id = $/id/`, { id: person.id });
         }
         let survey = await t.oneOrNone(
-          `SELECT *
+          `SELECT id
           FROM survey
           WHERE person = $/person/
             AND date = current_date`,
@@ -42,7 +42,7 @@ export default async (req, res) => {
               ) VALUES (
                 $/person/
               )
-              RETURNING *`,
+              RETURNING id`,
             { person: person.id }
           );
         }
