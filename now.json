@@ -10,6 +10,9 @@
     "SURVEY_SECRET": "@survey_secret",
     "ROLLBAR_ACCESS_TOKEN": "@rollbar",
     "ADMIN_PASSWORD": "@admin_password",
-    "DWH": "@dwh"
+    "DWH": "@dwh",
+    "SINCH_BEARER_TOKEN": "@sinch_bearer_token",
+    "SINCH_PHONE_NO": "@sinch_phone_no",
+    "SINCH_SERVICE_PLAN_ID": "@sinch_service_plan_id"
   }
 }
