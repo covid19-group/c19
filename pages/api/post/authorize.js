@@ -37,6 +37,15 @@ export default async (req, res) => {
               RETURNING *`,
               { phone, secret, code: generatedCode }
             );
+
+            await db.none(
+              `INSERT INTO participant (
+                person
+              ) values (
+                $/person/
+              )`,
+              { person: person.id }
+            )
             return { ...person, code: generatedCode };
           } else {
             return person;
