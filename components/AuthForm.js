@@ -294,7 +294,12 @@ export default function AuthForm({ children }) {
             description={<p className="text-xs leading-5 text-gray-500">{content.reminders.description}</p>}
           />
           <Checkbox
-            label={content.consent.label}
+            label={
+              <>
+                {content.consent.label}
+                <span className="font-normal"> ({content.required})</span>
+              </>
+            }
             checked={consent}
             onChange={() => setConsent(!consent)}
             description={
@@ -311,17 +316,19 @@ export default function AuthForm({ children }) {
         <div className="mt-6">
           <span className="block w-full rounded-md shadow-sm">
             <button
-              disabled={!(codeIsComplete && phoneIsValid && consent)}
+              disabled={!codeIsComplete || !phoneIsValid}
               ref={btn => (submitBtnRef.current = btn)}
               onClick={e => {
                 e.preventDefault();
-                verify(parsePhoneNumberFromString(phone).number, code, reminders, consent);
+                if (consent) {
+                  verify(parsePhoneNumberFromString(phone).number, code, reminders, consent);
+                } else {
+                  setAuthError(content.consent.error);
+                }
               }}
               className={
                 'relative w-full flex justify-center py-2 px-4 bg-teal-500 border border-transparent text-sm font-medium h-10 rounded-md text-white focus:outline-none transition duration-150 ease-in-out ' +
-                (phoneIsValid && codeIsComplete && consent
-                  ? 'hover:bg-teal-600'
-                  : 'opacity-50 focus:shadow-none cursor-default')
+                (phoneIsValid && codeIsComplete ? 'hover:bg-teal-600' : 'opacity-50 focus:shadow-none cursor-default')
               }>
               {verifying ? (
                 <span className="absolute inset-0 h-full flex items-center justify-center text-lg">

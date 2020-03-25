@@ -38,7 +38,9 @@ export default {
       description:
         'Vi må behandle dine persondata for at skabe et overblik over befolkningens symptomer ifm. med epidemier, fx COVID-19. Læs vores ',
       privacy: 'Privatlivspolitik',
+      error: 'Accept af behandling af persondata er påkrævet for at bruge c19.dk',
     },
+    required: 'påkrævet',
   },
   'en-UK': {
     testBtn: 'Use Test Number',
@@ -79,6 +81,8 @@ export default {
       description:
         'We may use your personal data to create an overview of symptoms in the public from epidemic outbreaks, e.g. COVID-19. Read our',
       privacy: 'Privacy Policy',
+      error: 'Accepting the use of personal data is required for using c19.dk',
     },
+    required: 'required',
   },
 };
