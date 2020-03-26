@@ -54,5 +54,6 @@ export default {
     'Christian Skovholm, Software Engineer, tidl. @ [Netcompany](https://netcompany.com)',
     'Tristan Homsi, Founder @ [Readwise.io](https://readwise.io)',
     'Jacob Lennheden, CEO @ [Escalino](http://www.escalino.com/) and Former Innovation Lead, [IDA](https://ida.dk/)',
+    'Andreas Lønborg, Medical Doctor @ Nykøbing F. Sygehus',
   ],
 };
