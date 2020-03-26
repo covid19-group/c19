@@ -1,20 +1,20 @@
 export default {
   'da-DK': {
-    title: 'Med frivillige bidrag fra',
-    subtitle: 'Et kæmpe tak til alle involveret! Vi kunne ikke have gjort det uden jeres hjælp.',
+    title: 'Frivillige bidragsydere',
+    subtitle: 'En kæmpe tak til alle involverede! Vi kunne ikke have gjort det uden jeres hjælp.',
     services: {
-      prefix: 'Og til de serviceudbydere der sponsorer den infratruktur og software vi bygger på:',
+      prefix: 'Og til de serviceudbydere der sponsorerer den infrastruktur og software vi bygger på:',
       list: [
         '[AWS](https://aws.amazon.com/) for stabil data storage',
         '[Zeit](http://zeit.co/) for skalerbar hosting',
         '[GitHub](https://github.com) for open source versionskontrol',
-        '[Twilio](https://twilio.com/) for en simpel SMS service',
+        '[Twilio](https://twilio.com/) for en simpel SMS-service',
         '[Rollbar](https://rollbar.com/) for logging',
-        '[Linear](https://linear.app/) for  at orgnaisere samarbejdet',
+        '[Linear](https://linear.app/) for at organisere samarbejdet',
         // '[TDC](https://tdc.dk/) for skaleret kommunikation til danskerne',
       ],
     },
-    signup: '... og flere tilkomne. [Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
+    signup: '... og flere tilkommer. [Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
   },
   'en-UK': {
     title: 'Volunteering Contributors',
