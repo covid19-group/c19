@@ -36,7 +36,7 @@ export default {
     consent: {
       label: 'Behandling af persondata',
       description:
-        'Vi må behandle dine persondata for at skabe et overblik over befolkningens symptomer ifm. med epidemier, fx COVID-19. Læs vores ',
+        'Jeg tillader behandling af mine persondata for at skabe et overblik over befolkningens symptomer ifm. epidemier, fx COVID-19. Læs vores ',
       privacy: 'Privatlivspolitik',
       error: 'Accept af behandling af persondata er påkrævet for at bruge c19.dk',
     },

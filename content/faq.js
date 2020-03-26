@@ -3,7 +3,7 @@ export default {
     title: 'Ofte stillede spørgsmål',
     questions: [
       {
-        question: 'Hvem er bag c19.dk?',
+        question: 'Hvem står bag c19.dk?',
         answer:
           'En række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors).',
       },
@@ -19,7 +19,7 @@ export default {
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          '"Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
+          'Afbødningsstrategien betyder, at vi mister overblikket over, hvor mange danskere der udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
       {
         question: 'Hvorfor være frivillig?',
@@ -29,7 +29,7 @@ export default {
       {
         question: 'Er det open source?',
         answer:
-          'Ja! Koden er frit tilgængelig på GitHub: [https://github.com/covid19-group/c19](https://github.com/covid19-group/c19)',
+          'Ja! Kildekoden kan distributeres efter betingelserne i [MIT-licensen](https://github.com/covid19-group/c19/blob/master/LICENSE) og er tilgængelig på GitHub: [github.com/covid19-group/c19](https://github.com/covid19-group/c19)',
       },
     ],
   },
@@ -62,7 +62,7 @@ export default {
       {
         question: 'Is this open source?',
         answer:
-          "Yes! We're hosting the code on GitHub: [https://github.com/covid19-group/c19](https://github.com/covid19-group/c19)",
+          "Yes! The code is distributed under the terms of the [MIT license](https://github.com/covid19-group/c19/blob/master/LICENSE) and hosted on GitHub: [github.com/covid19-group/c19](https://github.com/covid19-group/c19)",
       },
     ],
   },
