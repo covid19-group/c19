@@ -38,14 +38,14 @@ export default async (req, res) => {
               { phone, secret, code: generatedCode }
             );
 
-            await db.none(
+            await db.one(
               `INSERT INTO participant (
                 person
               ) values (
                 $/person/
-              )`,
+              ) returning *`,
               { person: person.id }
-            )
+            );
             return { ...person, code: generatedCode };
           } else {
             return person;

@@ -12,7 +12,8 @@ export default async (req, res) => {
           `SELECT
             id,
             reminders,
-            verified
+            verified,
+            primary_participant
           FROM person
           WHERE phoneHash = ENCODE(ENCRYPT($/phone/, $/secret/, 'bf'), 'base64')
             AND PGP_SYM_DECRYPT(code::bytea, $/secret/) = $/code/`,
@@ -38,12 +39,14 @@ export default async (req, res) => {
         if (!survey) {
           survey = await t.oneOrNone(
             `INSERT INTO survey  (
-                person
+                person,
+                participant
               ) VALUES (
-                $/person/
+                $/person/,
+                $/participant/
               )
               RETURNING id`,
-            { person: person.id }
+            { person: person.id, participant: person.primary_participant }
           );
         }
         return { id: survey.id };
