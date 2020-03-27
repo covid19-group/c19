@@ -11,8 +11,8 @@ import registrationContent from '../content/registration';
 import authContent from '../content/authForm';
 const R = require('ramda');
 
-function Registration({ phone, survey, initial, reminders, consented }) {
-  const [sisterSurveys, setSisterSurveys] = useState([]);
+function Registration({ phone, survey, initial, reminders, consented, defaultSisterSurveys }) {
+  const [sisterSurveys, setSisterSurveys] = useState(defaultSisterSurveys);
 
   /* one time questions */
   const [sex, setSex] = useState(null);
@@ -192,6 +192,17 @@ function Registration({ phone, survey, initial, reminders, consented }) {
         }}
         close={() => setShowConfirmation(false)}
       />
+      <div className="mb-2">
+        {sisterSurveys.map((item, index) => (
+          <span key={item.survey}>
+            {!!index && ' • '}
+            <Link href={'/' + item.survey} className="text-blue-800">
+              <a className="text-blue-800">{item.survey}</a>
+            </Link>
+          </span>
+        ))}
+      </div>
+
       <Header
         title={
           <>
@@ -483,7 +494,7 @@ export async function getServerSideProps(context) {
   const db = require('../db');
   const secret = process.env.SECRET;
   const { survey } = context.query;
-  const { phone, value, surveys, reminders, consent } = await db.task(async t => {
+  const { phone, value, surveys, reminders, consent, sisterSurveys } = await db.task(async t => {
     const { person, value } =
       (await t.oneOrNone(
         `SELECT *
@@ -493,19 +504,34 @@ export async function getServerSideProps(context) {
         { id: survey }
       )) || {};
     if (!person) return {};
-    const { phone, reminders, consent } = await db.oneOrNone(
+    const { phone, reminders, consent } = await t.oneOrNone(
       `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders, consent
       FROM person
       WHERE id = $/id/`,
       { secret, id: person }
     );
-    const { surveys } = await db.one(
-      `SELECT count(*) as surveys
-      FROM survey
-      WHERE person = $/person/`,
-      { person }
+    //find out if this is the initial survey, for this participant
+    const { surveys } = await t.one(
+      `SELECT s1.participant, count(s1.id) as surveys
+      FROM survey s1
+      INNER JOIN survey s2 on s1.participant = s2.participant
+      WHERE s1.person = $/person/
+      AND s2.id = $/survey/
+      GROUP BY s1.participant`,
+      { person, survey }
     );
-    return { phone, value, surveys, reminders, consent };
+
+    const sisterSurveys = await t.any(
+      `SELECT s1.id as survey
+      FROM survey s1
+      INNER JOIN survey s2 on s1.person = s2.person
+      WHERE s2.id = $/survey/
+      AND s1.date = current_date
+      AND s1.id <> $/survey/`,
+      { survey }
+    );
+
+    return { phone, value, surveys, reminders, consent, sisterSurveys };
   });
   if (phone) {
     return {
@@ -515,6 +541,7 @@ export async function getServerSideProps(context) {
         initial: parseInt(surveys) === 1,
         reminders,
         consented: consent,
+        defaultSisterSurveys: sisterSurveys || [],
       },
     };
   } else return { props: {} };
