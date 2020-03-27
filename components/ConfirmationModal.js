@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 import confirmationModalContent from '../content/confirmationModal';
 
-export default function ConfirmationModal({ language, show, close }) {
+export default function ConfirmationModal({ language, show, close, offerToAddParticipants, addParticipant }) {
   const router = useRouter();
   const content = confirmationModalContent[language];
   return (
@@ -52,6 +52,16 @@ export default function ConfirmationModal({ language, show, close }) {
                   onClick={close}
                   className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                   {content.back}
+                </button>
+              </span>
+            </div>
+            <div className="mt-3 flex flex-rol justify-center">
+              <span className="mt-3 flex rounded-md  sm:mt-0 sm:col-start-1">
+                <button
+                  type="button"
+                  onClick={addParticipant}
+                  className="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                  {content.addParticipant}
                 </button>
               </span>
             </div>

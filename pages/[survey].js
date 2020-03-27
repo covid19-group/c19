@@ -12,6 +12,8 @@ import authContent from '../content/authForm';
 const R = require('ramda');
 
 function Registration({ phone, survey, initial, reminders, consented }) {
+  const [sisterSurveys, setSisterSurveys] = useState([]);
+
   /* one time questions */
   const [sex, setSex] = useState(null);
   const [zip, setZip] = useState('');
@@ -93,9 +95,103 @@ function Registration({ phone, survey, initial, reminders, consented }) {
         !!exposure &&
         (!initial || (!!sex && born.length === 4 && zip.length === 4 && !!household.length))));
 
+  const submitSurvey = async e => {
+    setError(false);
+    setSaving(true);
+    e.preventDefault();
+
+    /* If user didn't receive reminders, but changed their mind, update reminder preferences,
+                     but don't await it to go through – shouldn't interfere with form submission UX */
+    if (!reminders && wantReminders) {
+      fetch('/api/post/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          survey,
+        }),
+      });
+    }
+
+    /* If user didn't complete the right consent form, we force them to do it here,
+                    but shouldn't interfere with form submission UX */
+    if (!consented && consent) {
+      fetch('/api/post/consent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          survey,
+        }),
+      });
+    }
+
+    const response = await fetch('/api/post/survey', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hasChanged,
+        value: {
+          initial: initial || false,
+          sex,
+          zip,
+          born,
+          household,
+          children,
+          conditions,
+          exposure,
+          temperature,
+          temperatureValue,
+          symptoms,
+          symptomsAdditional,
+          distancing,
+          state,
+          critical,
+          neighbourhood,
+          community,
+        },
+        survey,
+      }),
+    });
+    if (response.ok) setShowConfirmation(true);
+    else setError('An unexpected error occured. Please try again.');
+    setSaving(false);
+  };
+
+  const addParticipant = async () => {
+    const response = await fetch('/api/post/participant', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        survey,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      setSisterSurveys(sisterSurveys.concat({ survey: result?.survey?.id }));
+    } else setError('An unexpected error occured. Please try again.');
+    setSaving(false);
+  };
+
   return (
     <PageLayout>
-      <ConfirmationModal language={language} show={showConfirmation} close={() => setShowConfirmation(false)} />
+      <ConfirmationModal
+        offerToAddParticipants={initial && parseInt(household)}
+        language={language}
+        show={showConfirmation}
+        addParticipant={() => {
+          addParticipant();
+          setShowConfirmation(false);
+        }}
+        close={() => setShowConfirmation(false)}
+      />
       <Header
         title={
           <>
@@ -363,72 +459,7 @@ function Registration({ phone, survey, initial, reminders, consented }) {
           <p className="mt-2 text-xs font-normal text-red-600">{error}</p>
           <span className="ml-3 inline-flex rounded-md shadow-sm">
             <button
-              onClick={async e => {
-                setError(false);
-                setSaving(true);
-                e.preventDefault();
-
-                /* If user didn't receive reminders, but changed their mind, update reminder preferences,
-                   but don't await it to go through – shouldn't interfere with form submission UX */
-                if (!reminders && wantReminders) {
-                  fetch('/api/post/subscribe', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      survey,
-                    }),
-                  });
-                }
-
-                /* If user didn't complete the right consent form, we force them to do it here,
-                  but shouldn't interfere with form submission UX */
-                if (!consented && consent) {
-                  fetch('/api/post/consent', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      survey,
-                    }),
-                  });
-                }
-
-                const response = await fetch('/api/post/survey', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    hasChanged,
-                    value: {
-                      initial: initial || false,
-                      sex,
-                      zip,
-                      born,
-                      household,
-                      children,
-                      conditions,
-                      exposure,
-                      temperature,
-                      temperatureValue,
-                      symptoms,
-                      symptomsAdditional,
-                      distancing,
-                      state,
-                      critical,
-                      neighbourhood,
-                      community,
-                    },
-                    survey,
-                  }),
-                });
-                if (response.ok) setShowConfirmation(true);
-                else setError('An unexpected error occured. Please try again.');
-                setSaving(false);
-              }}
+              onClick={submitSurvey}
               disabled={!complete}
               className={
                 (complete ? 'hover:bg-teal-600' : 'opacity-50 cursor-default focus:outline-none') +
