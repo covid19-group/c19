@@ -31,7 +31,8 @@ create table person
 	last_reminded timestamp with time zone,
 	whatsapp boolean default false not null,
 	phonehash text,
-	consent boolean default false
+	consent boolean default false,
+	primary_participant integer
 )
 ;
 
@@ -98,6 +99,12 @@ create table participant
 ;
 
 alter table participant owner to postgres
+;
+
+alter table person
+	add constraint person_participant_id_fk
+		foreign key (primary_participant) references participant
+			on update cascade
 ;
 
 create table survey
