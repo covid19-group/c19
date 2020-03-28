@@ -175,7 +175,7 @@ function Registration({ phone, survey, initial, reminders, consented, defaultSis
 
     if (response.ok) {
       const result = await response.json();
-      setSisterSurveys(sisterSurveys.concat({ survey: result?.survey?.id }));
+      window.location.href = '/' + result?.survey?.id;
     } else setError('An unexpected error occured. Please try again.');
     setSaving(false);
   };
