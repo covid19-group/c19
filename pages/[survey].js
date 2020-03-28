@@ -462,13 +462,13 @@ export async function getServerSideProps(context) {
         { id: survey }
       )) || {};
     if (!person) return {};
-    const { phone, reminders, consent } = await db.oneOrNone(
+    const { phone, reminders, consent } = await t.oneOrNone(
       `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders, consent
       FROM person
       WHERE id = $/id/`,
       { secret, id: person }
     );
-    const { surveys } = await db.one(
+    const { surveys } = await t.one(
       `SELECT count(*) as surveys
       FROM survey
       WHERE person = $/person/`,
