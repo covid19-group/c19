@@ -33,8 +33,9 @@ export default async (req, res) => {
           `SELECT id
           FROM survey
           WHERE person = $/person/
-            AND date = current_date`,
-          { person: person.id }
+            AND date = current_date
+            ${person.primary_participant ? 'AND participant = $/primary_participant/' : ''}`,
+          { person: person.id, primary_participant: person.primary_participant }
         );
         if (!survey) {
           survey = await t.oneOrNone(
