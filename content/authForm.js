@@ -50,7 +50,7 @@ export default {
       description: '',
       error: {
         incomplete: 'Please enter a valid phone number first',
-        wrongCountryCode: 'We currently only support danish phone numbers',
+        wrongCountryCode: 'We currently only support Danish phone numbers',
         missingCountryCode: 'Please specify your country code (e.g. +44)',
         invalid: "This doesn't look right. Try again.",
         unknown: 'An error occured. Please try again later.',
