@@ -26,7 +26,7 @@ export default {
       2: {
         title: 'Daily Notifications',
         description:
-          'Subscribers will be notified daily to self-report their current health status, their whereabouts, and quarantine status.',
+          'Subscribers will be reminded daily to self-report their current health status, their whereabouts, and quarantine status.',
       },
       3: {
         title: 'Data Publicly Available',

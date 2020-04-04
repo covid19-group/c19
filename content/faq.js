@@ -3,7 +3,7 @@ export default {
     title: 'Ofte stillede spørgsmål',
     questions: [
       {
-        question: 'Hvem er bag c19.dk?',
+        question: 'Hvem står bag c19.dk?',
         answer:
           'Projektet kører under den frivillige forening _Techværnet_ af en række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors).',
       },
@@ -19,7 +19,7 @@ export default {
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          '"Flatten the curve"-strategien betyder, at vi mister overblikket over, hvor mange danskere udviser symptomer, men ikke er i kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således myndighederne bedre kan forudse presset på hospitalerne.',
+          'Afbødningsstrategien betyder, at vi mister overblikket over, hvor mange danskere der udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
       {
         question: 'Hvordan afmelder jeg mig?',
@@ -39,7 +39,7 @@ export default {
       {
         question: 'Kan c19.dk bruges i andre lande?',
         answer:
-          'Ja! Koden er open source og tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinerer vores global indsats, og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
+          'Ja! Kildekoden kan distributeres efter betingelserne i [MIT-licensen](https://github.com/covid19-group/c19/blob/master/LICENSE) og er tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinerer vores global indsats, og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
       },
     ],
   },
@@ -83,7 +83,7 @@ export default {
       {
         question: 'Can this be used in other countries?',
         answer:
-          "Yes! The code is open source and avilable on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
+          "Yes! The code is distributed under the terms of the [MIT license](https://github.com/covid19-group/c19/blob/master/LICENSE) and hosted on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
       },
     ],
   },
