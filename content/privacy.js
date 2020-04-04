@@ -40,7 +40,7 @@ registrerede deler selv deler med Techværnet.
 over symptomer i befolkningen i forbindelse med udbrud af epidemier, herunder COVID-19.
 
 ## 6. Opbevaring
-6. 1. Oplysningerne opbevares i det tidsrum, der er tilladt i henhold til lovgivningen, og slettes, når persondataen
+6.1. Oplysningerne opbevares i det tidsrum, der er tilladt i henhold til lovgivningen, og slettes, når persondataen
 ikke længere er nødvendige for Techværnet. Perioden afhænger af karakteren af oplysningen og baggrunden for
 opbevaringen.
 
