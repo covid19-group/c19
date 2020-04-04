@@ -44,7 +44,7 @@ export default {
     ],
   },
   'en-UK': {
-    title: 'Frequently asked questions',
+    title: 'Frequently Asked Questions',
     questions: [
       {
         question: "Who's behind c19.dk?",

@@ -3,7 +3,7 @@ export default {
     baseline: {
       label: 'Baseline',
       description:
-        'Denne første registrering er udvidet til at omfatte de seneste {unit}, og inkluderer demografiske data samt sygehistorie for at sætte en baseline til fremtidige registrering.',
+        'Denne første registrering er udvidet til at omfatte de seneste {unit}, og inkluderer demografiske data samt sygehistorie for at etablere en reference for fremtidige registreringer.',
     },
     by: 'Registrering for tlf.',
     title: 'Registration',
@@ -87,7 +87,7 @@ export default {
         },
         normal: {
           label: 'Jeg tror min temperatur er normal, men har ikke målt den',
-          description: 'From 36.1°C to 37.2°C (97°F - 99°F) ',
+          description: 'Mellem 36.1°C og 37.2°C (97°F - 99°F)',
         },
       },
     },
@@ -262,7 +262,7 @@ export default {
         },
         normal: {
           label: 'I think it’s normal, but haven’t measured',
-          description: 'From 36.1°C to 37.2°C (97°F - 99°F) ',
+          description: 'From 36.1°C to 37.2°C (97°F - 99°F)',
         },
       },
     },
