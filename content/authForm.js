@@ -36,7 +36,7 @@ export default {
     consent: {
       label: 'Behandling af persondata',
       description:
-        'Vi må behandle dine persondata for at skabe et overblik over befolkningens symptomer ifm. med epidemier, fx COVID-19. Læs vores ',
+        'Jeg tillader behandling af mine persondata for at skabe et overblik over befolkningens symptomer ifm. epidemier, fx COVID-19. Læs vores ',
       privacy: 'Privatlivspolitik',
       error: 'Accept af behandling af persondata er påkrævet for at bruge c19.dk',
     },
@@ -50,7 +50,7 @@ export default {
       description: '',
       error: {
         incomplete: 'Please enter a valid phone number first',
-        wrongCountryCode: 'We currently only support danish phone numbers',
+        wrongCountryCode: 'We currently only support Danish phone numbers',
         missingCountryCode: 'Please specify your country code (e.g. +44)',
         invalid: "This doesn't look right. Try again.",
         unknown: 'An error occured. Please try again later.',

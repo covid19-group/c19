@@ -3,7 +3,7 @@ export default {
     title: 'Ofte stillede spørgsmål',
     questions: [
       {
-        question: 'Hvem er bag c19.dk?',
+        question: 'Hvem står bag c19.dk?',
         answer:
           'Projektet kører under den frivillige forening _Techværnet_ af en række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors).',
       },
@@ -19,32 +19,32 @@ export default {
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          '"Flatten the curve" strategien betyder, at vi mister overblikket over, hvor mange danskere udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
+          'Afbødningsstrategien betyder, at vi mister overblikket over, hvor mange danskere der udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
       {
         question: 'Hvordan afmelder jeg mig?',
         answer:
-          'Du kan til en vær tid trække dit samtykke tilbage og få slettet de oplysninger vi har registreret på dig ved at skrive til vores dataansvarlige Holger Thorup på [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app]).',
+          'Du kan til en hver tid trække dit samtykke tilbage og få slettet de oplysninger, vi har registreret på dig ved at skrive til vores dataansvarlige Holger Thorup på [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app]).',
       },
       {
         question: 'Hvordan behandles mine data?',
         answer:
-          'Dine data behandles efter regler og retningslinjerne i GDPR og deles ikke til andre, udover ved aggregering som beskytter dit privatliv. Læs mere om hvordan vi behandler dine data i vores [privatlivspolitik](/privacy).',
+          'Dine data behandles efter regler og retningslinjerne i GDPR og deles ikke til andre, ud over ved aggregering som beskytter dit privatliv. Læs mere om, hvordan vi behandler dine data i vores [privatlivspolitik](/privacy).',
       },
       {
         question: 'Hvorfor være frivillig?',
         answer:
-          'I Frankrig laver parfume-fabrikkerne håndsprit. I England laver bilfabrikanterne respiratorer. I krisetid må vi alle hjælpe med det vi er gode til — og vi er gode til data!\n\n[Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
+          'I Frankrig laver parfumefabrikkerne håndsprit. I England laver bilfabrikanterne respiratorer. I krisetid må vi alle hjælpe med det, vi er gode til — og vi er gode til data!\n\n[Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
       },
       {
         question: 'Kan c19.dk bruges i andre lande?',
         answer:
-          'Ja! Koden er open source og tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinere vores global indsats og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
+          'Ja! Kildekoden kan distributeres efter betingelserne i [MIT-licensen](https://github.com/covid19-group/c19/blob/master/LICENSE) og er tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinerer vores global indsats, og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
       },
     ],
   },
   'en-UK': {
-    title: 'Frequently asked questions',
+    title: 'Frequently Asked Questions',
     questions: [
       {
         question: "Who's behind c19.dk?",
@@ -83,7 +83,7 @@ export default {
       {
         question: 'Can this be used in other countries?',
         answer:
-          "Yes! The code is open source and avilable on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
+          "Yes! The code is distributed under the terms of the [MIT license](https://github.com/covid19-group/c19/blob/master/LICENSE) and hosted on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
       },
     ],
   },

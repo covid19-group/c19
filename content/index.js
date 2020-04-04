@@ -9,7 +9,7 @@ export default {
       share: 'Del via: ',
       placeholder: 'Indtast telefonnummer',
       privacy: {
-        value: 'Vi går op i datasikkerhed. Læse vore privatlivspolitik her.',
+        value: 'Vi går op i datasikkerhed. Læs vores privatlivspolitik her.',
         link: {
           href: '#',
           label: 'Privatlivspolitik',
@@ -21,12 +21,12 @@ export default {
       1: {
         title: 'Data Collection',
         description:
-          'A data collection tool to capture COVID-19 related data on those who are not currently in touch with thehealth care system.',
+          'A data collection tool to capture COVID-19 related data on those who are not currently in touch with the health care system.',
       },
       2: {
         title: 'Daily Notifications',
         description:
-          'Subscribers will be notified daily to self-report their current health status, their whereabouts, and quarantine status.',
+          'Subscribers will be reminded daily to self-report their current health status, their whereabouts, and quarantine status.',
       },
       3: {
         title: 'Data Publicly Available',
@@ -57,7 +57,7 @@ export default {
       1: {
         title: 'Data Collection',
         description:
-          'A data collection tool to capture COVID-19 related data on those who are not currently in touch with thehealth care system.',
+          'A data collection tool to capture COVID-19 related data on those who are not currently in touch with the health care system.',
       },
       2: {
         title: 'Daily Notifications',
