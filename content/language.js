@@ -1,6 +1,6 @@
 export default {
   'da-DK': {
-    name: 'dansk',
+    name: 'Dansk',
     flag: 'DK',
   },
   'en-UK': {
