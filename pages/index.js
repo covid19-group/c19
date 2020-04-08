@@ -5,7 +5,6 @@ import Link from 'next/link';
 import contentMain from '../content';
 import { useContext } from 'react';
 import { LanguageContext } from '../components/LanguageSelector';
-import Banner from '../components/Banner';
 import ReactMarkdown from 'react-markdown';
 
 function Landing({ count }) {
@@ -20,7 +19,6 @@ function Landing({ count }) {
   return (
     <PageLayout>
       <Hero count={count} />
-      <Banner />
     </PageLayout>
   );
 }

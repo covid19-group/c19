@@ -15,7 +15,7 @@ export default function PageLayout({ children }) {
       <Nav />
       <main>
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-          <div className="px-4 py-8 sm:px-0">{children}</div>
+          <div className="px-4 pt-8 pb-20 sm:px-0">{children}</div>
         </div>
       </main>
     </div>
@@ -26,7 +26,6 @@ const Nav = () => {
   const { language } = useContext(LanguageContext);
   const items = [
     { title: content[language].root, to: '/' },
-    { title: content[language].data, to: '/data' },
     { title: content[language].faq, to: '/faq' },
   ];
   return (

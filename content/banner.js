@@ -1,4 +1,10 @@
 export default {
-  'da-DK': 'Meld dig til nu. C19.DK går i luften så snart vi får godkendelse fra de relevante myndigheder.',
-  'en-UK': 'Sign up now. C19.DK will go live as soon as we obtain an approval from relevant authorities.',
+  'da-DK': {
+    message: 'C19.DK henviser til Sundshedsministeriets selvrapporteringsløsning',
+    btn: 'Gå til COVIDmeter',
+  },
+  'en-UK': {
+    message: 'C19.DK refers to the official self-reporting tool from the Ministry of Health',
+    btn: 'Go to COVIDmeter',
+  },
 };
