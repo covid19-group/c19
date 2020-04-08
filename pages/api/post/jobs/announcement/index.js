@@ -22,7 +22,6 @@ export default async (req, res) => {
           FROM person p
           WHERE
             verified
-            and phoneHash = ENCODE(ENCRYPT('+4560550709', $/secret/, 'bf'), 'base64') -- DELETE THIS
             and NOT EXISTS (
               select l.id from "message_log" l
                 where l.person = p.id

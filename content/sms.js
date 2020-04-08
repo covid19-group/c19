@@ -5,7 +5,7 @@ export default {
     unsubscribe: 'Afmeld: c19.dk/u',
     activatePeers:
       'c19.dk er klar, men før vi går i luften, har vi brug for din hjælp. \n\nFortæl dine nærmeste, at de skal tilmelde sig. Flere tilmeldte = bedre data.',
-    announcement: `Hej,\n\nSundhedministeriet har lanceret COVIDmeter, som erstatter C19.dk.\n\nSe mere info på: c19.dk\n\nTak!`,
+    announcement: `Hej,\n\nSundhedministeriet har lanceret COVIDmeter, som erstatter C19.DK.\n\nSe mere info på: c19.dk\n\nTak!`,
   },
   'en-UK': {
     authCode: 'Your c19.dk verification code is: ',
@@ -13,6 +13,6 @@ export default {
     unsubscribe: 'Unsubscribe: c19.dk/u',
     activatePeers:
       'c19.dk er klar, men før vi går i luften, har vi brug for din hjælp. \n\nFortæl dine nærmeste, at de skal tilmelde sig. Flere tilmeldte = bedre data.',
-    announcement: `Hej,\n\nSundhedministeriet har lanceret COVIDmeter, som erstatter C19.dk.\n\nSe mere info på: c19.dk\n\nTak!`,
+    announcement: `Hej,\n\nSundhedministeriet har lanceret COVIDmeter, som erstatter C19.DK.\n\nSe mere info på: c19.dk\n\nTak!`,
   },
 };
