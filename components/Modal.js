@@ -7,7 +7,7 @@ export default function() {
   return (
     <AnimatePresence>
       {!!modal && (
-        <div className="fixed z-50 inset-0 flex items-start justify-center">
+        <div className="fixed z-50 inset-0 flex items-start justify-center overflow-auto scrolling-touch">
           <motion.div
             onClick={() => setModal(false)}
             transition={{ exit: { duration: 0.1 } }}
@@ -57,7 +57,10 @@ export default function() {
                 håber, at I fremover vil bruge Statens Serum Instituts nye officielle løsning – COVIDmeter. Jeres
                 indsats er af stor betydning for vores muligheder for at vurdere udbredelsen af COVID-19 i samfundet.
                 <span className="text-gray-500 block mt-2">
-                  <span onMouseEnter={() => setHeunicke(true)}>Magnus Heunicke</span>, Sundheds- og ældreminister
+                  <span onClick={() => setHeunicke(!heunicke)} className="cursor-pointer">
+                    Magnus Heunicke
+                  </span>
+                  , Sundheds- og ældreminister
                 </span>
               </p>
               <AnimatePresence>
@@ -66,8 +69,8 @@ export default function() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onMouseLeave={() => setHeunicke(false)}
-                    className="rounded-lg"
+                    onClick={() => setHeunicke(false)}
+                    className="rounded-lg cursor-pointer"
                     src="/assets/heunicke.png"
                   />
                 )}
