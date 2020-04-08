@@ -17,7 +17,7 @@ export default function() {
             exit={{ opacity: 0 }}
             className="absolute bg-teal-900 h-full w-full"
           />
-          <div className="px-2 sm:px-4 md:px-6 py-4 md:py-8 w-full max-w-4xl mx-auto max-h-screen overflow-y-scroll">
+          <div className="relative px-2 sm:px-4 md:px-6 py-4 md:py-8 w-full max-w-4xl mx-auto max-h-screen overflow-y-scroll">
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
@@ -56,27 +56,28 @@ export default function() {
                 Mange tak for jeres velvilje til at hjælpe myndighederne med at svare på spørgsmål om jeres helbred. Vi
                 håber, at I fremover vil bruge Statens Serum Instituts nye officielle løsning – COVIDmeter. Jeres
                 indsats er af stor betydning for vores muligheder for at vurdere udbredelsen af COVID-19 i samfundet.
-                <span className="text-gray-500 block mt-2">
+                <span className="relative text-gray-500 block mt-2">
                   <span onClick={() => setHeunicke(!heunicke)} className="cursor-pointer">
                     Magnus Heunicke
                   </span>
                   , Sundheds- og ældreminister
+                  <AnimatePresence>
+                    {heunicke && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setHeunicke(false)}
+                        onMouseLeave={() => setHeunicke(false)}
+                        className="absolute inset-x-0 bottom-0 rounded-lg cursor-pointer pb-12 sm:pb-6">
+                        <img src="/assets/heunicke.png" className="rounded-lg shadow-lg" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </span>
               </p>
-              <AnimatePresence>
-                {heunicke && (
-                  <motion.img
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() => setHeunicke(false)}
-                    className="rounded-lg cursor-pointer"
-                    src="/assets/heunicke.png"
-                  />
-                )}
-              </AnimatePresence>
               <hr className="my-4" />
-              <div className="flex justify-center flex-wrap -mx-1">
+              <div className="flex justify-center flex-wrap-reverse -mx-1">
                 <div className="inline-flex rounded-md shadow mt-2 flex-1 mx-1">
                   <a
                     target="_press-release"
