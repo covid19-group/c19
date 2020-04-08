@@ -76,6 +76,7 @@ export default function() {
               <div className="flex justify-center flex-wrap -mx-1">
                 <div className="inline-flex rounded-md shadow mt-2 flex-1 mx-1">
                   <a
+                    target="_press-release"
                     href="http://www.sum.dk/Aktuelt/Nyheder/Coronavirus/2020/April/Ny-digital-loesning-til-borgere-skal-COVIDmeter.aspx"
                     className="w-full flex-shrink-0 whitespace-no-wrap inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-teal-600 bg-teal-100 hover:text-teal-500 hover:bg-teal-50 focus:outline-none focus:shadow-outline focus:border-teal-300 transition duration-150 ease-in-out">
                     Læs pressemeddelelsen
@@ -83,6 +84,7 @@ export default function() {
                 </div>
                 <div className="inline-flex mt-2 flex-1 mx-1">
                   <a
+                    target="_covidmeter"
                     href="https://www.sundhed.dk/borger/corona/covidmeter/"
                     className="w-full flex-shrink-0 whitespace-no-wrap inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
                     Gå til COVIDmeter

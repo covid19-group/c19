@@ -3,6 +3,11 @@ export default {
     title: 'Ofte stillede spørgsmål',
     questions: [
       {
+        question: 'Hvad sker der med mine data?',
+        answer:
+          'Efter lanceringen af COVIDmeter, har C19.DK ingen grund til at opbevare dine data. Alle dine oplysninger slettes inden 30 dage (senest d. 8. maj 2020).',
+      },
+      {
         question: 'Hvem står bag c19.dk?',
         answer:
           'Projektet kører under den frivillige forening _Techværnet_ af en række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors).',
@@ -46,6 +51,11 @@ export default {
   'en-UK': {
     title: 'Frequently Asked Questions',
     questions: [
+      {
+        question: 'What will happen with my data?',
+        answer:
+          'After the launch of COVIDmeter, C19.DK has no reason to keep your data. All your information will be deleted within 30 days (no later than May 8, 2020).',
+      },
       {
         question: "Who's behind c19.dk?",
         answer: `The project is run under the NGO _Techværnet_ by a group of volunteering people in tech. We are startup founders, engineers, designers etc.`,
