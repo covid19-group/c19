@@ -37,8 +37,8 @@ export default function() {
               </button>
               <h2 className="font-medium text-xl mb-4">COVIDmeter erstatter C19.DK</h2>
               <p className="mt-4">
-                For tre uger siden byggede vi c19.dk som en håndsrækning til sundhedsmyndighederne, og i de forgangne
-                uger har mere end 32.000 danskere meldt sig til at bidrage på c19.dk.
+                For tre uger siden byggede vi c19.dk som en håndsrækning til sundhedsmyndighederne. I de forgangne uger
+                har mere end 32.000 danskere meldt sig til at bidrage på c19.dk.
               </p>
               <p className="mt-4">
                 Vi besluttede tidligt, at c19.DK ikke ville gå live uden myndighedernes accept. Nu har
