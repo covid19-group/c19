@@ -5,41 +5,41 @@ export default {
       {
         question: 'Hvem står bag c19.dk?',
         answer:
-          'Projektet kører under den frivillige forening _Techværnet_ af en række frivillige teknologi-professionelle. Vi er startupstiftere, udviklere, designere, osv. [Se listen her](#contributors).',
+          'Projektet drives af den frivillige forening _Techværnet_ af en række frivillige teknologi-professionelle. Vi er iværksættere, udviklere, designere, osv. [Se listen her](#contributors).',
       },
       {
         question: 'Hvordan kommer man i kontakt med de projektansvarlige?',
-        answer: `**Primær** Martin Permin [+1 (323) 529-7523](tel:+13235297523) / [martin@pelion.app](mailto:martin@pelion.app)
+        answer: `**Primær:** Martin Permin [+1 (323) 529-7523](tel:+13235297523) / [martin@pelion.app](mailto:martin@pelion.app)
 
-**Tech** Holger Thorup [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app])
+**Tech:** Holger Thorup [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app])
 
-**Kommunikation** Carl Kronika [+45 20 87 28 89](tel:+4520872789) / [ck@copus.dk](mailto:ck@copus.dk)
+**Kommunikation:** Carl Kronika [+45 20 87 28 89](tel:+4520872789) / [ck@copus.dk](mailto:ck@copus.dk)
 `,
       },
       {
         question: 'Hvorfor c19.dk?',
         answer:
-          'Afbødningsstrategien betyder, at vi mister overblikket over, hvor mange danskere der udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
+          'Afbødningsstrategien betyder, at vi mister overblikket over, hvor mange danskere, der udviser symptomer, men ikke er kontakt med sundhedsvæsenet. Dette værktøj afdækker mørketallet, således at myndighederne bedre kan forudse presset på hospitalerne.',
       },
       {
-        question: 'Hvordan afmelder jeg mig?',
+        question: 'Hvordan bliver man afmeldt?',
         answer:
-          'Du kan til en hver tid trække dit samtykke tilbage og få slettet de oplysninger, vi har registreret på dig ved at skrive til vores dataansvarlige Holger Thorup på [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app]).',
+          'Du kan til en hver tid trække dit samtykke tilbage og få slettet de oplysninger, vi har registreret om dig ved at skrive til vores dataansvarlige Holger Thorup på [+45 60 55 07 09](tel:+4560550709) / [holger@pelion.app](mailto:holger@pelion.app]).',
       },
       {
         question: 'Hvordan behandles mine data?',
         answer:
-          'Dine data behandles efter regler og retningslinjerne i GDPR og deles ikke til andre, ud over ved aggregering som beskytter dit privatliv. Læs mere om, hvordan vi behandler dine data i vores [privatlivspolitik](/privacy).',
+          'Dine data behandles efter reglerne og retningslinjerne i GDPR og deles ikke med andre, ud over ved aggregering, som beskytter dit privatliv. Læs mere om, hvordan vi behandler dine data i vores [privatlivspolitik](/privacy).',
       },
       {
         question: 'Hvorfor være frivillig?',
         answer:
-          'I Frankrig laver parfumefabrikkerne håndsprit. I England laver bilfabrikanterne respiratorer. I krisetid må vi alle hjælpe med det, vi er gode til — og vi er gode til data!\n\n[Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
+          'I Frankrig laver parfumefabrikkerne håndsprit. I England laver bilfabrikanterne respiratorer. I krisetid må vi alle hjælpe med det, vi er gode til — og vi er gode til data.\n\n[Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
       },
       {
         question: 'Kan c19.dk bruges i andre lande?',
         answer:
-          'Ja! Kildekoden kan distributeres efter betingelserne i [MIT-licensen](https://github.com/covid19-group/c19/blob/master/LICENSE) og er tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinerer vores global indsats, og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
+          'Ja. Kildekoden kan distribueres efter betingelserne i [MIT-licensen](https://github.com/covid19-group/c19/blob/master/LICENSE) og er tilgængelig på [GitHub](https://github.com/covid19-group/c19). Vi har et hold, der koordinerer vores globale indsats og rigtig gerne vil have dig involveret, så tag endelig fat i os.',
       },
     ],
   },
@@ -78,12 +78,12 @@ export default {
       {
         question: 'Why volunteer?',
         answer:
-          "In France, perfume factories produce hand sanitizer. In the United Kingdom, the car manufacturers produce respirators. In time of crisis we must all contribute with the things we're good at — and we're good with data!\n\n[Sign up to contribute](https://airtable.com/shrM3SHGwxEnnCChj).",
+          "In France, perfume factories produce hand sanitizer. In the United Kingdom, the car manufacturers produce respirators. In time of crisis we must all contribute with the things we're good at — and we're good with data.\n\n[Sign up to contribute](https://airtable.com/shrM3SHGwxEnnCChj).",
       },
       {
         question: 'Can this be used in other countries?',
         answer:
-          "Yes! The code is distributed under the terms of the [MIT license](https://github.com/covid19-group/c19/blob/master/LICENSE) and hosted on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
+          "Yes. The code is distributed under the terms of the [MIT license](https://github.com/covid19-group/c19/blob/master/LICENSE) and hosted on [GitHub](https://github.com/covid19-group/c19). We have a team working on coordinating our global efforts and would love to get you involved, so don't hesitate to reach out.",
       },
     ],
   },

@@ -26,8 +26,8 @@ export default {
       reset: 'Nulstil',
     },
     reminders: {
-      label: 'Modtag påmindelser på SMS',
-      description: 'Send mig dagligt et link til registrering',
+      label: 'Modtag påmindelser via SMS',
+      description: 'Få dagligt tilsendt et link til registrering',
     },
     btn: {
       label: 'Gå til tilmelding',

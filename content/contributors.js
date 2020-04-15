@@ -1,20 +1,20 @@
 export default {
   'da-DK': {
     title: 'Frivillige bidragsydere',
-    subtitle: 'En kæmpe tak til alle involverede! Vi kunne ikke have gjort det uden jeres hjælp.',
+    subtitle: 'En kæmpe tak til alle involverede. Vi kunne ikke have gjort det uden jeres hjælp.',
     services: {
-      prefix: 'Og til de serviceudbydere der sponsorerer den infrastruktur og software vi bygger på:',
+      prefix: 'Og tak til de serviceudbydere, der sponsorerer den infrastruktur og software, vi bygger på:',
       list: [
-        '[AWS](https://aws.amazon.com/) for stabil data storage',
-        '[Zeit](http://zeit.co/) for skalerbar hosting',
-        '[GitHub](https://github.com) for open source versionskontrol',
-        '[Twilio](https://twilio.com/) for en simpel SMS-service',
-        '[Rollbar](https://rollbar.com/) for logging',
-        '[Linear](https://linear.app/) for at organisere samarbejdet',
+        '[AWS](https://aws.amazon.com/) for stabil data storage.',
+        '[Zeit](http://zeit.co/) for skalerbar hosting.',
+        '[GitHub](https://github.com) for versionskontrol.',
+        '[Twilio](https://twilio.com/) for en simpel SMS-service.',
+        '[Rollbar](https://rollbar.com/) for logging.',
+        '[Linear](https://linear.app/) for at organisere samarbejdet.',
         // '[TDC](https://tdc.dk/) for skaleret kommunikation til danskerne',
       ],
     },
-    signup: '... og flere tilkommer. [Skriv dig op til at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
+    signup: '... og flere følger. [Skriv dig op for at bidrage](https://airtable.com/shrM3SHGwxEnnCChj).',
   },
   'en-UK': {
     title: 'Volunteering Contributors',
@@ -22,12 +22,12 @@ export default {
     services: {
       prefix: 'And to the service providers who sponsored the infrastructure and software we rely on:',
       list: [
-        '[AWS](https://aws.amazon.com/) for reliable data storage',
-        '[Zeit](http://zeit.co/) for scalable hosting',
-        '[GitHub](https://github.com) for open source version control',
-        '[Twilio](https://twilio.com/) for simple SMS services',
-        '[Rollbar](https://rollbar.com/) for logging',
-        '[Linear](https://linear.app/) for organizing the collaboration',
+        '[AWS](https://aws.amazon.com/) for reliable data storage.',
+        '[Zeit](http://zeit.co/) for scalable hosting.',
+        '[GitHub](https://github.com) for version control.',
+        '[Twilio](https://twilio.com/) for simple SMS services.',
+        '[Rollbar](https://rollbar.com/) for logging.',
+        '[Linear](https://linear.app/) for organizing the collaboration.',
         // '[TDC](https://tdc.dk/) for scaled communication to the Danes',
       ],
     },
