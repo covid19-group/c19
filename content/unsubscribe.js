@@ -15,7 +15,7 @@ export default {
     },
     success: {
       label: 'Du er nu afmeldt',
-      description: 'Vi sender dig fremadrettet ikke kommunikation på SMS. Afmeldt ved en fejl?',
+      description: 'Vi sender dig fremadrettet ikke kommunikation via SMS. Afmeldt ved en fejl?',
       link: 'Tilmeld igen',
     },
   },
@@ -31,7 +31,7 @@ export default {
     },
     success: {
       label: 'Du er nu afmeldt',
-      description: 'Vi sender dig fremadrettet ikke kommunikation på SMS',
+      description: 'Vi sender dig fremadrettet ikke kommunikation via SMS',
       link: 'Afmeldt ved en fejl? Tilmeld igen',
     },
   },
