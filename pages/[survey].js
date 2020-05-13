@@ -449,44 +449,48 @@ function Registration({ phone, survey, initial, reminders, consented }) {
 }
 
 export async function getServerSideProps(context) {
-  const db = require('../db');
-  const secret = process.env.SECRET;
-  const { survey } = context.query;
-  const { phone, value, surveys, reminders, consent } = await db.task(async t => {
-    const { person, value } =
-      (await t.oneOrNone(
-        `SELECT *
+  try {
+    const db = require('../db');
+    const secret = process.env.SECRET;
+    const { survey } = context.query;
+    const { phone, value, surveys, reminders, consent } = await db.task(async t => {
+      const { person, value } =
+        (await t.oneOrNone(
+          `SELECT *
+          FROM survey
+          WHERE id = $/id/
+            and date = current_date`,
+          { id: survey }
+        )) || {};
+      if (!person) return {};
+      const { phone, reminders, consent } = await t.oneOrNone(
+        `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders, consent
+        FROM person
+        WHERE id = $/id/`,
+        { secret, id: person }
+      );
+      const { surveys } = await t.one(
+        `SELECT count(*) as surveys
         FROM survey
-        WHERE id = $/id/
-          and date = current_date`,
-        { id: survey }
-      )) || {};
-    if (!person) return {};
-    const { phone, reminders, consent } = await t.oneOrNone(
-      `SELECT PGP_SYM_DECRYPT(phone::bytea, $/secret/) as phone, reminders, consent
-      FROM person
-      WHERE id = $/id/`,
-      { secret, id: person }
-    );
-    const { surveys } = await t.one(
-      `SELECT count(*) as surveys
-      FROM survey
-      WHERE person = $/person/`,
-      { person }
-    );
-    return { phone, value, surveys, reminders, consent };
-  });
-  if (phone) {
-    return {
-      props: {
-        phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
-        survey,
-        initial: parseInt(surveys) === 1,
-        reminders,
-        consented: consent,
-      },
-    };
-  } else return { props: {} };
+        WHERE person = $/person/`,
+        { person }
+      );
+      return { phone, value, surveys, reminders, consent };
+    });
+    if (phone) {
+      return {
+        props: {
+          phone: '*'.repeat(phone.substr(0, phone.length - 4).length) + phone.substr(phone.length - 4),
+          survey,
+          initial: parseInt(surveys) === 1,
+          reminders,
+          consented: consent,
+        },
+      };
+    } else return { props: {} };
+  } catch (e) {
+    return { props: {} };
+  }
 }
 
 export default Registration;
