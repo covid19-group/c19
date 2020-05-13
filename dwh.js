@@ -1,11 +1,12 @@
 require('dotenv').config();
 const pgp = require('pg-promise')();
+const cx = process.env.DWH;
 
 const DB_KEY = Symbol.for('corona.dwh');
 const globalSymbols = Object.getOwnPropertySymbols(global);
 const hasDb = globalSymbols.indexOf(DB_KEY) > -1;
 if (!hasDb) {
-  global[DB_KEY] = pgp(process.env.DWH);
+  global[DB_KEY] = pgp(cx);
 }
 
 const singleton = {};

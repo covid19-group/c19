@@ -10,10 +10,10 @@ export default function Data() {
     <PageLayout>
       <div className="w-full relative overflow-hidden sm:border sm:border-gray-100 sm:rounded-lg overflow-y-hidden">
         <Banner text={content.banner} />
-        {/*<div className="-mt-4 relative flex items-center justify-center">
+        <div className="-mt-4 relative flex items-center justify-center">
           <img rel="nofollow" src="/assets/illustrations/data.svg" alt="Illustration of Data" className="h-80 my-16" />
-        </div>*/}
-        <div className="min-h-screen -mt-9 relative">
+        </div>
+        {/*  <div className="min-h-screen -mt-9 relative">
           <iframe
             className="relative min-h-screen"
             src="https://app.powerbi.com/view?r=eyJrIjoiYjAyYTc5NmYtNTBlMi00ZThmLWJhN2UtODVjZGI5MWExNWQzIiwidCI6ImIyNzIzOWVhLTNhODUtNDU1Yi1hNDJmLTBmZTFjOWY4ZmExMiIsImMiOjl9"
@@ -25,7 +25,7 @@ export default function Data() {
               top: '37px',
             }}
           />
-        </div>
+        </div>*/}
       </div>
     </PageLayout>
   );
