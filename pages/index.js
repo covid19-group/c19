@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { LanguageContext } from '../components/LanguageSelector';
 import ReactMarkdown from 'react-markdown';
 
-function Landing({ count }) {
+function Landing() {
   const environment = process.browser
     ? origin.includes('c19.dk')
       ? 'production'
@@ -18,21 +18,14 @@ function Landing({ count }) {
 
   return (
     <PageLayout>
-      <Hero count={count} />
+      <Hero />
     </PageLayout>
   );
 }
 
-export async function getServerSideProps() {
-  const db = require('../db');
-  const data = await db.one(`select count(*) as count from person`);
-  const { count } = data || {};
-  return { props: { count } };
-}
-
 export default Landing;
 
-const Hero = ({ count }) => {
+const Hero = () => {
   const { language } = useContext(LanguageContext);
   const content = contentMain[language].hero;
   return (
@@ -54,10 +47,7 @@ const Hero = ({ count }) => {
             <p className="mt-3 text-base text-gray-700 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
               <ReactMarkdown
                 className="react-markdown"
-                source={content.subtitle.replace(
-                  '{count}',
-                  count ? Number(count).toLocaleString(language) : language === 'da-DK' ? 'tusindevis' : 'thousands'
-                )}
+                source={content.subtitle.replace('{count}', language === 'da-DK' ? '32.531' : '32,531')}
               />
             </p>
 
