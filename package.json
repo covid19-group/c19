@@ -17,7 +17,7 @@
     "framer-motion": "^1.9.1",
     "libphonenumber-js": "^1.7.46",
     "next": "9.3.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pg-promise": "^10.4.4",
     "ramda": "^0.27.0",
     "react": "16.13.0",
